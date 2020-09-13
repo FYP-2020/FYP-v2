@@ -8,7 +8,7 @@ host : 'db4free.net',
   database: 'fyp2020',
 
 });
-
+//
 mysqlConnection.connect((err) => {
   if (!err)
       console.log('DB connection succeded.');
