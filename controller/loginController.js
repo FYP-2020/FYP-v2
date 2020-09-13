@@ -9,6 +9,7 @@ host : 'db4free.net',
 
 });
 //
+//
 mysqlConnection.connect((err) => {
   if (!err)
       console.log('DB connection succeded.');
