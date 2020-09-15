@@ -175,13 +175,15 @@ window.onclick = function(event) {
           <th>Ketersediaan</th>
           <th>Status Bebanan</th>
         </tr>
-         <% for(var i = 0; i < userprofile.length; i++) {%>
+        
+          <% userprofile.forEach(function(user){ %>
         <tr>
-          <td><input type="checkbox" id="name1" name="name11" value="<%= userprofile[i].fullname %>"> &nbsp; <%= userprofile[i].fullname %></td>
+          <td><input type="checkbox" id="name1" name="name11" value="<%= user.fullname %>"> &nbsp; <%= user.fullname %></td>
           <td>n/a</td>
           <td>n/a</td>
         </tr>
-         <% } %>
+        <% }); %>
+         
       </table>
       <br>
            <div id="tasksdiv" class="row" style="margin-right: 15%;">

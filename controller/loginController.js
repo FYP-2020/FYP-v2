@@ -35,6 +35,14 @@ app.get('/', (req, res) => {
       });
   });
 
+  app.get('/completeprofile', function(req,res){
+    mysqlConnection.query('SELECT * FROM userprofile' , function(error, results, fields) {
+     res.render('completeprofile.ejs', {
+       userprofile : results
+     });
+    });
+       });
+
   app.get('/test',(req,res)=>{
         
             res.render('test.ejs')
