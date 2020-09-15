@@ -106,48 +106,7 @@ window.onclick = function(event) {
 <th>Nama</th>
 <th>Status</th>
 </tr>
-<% for (var i=0; i<taskpoint.length; i++) {%>
-  <% var arr1 = taskpoint[i].mesyuarat %>
-  <% var arr2 = taskpoint[i].luar %>
-  <% var arr3 = taskpoint[i].tinggi %>
-  <% var arr4 = taskpoint[i].sederhana %>
-  <% var arr5 = taskpoint[i].rendah %>
-  <% //for (var j=0; j<arr.length; j++) {%>
-    <%// var total =0 %>
-    <%// var sum = total += arr[j] %>
-    <% var sum1 = arr1.reduce(function(a, b){
-      return a + b;
-        }, 0); %>
-    <% var meeting= sum1*1 %>
 
-    <% var sum2 = arr2.reduce(function(a, b){
-      return a + b;
-        }, 0); %>
-    <% var out= sum2*3 %>
-
-    <% var sum3 = arr3.reduce(function(a, b){
-      return a + b;
-        }, 0); %>
-    <% var hard= sum3*3 %>
-
-    <% var sum4 = arr4.reduce(function(a, b){
-      return a + b;
-        }, 0); %>
-    <% var medium= sum4*2 %>
-
-    <% var sum5 = arr5.reduce(function(a, b){
-      return a + b;
-        }, 0); %>
-    <% var easy= sum5*1 %>
-    <% var total = meeting + out + hard + medium + easy %>
-    <% var percent = Math.round(total/50*100) %>
-    <%//}%>
-<tr>
-    <td>  <%= taskpoint[i].name %> </td>
-    <td>  <%= percent %> % </td>
-</tr>
-
-<%}%>
   </table>
 
 

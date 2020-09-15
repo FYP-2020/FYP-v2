@@ -12,15 +12,34 @@ host : 'db4free.net',
 //
 mysqlConnection.connect((err) => {
   if (!err)
-      console.log('DB connection succeded.');
+      console.log('DB connection succeeded.');
   else
       console.log('DB connection failed \n Error : ' + JSON.stringify(err, undefined, 2));
 });
 
 module.exports = (function(app){
 app.get('/', (req, res) => {
-  res.render('login');
+  res.render('login.ejs');
   })
+
+ 
+  app.post('/test',urlencodedParser,function(req,res) {
+    
+      mysqlConnection.query('SELECT * FROM userprofile WHERE name = ? AND pass = ?', [req.body.name,req.body.pass], function(error, results, fields) {
+        if (results.length > 0) {  
+            res.render('test');      			
+        }else {
+          res.render('error');
+        }	
+        res.end();
+      });
+  });
+
+  app.get('/test',(req,res)=>{
+        
+            res.render('test.ejs')
+       
+    })
 });
 //test
 //test
@@ -88,7 +107,7 @@ app.get('/', (req, res) => {
 //   });
 //    });
 
-// // Login TO DB==================================================================
+// Login TO DB==================================================================
 //   app.post('/test',urlencodedParser,function(req,res){
 //    MongoClient.connect(url, function(err, db) {
 //    db.collection('userprofile').findOne({ name: req.body.name}, function(err, user) {
