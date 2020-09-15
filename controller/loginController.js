@@ -62,6 +62,15 @@ app.get('/', (req, res) => {
         //      db.close();
                });
 
+               app.get('/pengurusanTugas', function(req,res){
+                mysqlConnection.query('SELECT * FROM tasksMgmt' , function(error, results, fields) {
+                  res.render('pengurusanTugas.ejs', {
+                    tasksMgmt : results
+                  });
+                 });
+  });
+
+
   app.get('/test',(req,res)=>{
         
             res.render('test.ejs')

@@ -73,23 +73,23 @@ document.getElementById("demo").innerHTML = d.getMonth() + 1;
             <th>Tahap Kesukaran</th>
             <th>Tarikh Akhir</th> 
           </tr>
-          <% for(var i = 0; i < tasksMgmt.length; i++) {%>
+          <% tasksMgmt.forEach(function(task) {%>
         <tr>
-          <td><%= tasksMgmt[i].task %></td>
-          <td><%= tasksMgmt[i].tarikh %></td>
-          <td><%= tasksMgmt[i].from %> - <%= tasksMgmt[i].to %></td>
-          <td><%= tasksMgmt[i].Tajuk %></td>
-          <td><%= tasksMgmt[i].Nota %><%= tasksMgmt[i].Agenda %></td>
-          <td><%= tasksMgmt[i].peranan %></td>
-          <td><%= tasksMgmt[i].Lokasi %></td>
-          <td><%= tasksMgmt[i].tahap %></td>
-          <td><%= tasksMgmt[i].tarikhakhir %></td> 
+          <td><%= task.task %></td>
+          <td><%= task.tarikh %></td>
+          <td><%= task.from %> - <%= task.to %></td>
+          <td><%= task.Tajuk %></td>
+          <td><%= task.Nota %><%= task.Agenda %></td>
+          <td><%= task.peranan %></td>
+          <td><%= task.Lokasi %></td>
+          <td><%= task.tahap %></td>
+          <td><%= task.tarikhakhir %></td> 
           <td style="border-bottom: 0;">
             <span><button><img src="images/edit.png" class="iconCrud"></button></span>
             <span><button id="delete-button"><img src="images/delete.png" class="iconCrud"></button></span>
           </td>
         </tr>
-         <% } %>
+         <% }) %>
         </table>
         </div>
     </div> <!--slideshow-->
