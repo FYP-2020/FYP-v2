@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
             res.render('test.ejs')
        
     })
-});
+});//
 //test
 //test
 // var MongoClient = require('mongodb').MongoClient;
