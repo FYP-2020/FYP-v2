@@ -48,7 +48,7 @@
 <br><br>
           
 <h1>Keberadaan Harian</h1>
-<h2><%=attendance[0].date%></h2>
+<h2><%=attendance.date%></h2>
 
 <br><br>
 <div class="atable">
@@ -58,19 +58,19 @@
 <th>Sebab</th>
 <th>Kategori</th>
 </tr>
-<% for (var i=0; i<attendance.length; i++) {%>
+<% attendance.forEach(function(a) { %>
 <tr>
 <td class="long">
-    <%= attendance[i].name %> 
+    <%= a.name %> 
 </td>
 <td class="long">
-     <%= attendance[i].reason %>
+     <%= a.reason %>
 </td>
 <td class="short">
-    <%= attendance[i].category%>
+    <%= a.category%>
 </td>
 </tr>
-<%}%>
+<%})%>
 </table>
 </div>
 

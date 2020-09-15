@@ -41,26 +41,26 @@
 <th>Masa Masuk</th>
 <th>Perkara</th>
 </tr>
-<% for (var i=0; i<hourlyleave.length; i++) {%>
+<% hourlyleave.forEach(function(h){%>
 <tr>
 <td class="longc">
-    <%= hourlyleave[i].name %> 
+    <%= h.name %> 
 </td>
 <td class="shortb">
-     <%= hourlyleave[i].applydate %>
+     <%= h.applydate %>
 </td>
 <td class="shortb">
-    <%= hourlyleave[i].leavetime%>
+    <%= h.leavetime%>
 </td>
 <td class="shortb">
-    <%= hourlyleave[i].entertime%>
+    <%= h.entertime%>
 </td>
 <td class="longb">
-    <%= hourlyleave[i].reason%>
+    <%= h.reason%>
 </td>
 <td style="text-align: center;"><button id="tickbutton" ><img src="images/tick.png"></button> <button id="crossbutton"><img src="images/cross.png"></button></td>
 </tr>
-<%}%>
+<%})%>
 </table>
 </div>
 

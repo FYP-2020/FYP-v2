@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
        app.post('/pengurusanTugas',urlencodedParser,function(req,res){
          var name = JSON.stringify(req.body.names);
 
-         let data = {task: req.body.task, tarikh:req.body.tarikh, from:req.body.from, to: req.body.to, Lokasi:req.body.Lokasi, Tajuk:req.body.Tajuk, Nota:req.body.Nota, tarikhakhir:req.body.tarikhakhir, tahap:req.body.tahap, names:name};
+         let data = {task: req.body.task, tarikh:req.body.tarikh, from:req.body.from, to: req.body.to, Lokasi:req.body.Lokasi, Tajuk:req.body.Tajuk, Nota:req.body.Nota, tarikhakhir:req.body.tarikhakhir, tahap:req.body.tahap,Agenda:req.body.Agenda, names:name};
          let sql = "INSERT INTO tasksMgmt SET ?";
          mysqlConnection.query(sql , data, function(error, results) {
           if(error) throw error;
@@ -69,9 +69,55 @@ app.get('/', (req, res) => {
                   });
                  });
   });
+  app.get('/manageMeetingInvitation', function(req,res){
+    mysqlConnection.query('SELECT * FROM userprofile' , function(error, results, fields) {
+      res.render('manageMeetingInvitation.ejs', {
+        userprofile : results
+      });
+     });
+       });
 
+       app.get('/viewMeetingInfo', function(req,res){
+        mysqlConnection.query('SELECT * FROM meetingInfo' , function(error, results, fields) {
+          res.render('viewMeetingInfo.ejs', {
+            meetingInfo : results
+          });
+         });
+           });
+        
+        app.get('/meetingInfo', function(req,res){
+          mysqlConnection.query('SELECT * FROM tasksMgmt' , function(error, results, fields) {
+            res.render('meetingInfo.ejs', {
+              tasksMgmt : results
+            });
+           });
+          });
 
-  app.get('/test',(req,res)=>{
+          app.get('/attendance',(req,res)=>{
+            mysqlConnection.query('SELECT * FROM attendance' , function(error, results, fields) {
+              res.render('attendance.ejs', {
+                attendance : results
+              });
+             });
+                 
+              })
+          
+              app.get('/approve',(req,res)=>{
+                mysqlConnection.query('SELECT * FROM hourlyleave' , function(error, results, fields) {
+                  res.render('approve.ejs', {
+                    hourlyleave : results
+                  });
+                 });
+                     
+                  })
+
+                  app.get('/hourlyleave',(req,res)=>{
+                        
+                              res.render('hourly.ejs')
+                      
+                      })
+
+        app.get('/test',(req,res)=>{
         
             res.render('test.ejs')
        
@@ -350,4 +396,3 @@ app.get('/', (req, res) => {
 //     })
 // })
  //})
-//testing

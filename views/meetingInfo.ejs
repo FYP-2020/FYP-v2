@@ -92,26 +92,27 @@ document.getElementById('select-all').onclick = function() {
   <h2><b>Minit Mesyuarat</b></h2>
   <form action="/viewMeetingInfo" method="POST" id="usrform">
   <div action="/getMeetingInfo" method = "GET">
-     <% for(var i =  tasksMgmt.length-1; i > tasksMgmt.length-2; i--) {%>
+     <%// for(var i =  tasksMgmt.length-1; i > tasksMgmt.length-2; i--) {%>
+      <% tasksMgmt.forEach(function(task) {%>
   <div class="row">
        <div class="col-25">
           <label for="tajuk">Tajuk</label></div>
            <div class="col-75" style="font-size: 15px;">
-           <input type="text" name="tajuk" value="<%= tasksMgmt[i].Tajuk %>"></div>
+           <input type="text" name="tajuk" value="<%= task.Tajuk %>"></div>
         </div>
 
   <div class="row">
        <div class="col-25">
           <label for="lokasi">Lokasi</label></div>
            <div class="col-75" style="font-size: 15px;">
-           <input type="text" name="lokasi" value="<%= tasksMgmt[i].Lokasi %>"></div>
+           <input type="text" name="lokasi" value="<%= task.Lokasi %>"></div>
         </div>
 
  <div class="row">
        <div class="col-25">
           <label for="timeAndDate">Tarikh & Masa</label></div>
            <div class="col-75" style="font-size: 15px;">
-            <input type="text" name="timeAndDate" value="<%= tasksMgmt[i].tarikh %> pada jam <%= tasksMgmt[i].from %> - <%= tasksMgmt[i].to %>">
+            <input type="text" name="timeAndDate" value="<%= task.tarikh %> pada jam <%= task.from %> - <%= task.to %>">
           </div>
        </div>
    
@@ -119,10 +120,10 @@ document.getElementById('select-all').onclick = function() {
   <div class="row">
        <div class="col-25">
           <label for="kehadiran">Kehadiran</label></div>
-           <div class="col-75" style="font-size: 15px;"><input type="text" name="kehadiran" value="<%= tasksMgmt[i].name1%>"></div>
+           <div class="col-75" style="font-size: 15px;"><input type="text" name="kehadiran" value="<%= task.names%>"></div>
         </div>
 
-         <% } %>
+         <% }) %>
   </div>
       <table style="margin-top: 50px; width: auto;">
         <tr>

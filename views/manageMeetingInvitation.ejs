@@ -148,9 +148,9 @@ document.getElementById('select-all').onclick = function() {
           <th>Ketersediaan</th>
           <th>Peranan</th>
         </tr>
-         <% for(var i = 0; i < userprofile.length; i++) {%>
+         <% userprofile.forEach(function(user){%>
         <tr>
-          <td><input type="checkbox" id="name1" name="name1[]" value="<%= userprofile[i].fullname %>" for="perananAhli"> &nbsp; <%= userprofile[i].fullname %></td>
+          <td><input type="checkbox" id="name1" name="name1[]" value="<%= user.fullname %>" for="perananAhli"> &nbsp; <%= user.fullname %></td>
           <td>n/a</td>
           <td><select id="name1" name="perananAhli">
           	<option value="" disabled selected hidden>Peranan Ahli...</option>
@@ -159,7 +159,7 @@ document.getElementById('select-all').onclick = function() {
           </select>
 		 </td>
         </tr>
-         <% } %>
+         <% }) %>
       </table>
       <br>
            <div id="tasksdiv" class="row" style="margin-right: 15%;">

@@ -72,18 +72,19 @@ document.getElementById("demo").innerHTML = d.getMonth() + 1;
             <th>Tahap Kesukaran</th>
             <th>Tarikh Akhir</th> 
           </tr>
-          <% for(var i = meetingInfo.length - 1; i >= 0; i--) {%>
+          <% //for(var i = meetingInfo.length - 1; i >= 0; i--) {%>
+           <% meetingInfo.forEach(function(info){ %>
         <tr>
-          <td><%= meetingInfo[i].tajuk %></td>
-          <td><%= meetingInfo[i].Lokasi %></td>
-          <td><%= meetingInfo[i].timeAndDate %></td>
-          <td><%= meetingInfo[i].item %></td>
-          <td><%= meetingInfo[i].nota %></td>
-          <td><%= meetingInfo[i].jenis %></td>
-          <td><%= meetingInfo[i].tahap %></td> 
-           <td><%= meetingInfo[i].tarikh %></td> 
+          <td><%= info.tajuk %></td>
+          <td><%= info.Lokasi %></td>
+          <td><%= info.timeAndDate %></td>
+          <td><%= info.item %></td>
+          <td><%= info.nota %></td>
+          <td><%= info.jenis %></td>
+          <td><%= info.tahap %></td> 
+           <td><%= info.tarikh %></td> 
         </tr>
-         <% } %>
+         <% }) %>
         </table>
         </div>
 
