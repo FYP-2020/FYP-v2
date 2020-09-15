@@ -43,6 +43,25 @@ app.get('/', (req, res) => {
     });
        });
 
+       app.post('/pengurusanTugas',urlencodedParser,function(req,res){
+         var name = JSON.stringify(req.body.names);
+
+         let data = {task: req.body.task, tarikh:req.body.tarikh, from:req.body.from, to: req.body.to, Lokasi:req.body.Lokasi, Tajuk:req.body.Tajuk, Nota:req.body.Nota, tarikhakhir:req.body.tarikhakhir, tahap:req.body.tahap, names:name};
+         let sql = "INSERT INTO tasksMgmt SET ?";
+         mysqlConnection.query(sql , data, function(error, results) {
+          if(error) throw error;
+          console.log("1 document inserted");
+         });
+         //    var obj = JSON.stringify(req.body);
+        //    console.log("Final reg Data : "+obj);
+        //    var jsonObj = JSON.parse(obj);
+        //       MongoClient.connect(url, function(err, db) {
+        //       db.collection("tasksMgmt").insertOne(jsonObj, function(err, res) {
+        //      if (err) throw err;
+        //      console.log("1 document inserted");
+        //      db.close();
+               });
+
   app.get('/test',(req,res)=>{
         
             res.render('test.ejs')
