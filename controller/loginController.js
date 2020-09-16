@@ -47,19 +47,47 @@ app.get('/', (req, res) => {
          var name = JSON.stringify(req.body.names);
 
          let data = {task: req.body.task, tarikh:req.body.tarikh, from:req.body.from, to: req.body.to, Lokasi:req.body.Lokasi, Tajuk:req.body.Tajuk, Nota:req.body.Nota, tarikhakhir:req.body.tarikhakhir, tahap:req.body.tahap,Agenda:req.body.Agenda, names:name};
+        
          let sql = "INSERT INTO tasksMgmt SET ?";
          mysqlConnection.query(sql , data, function(error, results) {
           if(error) throw error;
           console.log("1 document inserted");
+          res.redirect('/pengurusanTugas');
          });
-         //    var obj = JSON.stringify(req.body);
-        //    console.log("Final reg Data : "+obj);
-        //    var jsonObj = JSON.parse(obj);
-        //       MongoClient.connect(url, function(err, db) {
-        //       db.collection("tasksMgmt").insertOne(jsonObj, function(err, res) {
-        //      if (err) throw err;
-        //      console.log("1 document inserted");
-        //      db.close();
+        
+
+         mysqlConnection.query('UPDATE taskdetail SET luar = CONCAT(luar, " " ,?) WHERE name = ? ', [req.body.Tajuk,req.body.names], function(error, results, fields){
+          if(error) throw error;
+          console.log("1 document inserted");
+
+
+         });
+
+         
+          //============ save tasks detail to individual DB =====================
+//       //if jsonObj.task=Luar Sekolah, addtoset luar:Tajuk
+//       //if jsonObj.task=Tugasan Sekolah, if tahap=tinggi, addtoset tinggi:Tajuk, 
+//       //if tahap=Sederhana, addtoset sederhana:Tajuk, if tahap=rendah, addtoset rendah:Tajuk
+//       var newvalues = { $addToSet: {luar: jsonObj.Tajuk } };
+//       db.collection("taskdetail").updateOne({name: req.body.name11 }, newvalues, function(err, res){
+//         if (err) throw err;
+//         console.log("1 document updated");
+//         db.close();
+//          });
+//       //====================================================================
+
+//       //========= save points to individual DB============
+//       //if jsonObj.task=Luar Sekolah, addtoset luar: 1
+//       //if jsonObj.task=Tugasan Sekolah, if tahap=tinggi, addtoset tinggi:1, 
+//       //if tahap=Sederhana, addtoset sederhana:1, if tahap=rendah, addtoset rendah:1
+//       var newvalues2 = { $addToSet: {luar: 1 } };
+//       db.collection("taskpoint").updateOne({name: req.body.name11 }, newvalues2, function(err, res){
+//         if (err) throw err;
+//         console.log("1 document updated");
+//         db.close();
+//          });
+//       //====================================================================
+      
                });
 
                app.get('/pengurusanTugas', function(req,res){
