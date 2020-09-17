@@ -45,6 +45,24 @@ app.get('/', (req, res) => {
 
        app.post('/pengurusanTugas',urlencodedParser,function(req,res){
          var name = JSON.stringify(req.body.names);
+         var name2 = name.replace("[", ""); //buang " edit spaces nama
+         var name3 = name2.replace("]","");
+         var arr = name3.split(",");
+
+         for(var i=0; i < arr.length ; i++ ){
+           console.log(arr[i]);
+           mysqlConnection.query('UPDATE taskdetail SET luar = CONCAT(luar, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+            
+            if(error) throw error;
+            console.log("1 document inserted");
+           });
+           mysqlConnection.query('UPDATE taskpoint SET luar = luar+1 WHERE name = ? ', [req.body.arr[i]], function(error, results, fields){
+              if(error) throw error;
+              console.log("1 document inserted");
+    
+    
+             });
+         }
 
          let data = {task: req.body.task, tarikh:req.body.tarikh, from:req.body.from, to: req.body.to, Lokasi:req.body.Lokasi, Tajuk:req.body.Tajuk, Nota:req.body.Nota, tarikhakhir:req.body.tarikhakhir, tahap:req.body.tahap,Agenda:req.body.Agenda, names:name};
         
@@ -56,13 +74,19 @@ app.get('/', (req, res) => {
          });
         
 
-         mysqlConnection.query('UPDATE taskdetail SET luar = CONCAT(luar, " " ,?) WHERE name = ? ', [req.body.Tajuk,req.body.names], function(error, results, fields){
-          if(error) throw error;
-          console.log("1 document inserted");
+        //  mysqlConnection.query('UPDATE taskdetail SET luar = CONCAT(luar, " " ,?) WHERE name = ? ', [req.body.Tajuk,req.body.names], function(error, results, fields){
+        //   if(error) throw error;
+        //   console.log("1 document inserted");
 
 
-         });
+        //  });
 
+        //  mysqlConnection.query('UPDATE taskpoint SET luar = luar+1 WHERE name = ? ', [req.body.names], function(error, results, fields){
+        //   if(error) throw error;
+        //   console.log("1 document inserted");
+
+
+        //  });
          
           //============ save tasks detail to individual DB =====================
 //       //if jsonObj.task=Luar Sekolah, addtoset luar:Tajuk

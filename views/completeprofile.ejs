@@ -173,6 +173,7 @@ window.onclick = function(event) {
 
       <table style="margin-top: 80px;" action="/getdetails" method = "GET">
         <tr>
+   
           <th> <input type="checkbox" onclick="checkPage(this)" id="name1" name="name1" value="name1">Nama</th>
           <th>Ketersediaan</th>
           <th>Status Bebanan</th>
@@ -180,6 +181,7 @@ window.onclick = function(event) {
         
           <% userprofile.forEach(function(user){ %>
         <tr>
+          
           <td><input type="checkbox" id="name1" name="names" value="<%= user.fullname %>"> &nbsp; <%= user.fullname %></td>
           <td>n/a</td>
           <td>n/a</td>
