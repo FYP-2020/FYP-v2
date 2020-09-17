@@ -43,27 +43,85 @@ app.get('/', (req, res) => {
     });
        });
 
+      //save tasks to db=====================================================================
        app.post('/pengurusanTugas',urlencodedParser,function(req,res){
          var name = JSON.stringify(req.body.names);
-         var name2 = name.replace("[", ""); //buang " edit spaces nama
+         var name2 = name.replace("[",""); 
          var name3 = name2.replace("]","");
-         var arr = name3.split(",");
-
+         var search = '"';
+         var replaceWith ='';
+         var name4 = name3.split(search).join(replaceWith);
+         var arr= name4.split(",");
+          
+         //save to task details and points (analyse workload)=================================
          for(var i=0; i < arr.length ; i++ ){
-           console.log(arr[i]);
-           mysqlConnection.query('UPDATE taskdetail SET luar = CONCAT(luar, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+         //if peranan ahli(mesyuarat)
+          var obj = JSON.stringify(req.body);
+          var jsonObj = JSON.parse(obj);
+          console.log(jsonObj.task);
+           if(jsonObj.task="Luar Sekolah"){
             
-            if(error) throw error;
-            console.log("1 document inserted");
-           });
-           mysqlConnection.query('UPDATE taskpoint SET luar = luar+1 WHERE name = ? ', [req.body.arr[i]], function(error, results, fields){
-              if(error) throw error;
-              console.log("1 document inserted");
-    
-    
-             });
+            mysqlConnection.query('UPDATE taskdetail SET luar = CONCAT(luar, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+             
+             if(error) throw error;
+             console.log("1 document inserted");
+            });
+            mysqlConnection.query('UPDATE taskpoint SET luar = luar+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+               if(error) throw error;
+               console.log("1 document inserted");
+     
+     
+              });
+           }
+
+           if(jsonObj.tahap="Tinggi"){
+            
+            mysqlConnection.query('UPDATE taskdetail SET tinggi = CONCAT(tinggi, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+             
+             if(error) throw error;
+             console.log("1 document inserted");
+            });
+            mysqlConnection.query('UPDATE taskpoint SET tinggi = tinggi+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+               if(error) throw error;
+               console.log("1 document inserted");
+     
+     
+              });
+           }
+
+           if(jsonObj.tahap="Sederhana"){
+            
+            mysqlConnection.query('UPDATE taskdetail SET sederhana = CONCAT(sederhana, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+             
+             if(error) throw error;
+             console.log("1 document inserted");
+            });
+            mysqlConnection.query('UPDATE taskpoint SET sederhana = sederhana+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+               if(error) throw error;
+               console.log("1 document inserted");
+     
+     
+              });
+           }
+
+           if(jsonObj.tahap="Rendah"){
+            
+            mysqlConnection.query('UPDATE taskdetail SET rendah = CONCAT(rendah, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+             
+             if(error) throw error;
+             console.log("1 document inserted");
+            });
+            mysqlConnection.query('UPDATE taskpoint SET rendah = rendah+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+               if(error) throw error;
+               console.log("1 document inserted");
+     
+     
+              });
+           }
+
          }
 
+        //save tasks to task mgmt (pengurusan tugas)======================================================
          let data = {task: req.body.task, tarikh:req.body.tarikh, from:req.body.from, to: req.body.to, Lokasi:req.body.Lokasi, Tajuk:req.body.Tajuk, Nota:req.body.Nota, tarikhakhir:req.body.tarikhakhir, tahap:req.body.tahap,Agenda:req.body.Agenda, names:name};
         
          let sql = "INSERT INTO tasksMgmt SET ?";
@@ -72,55 +130,18 @@ app.get('/', (req, res) => {
           console.log("1 document inserted");
           res.redirect('/pengurusanTugas');
          });
-        
-
-        //  mysqlConnection.query('UPDATE taskdetail SET luar = CONCAT(luar, " " ,?) WHERE name = ? ', [req.body.Tajuk,req.body.names], function(error, results, fields){
-        //   if(error) throw error;
-        //   console.log("1 document inserted");
-
-
-        //  });
-
-        //  mysqlConnection.query('UPDATE taskpoint SET luar = luar+1 WHERE name = ? ', [req.body.names], function(error, results, fields){
-        //   if(error) throw error;
-        //   console.log("1 document inserted");
-
-
-        //  });
          
-          //============ save tasks detail to individual DB =====================
-//       //if jsonObj.task=Luar Sekolah, addtoset luar:Tajuk
-//       //if jsonObj.task=Tugasan Sekolah, if tahap=tinggi, addtoset tinggi:Tajuk, 
-//       //if tahap=Sederhana, addtoset sederhana:Tajuk, if tahap=rendah, addtoset rendah:Tajuk
-//       var newvalues = { $addToSet: {luar: jsonObj.Tajuk } };
-//       db.collection("taskdetail").updateOne({name: req.body.name11 }, newvalues, function(err, res){
-//         if (err) throw err;
-//         console.log("1 document updated");
-//         db.close();
-//          });
-//       //====================================================================
-
-//       //========= save points to individual DB============
-//       //if jsonObj.task=Luar Sekolah, addtoset luar: 1
-//       //if jsonObj.task=Tugasan Sekolah, if tahap=tinggi, addtoset tinggi:1, 
-//       //if tahap=Sederhana, addtoset sederhana:1, if tahap=rendah, addtoset rendah:1
-//       var newvalues2 = { $addToSet: {luar: 1 } };
-//       db.collection("taskpoint").updateOne({name: req.body.name11 }, newvalues2, function(err, res){
-//         if (err) throw err;
-//         console.log("1 document updated");
-//         db.close();
-//          });
-//       //====================================================================
       
                });
 
-               app.get('/pengurusanTugas', function(req,res){
-                mysqlConnection.query('SELECT * FROM tasksMgmt' , function(error, results, fields) {
-                  res.render('pengurusanTugas.ejs', {
-                    tasksMgmt : results
-                  });
-                 });
+  app.get('/pengurusanTugas', function(req,res){
+    mysqlConnection.query('SELECT * FROM tasksMgmt' , function(error, results, fields) {
+    res.render('pengurusanTugas.ejs', {
+   tasksMgmt : results
+    });
+       });
   });
+  
   app.get('/manageMeetingInvitation', function(req,res){
     mysqlConnection.query('SELECT * FROM userprofile' , function(error, results, fields) {
       res.render('manageMeetingInvitation.ejs', {
