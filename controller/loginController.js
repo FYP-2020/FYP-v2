@@ -21,7 +21,10 @@ module.exports = (function(app){
 app.get('/', (req, res) => {
   res.render('login.ejs');
   })
-
+//====================== E TUGASAN=========================================================================
+  app.get('/test',(req,res)=>{
+    res.render('test.ejs')
+})
  
   app.post('/test',urlencodedParser,function(req,res) {
     
@@ -55,68 +58,89 @@ app.get('/', (req, res) => {
           
          //save to task details and points (analyse workload)=================================
          for(var i=0; i < arr.length ; i++ ){
-         //if peranan ahli(mesyuarat)
+       
           var obj = JSON.stringify(req.body);
           var jsonObj = JSON.parse(obj);
           console.log(jsonObj.task);
-           if(jsonObj.task="Luar Sekolah"){
+          console.log(jsonObj.peranan);
+
+          if(jsonObj.peranan==="Penganjur" || "Pencatat Minit Mesyuarat" ){
+            
+            mysqlConnection.query('UPDATE taskdetail SET mesyuarat = CONCAT(mesyuarat, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+             
+             if(error) throw error;
+             console.log("1 meeting detail inserted");
+            });
+            mysqlConnection.query('UPDATE taskpoint SET mesyuarat = mesyuarat+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+               if(error) throw error;
+               console.log("1 meeting point inserted");
+     
+              });
+           }
+           else if (jsonObj.peranan==="Penyerah Tugas"){
+
+           if(jsonObj.task==="Luar Sekolah"){
             
             mysqlConnection.query('UPDATE taskdetail SET luar = CONCAT(luar, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
              
              if(error) throw error;
-             console.log("1 document inserted");
+             console.log("1 out school detail inserted");
             });
             mysqlConnection.query('UPDATE taskpoint SET luar = luar+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
                if(error) throw error;
-               console.log("1 document inserted");
+               console.log("1 out school point inserted");
      
      
               });
            }
 
-           if(jsonObj.tahap="Tinggi"){
+           else if(jsonObj.task==="Tugasan Sekolah" || "Tugasan Umum"){
+            if(jsonObj.tahap==="Tinggi"){
             
-            mysqlConnection.query('UPDATE taskdetail SET tinggi = CONCAT(tinggi, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
-             
-             if(error) throw error;
-             console.log("1 document inserted");
-            });
-            mysqlConnection.query('UPDATE taskpoint SET tinggi = tinggi+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+              mysqlConnection.query('UPDATE taskdetail SET tinggi = CONCAT(tinggi, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+               
                if(error) throw error;
-               console.log("1 document inserted");
-     
-     
+               console.log("1 hard detail inserted");
               });
-           }
+              mysqlConnection.query('UPDATE taskpoint SET tinggi = tinggi+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+                 if(error) throw error;
+                 console.log("1 hard point inserted");
+       
+       
+                });
+             }
+  
+            else if(jsonObj.tahap==="Sederhana"){
+              
+              mysqlConnection.query('UPDATE taskdetail SET sederhana = CONCAT(sederhana, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+               
+               if(error) throw error;
+               console.log("1 medium detail inserted");
+              });
+              mysqlConnection.query('UPDATE taskpoint SET sederhana = sederhana+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+                 if(error) throw error;
+                 console.log("1 medium point inserted");
+       
+       
+                });
+             }
+  
+             else{
+              
+              mysqlConnection.query('UPDATE taskdetail SET rendah = CONCAT(rendah, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+               
+               if(error) throw error;
+               console.log("1 easy detail inserted");
+              });
+              mysqlConnection.query('UPDATE taskpoint SET rendah = rendah+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+                 if(error) throw error;
+                 console.log("1 easy point inserted");
+       
+       
+                });
+             }
+            }
 
-           if(jsonObj.tahap="Sederhana"){
-            
-            mysqlConnection.query('UPDATE taskdetail SET sederhana = CONCAT(sederhana, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
-             
-             if(error) throw error;
-             console.log("1 document inserted");
-            });
-            mysqlConnection.query('UPDATE taskpoint SET sederhana = sederhana+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
-               if(error) throw error;
-               console.log("1 document inserted");
-     
-     
-              });
-           }
-
-           if(jsonObj.tahap="Rendah"){
-            
-            mysqlConnection.query('UPDATE taskdetail SET rendah = CONCAT(rendah, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
-             
-             if(error) throw error;
-             console.log("1 document inserted");
-            });
-            mysqlConnection.query('UPDATE taskpoint SET rendah = rendah+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
-               if(error) throw error;
-               console.log("1 document inserted");
-     
-     
-              });
            }
 
          }
@@ -141,7 +165,17 @@ app.get('/', (req, res) => {
     });
        });
   });
-  
+
+  app.delete('/pengurusanTugas', (req, res) => {
+    db.collection('tasksMgmt').deleteOne()
+      .then(result => {
+        console.log('Task deleted')
+        res.json('Task deleted')
+        res.render('pengurusanTugas.ejs', { tasksMgmt: results })
+      })
+      .catch(error => console.error(error))
+  })
+
   app.get('/manageMeetingInvitation', function(req,res){
     mysqlConnection.query('SELECT * FROM userprofile' , function(error, results, fields) {
       res.render('manageMeetingInvitation.ejs', {
@@ -150,7 +184,7 @@ app.get('/', (req, res) => {
      });
        });
 
-       app.get('/viewMeetingInfo', function(req,res){
+   app.get('/viewMeetingInfo', function(req,res){
         mysqlConnection.query('SELECT * FROM meetingInfo' , function(error, results, fields) {
           res.render('viewMeetingInfo.ejs', {
             meetingInfo : results
@@ -158,13 +192,44 @@ app.get('/', (req, res) => {
          });
            });
         
-        app.get('/meetingInfo', function(req,res){
+    app.get('/meetingInfo', function(req,res){
           mysqlConnection.query('SELECT * FROM tasksMgmt' , function(error, results, fields) {
             res.render('meetingInfo.ejs', {
               tasksMgmt : results
             });
            });
           });
+
+          app.get('/getdetails',(req,res)=>{
+            mysqlConnection.query('SELECT * FROM userprofile' , function(error, results, fields) {
+              res.render('completeprofile.ejs', {
+                userprofile : results
+              });
+             });
+              })
+              app.get('/getInvitation',(req,res)=>{
+                mysqlConnection.query('SELECT * FROM userprofile' , function(error, results, fields) {
+                  res.render('manageMeetingInvitation.ejs', {
+                    userprofile : results
+                  });
+                 });
+              })
+              app.get('/getMeetingInfo',(req,res)=>{
+                mysqlConnection.query('SELECT * FROM tasksMgmt' , function(error, results, fields) {
+                  res.render('meetingInfo.ejs', {
+                 tasksMgmt : results
+                  });
+                     });
+              })
+              app.get('/getUserDetail',(req,res)=>{
+                mysqlConnection.query('SELECT * FROM userprofile' , function(error, results, fields) {
+                  res.render('meetingInfo.ejs', {
+                    userprofile : results
+                  });
+                 });
+              })
+            
+ //===============================E KEHADIRAN==========================================================              
 
           app.get('/attendance',(req,res)=>{
             mysqlConnection.query('SELECT * FROM attendance' , function(error, results, fields) {
@@ -175,247 +240,33 @@ app.get('/', (req, res) => {
                  
               })
           
-              app.get('/approve',(req,res)=>{
-                mysqlConnection.query('SELECT * FROM hourlyleave' , function(error, results, fields) {
-                  res.render('approve.ejs', {
-                    hourlyleave : results
+          app.get('/approve',(req,res)=>{
+             mysqlConnection.query('SELECT * FROM hourlyleave' , function(error, results, fields) {
+              res.render('approve.ejs', {
+                 hourlyleave : results
                   });
                  });
                      
                   })
 
-                  app.get('/hourlyleave',(req,res)=>{
+         app.get('/hourlyleave',(req,res)=>{
                         
-                              res.render('hourly.ejs')
-                      
+             res.render('hourly.ejs')
                       })
+// kena modify
+          app.post('/hourlyleave', (req, res) => {
+            //console.log(req.body.applydate);
+            console.log(req.body.name);
+        //   let data = {applydate: req.body.applydate, name:req.body.name,leavetime:req.body.leavetime, entertime:req.body.entertime, reason:req.body.reason};
+        //   let sql = "INSERT INTO hourlyleave SET ?";
+        //  mysqlConnection.query(sql , data, function(error, results) {
+        //   if(error) throw error;
+        //   console.log("1 document inserted");
+        //   alert("berjaya");
+        //  });
+  })
 
-        app.get('/test',(req,res)=>{
-        
-            res.render('test.ejs')
-       
-    })
-});//
-//test
-//test
-// var MongoClient = require('mongodb').MongoClient;
-// var url = 'mongodb://localhost:27017/mydb';
-// var connectionString = 'mongodb://localhost:27017/mydb';
-
- //module.exports = (function(app){
-//   app.get('/', function(req,res){
-//     res.render('login');
-//   });
-//   app.get('/register',function(req,res){
-//     res.render('register');
-//   });
-
-// app.get('/error', function(req,res){
-//     res.render('error');
-//   });
-
-// app.get('/pengurusanTugas', function(req,res){
-// MongoClient.connect(url, function(err, db) {
-//       const cursor=db.collection('tasksMgmt').find().toArray()
-//       .then(results=>{
-//      res.render('pengurusanTugas.ejs', { tasksMgmt: results })
-//       }).catch(error=>console.error(error));
-//       });
-//   });
-
-
-// app.get('/completeprofile', function(req,res){
-//     // res.render('completeprofile');
-//      MongoClient.connect(url, function(err, db) {
-//     const cursor=db.collection('userprofile').find().toArray()
-//     .then(results=>{
-//      res.render('completeprofile.ejs', { userprofile: results })
-//       }).catch(error=>console.error(error));
-//   });
-//    });
-
-
-// app.get('/manageMeetingInvitation', function(req,res){
-//      MongoClient.connect(url, function(err, db) {
-//     const cursor=db.collection('userprofile').find().toArray()
-//     .then(results=>{
-//      res.render('manageMeetingInvitation.ejs', { userprofile: results })
-//       }).catch(error=>console.error(error));
-//   });
-//    });
-
-// app.get('/viewMeetingInfo', function(req,res){
-//      MongoClient.connect(url, function(err, db) {
-//     const cursor=db.collection('meetingInfo').find().toArray()
-//     .then(results=>{
-//      res.render('viewMeetingInfo.ejs', { meetingInfo: results })
-//       }).catch(error=>console.error(error));
-//   });
-//    });
-
-// app.get('/meetingInfo', function(req,res){
-//        MongoClient.connect(url, function(err, db) {
-//     const cursor=db.collection('tasksMgmt').find().toArray()
-//     .then(results=>{
-//      res.render('meetingInfo.ejs', { tasksMgmt: results })
-//       }).catch(error=>console.error(error));
-//   });
-//    });
-
-// Login TO DB==================================================================
-//   app.post('/test',urlencodedParser,function(req,res){
-//    MongoClient.connect(url, function(err, db) {
-//    db.collection('userprofile').findOne({ name: req.body.name}, function(err, user) {
-//              if(user ===null){
-//               console.log("Empty");
-//                res.render('error');
-//             }else if (user.name === req.body.name && user.pass === req.body.pass){
-//             const cursor=db.collection('test').find().toArray()
-//     .then(results=>{
-//      res.render('test.ejs', { taskpoint: results })
-//       }).catch(error=>console.error(error))
-//           } else {
-//             console.log("Credentials wrong");
-//             res.render('error');
-//           }
-//    });
-//  });
-// });
-
-// //save tasks to MongoDB================================================================
-//   app.post('/pengurusanTugas',urlencodedParser,function(req,res){
-//    var obj = JSON.stringify(req.body);
-//    console.log("Final reg Data : "+obj);
-//    var jsonObj = JSON.parse(obj);
-//       MongoClient.connect(url, function(err, db) {
-//       db.collection("tasksMgmt").insertOne(jsonObj, function(err, res) {
-//      if (err) throw err;
-//      console.log("1 document inserted");
-//      db.close();
-//       });
-
-//       //============ save tasks detail to individual DB =====================
-//       //if jsonObj.task=Luar Sekolah, addtoset luar:Tajuk
-//       //if jsonObj.task=Tugasan Sekolah, if tahap=tinggi, addtoset tinggi:Tajuk, 
-//       //if tahap=Sederhana, addtoset sederhana:Tajuk, if tahap=rendah, addtoset rendah:Tajuk
-//       var newvalues = { $addToSet: {luar: jsonObj.Tajuk } };
-//       db.collection("taskdetail").updateOne({name: req.body.name11 }, newvalues, function(err, res){
-//         if (err) throw err;
-//         console.log("1 document updated");
-//         db.close();
-//          });
-//       //====================================================================
-
-//       //========= save points to individual DB============
-//       //if jsonObj.task=Luar Sekolah, addtoset luar: 1
-//       //if jsonObj.task=Tugasan Sekolah, if tahap=tinggi, addtoset tinggi:1, 
-//       //if tahap=Sederhana, addtoset sederhana:1, if tahap=rendah, addtoset rendah:1
-//       var newvalues2 = { $addToSet: {luar: 1 } };
-//       db.collection("taskpoint").updateOne({name: req.body.name11 }, newvalues2, function(err, res){
-//         if (err) throw err;
-//         console.log("1 document updated");
-//         db.close();
-//          });
-//       //====================================================================
-
-//       const cursor=db.collection('tasksMgmt').find().toArray()
-//       .then(results=>{
-//      res.render('pengurusanTugas.ejs', { tasksMgmt: results })
-//       }).catch(error=>console.error(error));
-//       });
-//     });
-
-//  app.post('/viewMeetingInfo',urlencodedParser,function(req,res){
-//    var obj = JSON.stringify(req.body);
-//    console.log("Final reg Data : "+obj);
-//    var jsonObj = JSON.parse(obj);
-//       MongoClient.connect(url, function(err, db) {
-//       db.collection("meetingInfo").insertOne(jsonObj, function(err, res) {
-//      if (err) throw err;
-//      console.log("1 document inserted");
-//      db.close();
-//       });
-//       const cursor=db.collection('meetingInfo').find().toArray()
-//       .then(results=>{
-//      res.render('viewMeetingInfo.ejs', { meetingInfo: results})
-//       }).catch(error=>console.error(error));
-//       });
-//     });  
-
-// MongoClient.connect(connectionString,{
-//   useUnifiedTopology: true
-//   }).then(client => {
- 
-//   console.log('Connected to Database')
-//   const db = client.db('mydb')
-//   //const profile= db.collection('userprofile')
-//   const leaveCollection = db.collection('hourlyleave')
-//   const attendance = db.collection('attendance')
-//   const approvedLeave = db.collection('notification')
-  
-//   app.post('/hourlyleave', (req, res) => {
-//       leaveCollection.insertOne(req.body)
-//       .then(result => {
-        
-//   res.render('hourlyy.ejs')
-    
-//       })
-//       .catch(error => console.error(error))
-//   })
-  
-//   app.post('/notification', (req, res) => {
-//       approvedLeave.insertOne(req.body)
-//       .then(result => {
-        
-//       console.log('haaiai')
-    
-//       })
-//       .catch(error => console.error(error))
-//   })
-
-
-//   app.get('/hourlyleave',(req,res)=>{
-//       //const cursor = db.collection('quotes').find().toArray()
-//       //.then(results =>{
-//           res.render('hourly.ejs')//,{ quotes: results})
-//      // })
-//      // .catch(error=>console.error(error))
-     
-//   })
-
-//   app.get('/approved',(req,res)=>{
-
-//       res.render('approved.ejs')
-//   })
-
-//   app.get('/attendance',(req,res)=>{
-//       const cursor = db.collection('attendance').find().toArray()
-//       .then(results =>{
-//           res.render('attendance.ejs',{ attendance: results})
-//       })
-//       .catch(error=>console.error(error))
-     
-//   })
-
-//   app.get('/test',(req,res)=>{
-//     const cursor = db.collection('taskpoint').find().toArray()
-//     .then(results =>{
-//         res.render('test.ejs',{ taskpoint: results})
-//     })
-//     .catch(error=>console.error(error))
-   
-// })
-
-//   app.get('/approve',(req,res)=>{
-//       const cursor = db.collection('hourlyleave').find().toArray()
-//       .then(results =>{
-//           res.render('approve.ejs',{ hourlyleave: results})
-//       })
-//       .catch(error=>console.error(error))
-     
-//   })
-
-//   app.delete('/approved', (req,res)=>{
+             //   app.delete('/approved', (req,res)=>{
       
 //       leaveCollection.deleteOne(
 
@@ -428,44 +279,8 @@ app.get('/', (req, res) => {
      
 //   })
 
-//   app.get('/getdetails',(req,res)=>{
-//     const cursor=db.collection('userprofile').find().toArray()
-//     .then(results=>{
-//      res.render('completeprofile.ejs', { userprofile: results })
-//       }).catch(error=>console.error(error))
-//   })
-//   app.get('/getInvitation',(req,res)=>{
-//     const cursor=db.collection('userprofile').find().toArray()
-//     .then(results=>{
-//      res.render('manageMeetingInvitation.ejs', { userprofile: results })
-//       }).catch(error=>console.error(error))
-//   })
-//   app.get('/getMeetingInfo',(req,res)=>{
-//     const cursor=db.collection('tasksMgmt').find().toArray()
-//     .then(results=>{
-//      res.render('meetingInfo.ejs', { tasksMgmt: results })
-//       }).catch(error=>console.error(error))
-//   })
-//   app.get('/getUserDetail',(req,res)=>{
-//     const cursor=db.collection('userprofile').find().toArray()
-//     .then(results=>{
-//      res.render('meetingInfo.ejs', { userprofile: results })
-//       }).catch(error=>console.error(error))
-//   })
-//   app.get('/pengurusanTugas',(req,res)=>{
-//     const cursor=db.collection('tasksMgmt').find().toArray()
-//     .then(results=>{
-//      res.render('pengurusanTugas.ejs', { tasksMgmt: results })
-//       }).catch(error=>console.error(error))
-//   })
-//    app.delete('/pengurusanTugas', (req, res) => {
-//       db.collection('tasksMgmt').deleteOne()
-//         .then(result => {
-//           console.log('Task deleted')
-//           res.json('Task deleted')
-//           res.render('pengurusanTugas.ejs', { tasksMgmt: results })
-//         })
-//         .catch(error => console.error(error))
-//     })
-// })
- //})
+      
+});
+
+
+

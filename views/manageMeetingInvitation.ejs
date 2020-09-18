@@ -136,6 +136,10 @@ document.getElementById('select-all').onclick = function() {
        <div class="col-75">
           <input type="text" id="title" placeholder="Tajuk" name="Tajuk" /></div></div>
 
+          <input type="hidden" id="nota" name="Nota" required>
+          <input type="hidden" id="tarikhakhir" name="tarikhakhir" required>
+          <input type="hidden" id="tahap" name="tahap" required>
+
        <div class="row"> 
       <div class="col-25">
       <label for="Agenda">Agenda</label></div>
@@ -150,7 +154,7 @@ document.getElementById('select-all').onclick = function() {
         </tr>
          <% userprofile.forEach(function(user){%>
         <tr>
-          <td><input type="checkbox" id="name1" name="name1[]" value="<%= user.fullname %>" for="perananAhli"> &nbsp; <%= user.fullname %></td>
+          <td><input type="checkbox" id="name1" name="names" value="<%= user.fullname %>" for="perananAhli"> &nbsp; <%= user.fullname %></td>
           <td>n/a</td>
           <td><select id="name1" name="perananAhli">
           	<option value="" disabled selected hidden>Peranan Ahli...</option>
