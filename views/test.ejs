@@ -56,6 +56,46 @@ window.onclick = function(event) {
 }
 </script>
 
+<style>
+.bar{
+   background: white;
+   display: block;
+   height: 30px;
+   border-radius: 3px;
+   overflow: hidden;
+   box-shadow: 0 0 5px #93B5EF;
+}
+.bar p{
+  font-weight: bold;
+   text-align: right;
+  
+   margin-top: 5px;
+}
+
+.ten{
+  width:10%; animation: ten 2s; height: 30px; float:left; background: red;
+}
+
+.forty{
+  width: 40%; animation: ten 2s; height: 30px; float:left; background:orange;
+}
+
+.sixty{
+  width: 60%; animation: ten 2s; height: 30px; float:left; background:greenyellow;
+}
+.eighty{
+  width: 80%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}
+
+@keyframes ten{
+  0%{
+    width:0%;
+  }
+}
+
+
+</style>
+
 </head>
 <body>
 <!-- top navigation -->
@@ -111,39 +151,439 @@ window.onclick = function(event) {
 <% taskpoint.forEach(function(task) { %>
 <% var percent = Math.round(task.peratus/50 * 100) %>
 
-<% if (percent<30){ %>
+<% if (percent==0) { %>
+     
+  <tr>
+    <td class="long"><%= task.name %></td>
+    <td >
+      <span class="bar"><span ></span><p><%= percent%>% </p></span>
+    </td>
+    </tr>
+
+<% } %>
+
+<% if (percent==2){ %>
 <tr>
 <td class="long"><%= task.name %></td>
 <td style="background-color:red;"><%= percent%>%</td>
 </tr>
 <% } %>
 
-<% if (percent>29 && percent<50) { %>
+<% if (percent==4) { %>
   <tr>
     <td class="long"><%= task.name %></td>
     <td style="background-color:orange;"><%= percent%>%</td>
     </tr>
   <% } %>
 
-  <% if (percent>49 && percent<70) { %>
-    <tr>
+<% if (percent==6) { %>
+  <tr>
       <td class="long"><%= task.name %></td>
       <td style="background-color:greenyellow;"><%= percent%>%</td>
       </tr>
-    <% } %>
+<% } %>
 
-    <% if (percent>69 && percent<101) { %>
+<% if (percent==8) { %>
      
       <tr>
-        
         <td class="long"><%= task.name %></td>
-     
-        <td style="background-color:yellow;"><%= percent%>%</td>
-      
+        <td style="background-color:yellow;"><p><%= percent%>%</p></td>
         </tr>
-      </div>
-      </div>
+    
+<% } %>
+
+<% if (percent==10) { %>
+     
+  <tr>
+    <td class="long"><%= task.name %></td>
+    <td >
+      <span class="bar"><span class="ten"></span><p><%= percent%>% </p></span>
+    </td>
+    </tr>
+
+<% } %>
+
+<% if (percent==12) { %>
+     
+  <tr>
+    <td class="long"><%= task.name %></td>
+    <td style="background-color:yellow;"><%= percent%>%</td>
+    </tr>
+
+<% } %>
+
+<% if (percent==14) { %>
+     
+  <tr>
+    <td class="long"><%= task.name %></td>
+    <td style="background-color:yellow;"><%= percent%>%</td>
+    </tr>
+
+<% } %>
+
+<% if (percent==16) { %>
+     
+  <tr>
+    <td class="long"><%= task.name %></td>
+    <td style="background-color:yellow;"><%= percent%>%</td>
+    </tr>
+
+<% } %>
+
+<% if (percent==18) { %>
+     
+  <tr>
+    <td class="long"><%= task.name %></td>
+    <td style="background-color:yellow;"><%= percent%>%</td>
+    </tr>
+
+<% } %>
+
+<% if (percent==20) { %>
+     
+  <tr>
+    <td class="long"><%= task.name %></td>
+    <td style="background-color:yellow;"><%= percent%>%</td>
+    </tr>
+
+<% } %>
+
+<% if (percent==22){ %>
+  <tr>
+  <td class="long"><%= task.name %></td>
+  <td style="background-color:red;"><%= percent%>%</td>
+  </tr>
+  <% } %>
+  
+  <% if (percent==24) { %>
+    <tr>
+      <td class="long"><%= task.name %></td>
+      <td style="background-color:orange;"><%= percent%>%</td>
+      </tr>
+    <% } %>
+  
+  <% if (percent==26) { %>
+    <tr>
+        <td class="long"><%= task.name %></td>
+        <td style="background-color:greenyellow;"><%= percent%>%</td>
+        </tr>
+  <% } %>
+  
+  <% if (percent==28) { %>
+       
+        <tr>
+          <td class="long"><%= task.name %></td>
+          <td style="background-color:yellow;"><%= percent%>%</td>
+          </tr>
+      
+  <% } %>
+  
+  <% if (percent==30) { %>
+       
+    <tr>
+      <td class="long"><%= task.name %></td>
+      <td style="background-color:yellow;"><%= percent%>%</td>
+      </tr>
+  
+  <% } %>
+  
+  <% if (percent==32) { %>
+       
+    <tr>
+      <td class="long"><%= task.name %></td>
+      <td style="background-color:yellow;"><%= percent%>%</td>
+      </tr>
+  
+  <% } %>
+  
+  <% if (percent==34) { %>
+       
+    <tr>
+      <td class="long"><%= task.name %></td>
+      <td style="background-color:yellow;"><%= percent%>%</td>
+      </tr>
+  
+  <% } %>
+  
+  <% if (percent==36) { %>
+       
+    <tr>
+      <td class="long"><%= task.name %></td>
+      <td style="background-color:yellow;"><%= percent%>%</td>
+      </tr>
+  
+  <% } %>
+  
+  <% if (percent==38) { %>
+       
+    <tr>
+      <td class="long"><%= task.name %></td>
+      <td style="background-color:yellow;"><%= percent%>%</td>
+      </tr>
+  
+  <% } %>
+  
+  <% if (percent==40) { %>
+       
+    <tr>
+      <td class="long"><%= task.name %></td>
+      <td><span class="bar"><span class="forty"></span><p><%= percent%>% </p></span></td>
+      </tr>
+  
+  <% } %>
+
+  <% if (percent==42){ %>
+    <tr>
+    <td class="long"><%= task.name %></td>
+    <td style="background-color:red;"><%= percent%>%</td>
+    </tr>
+    <% } %>
+    
+    <% if (percent==44) { %>
+      <tr>
+        <td class="long"><%= task.name %></td>
+        <td style="background-color:orange;"><%= percent%>%</td>
+        </tr>
       <% } %>
+    
+    <% if (percent==46) { %>
+      <tr>
+          <td class="long"><%= task.name %></td>
+          <td style="background-color:greenyellow;"><%= percent%>%</td>
+          </tr>
+    <% } %>
+    
+    <% if (percent==48) { %>
+         
+          <tr>
+            <td class="long"><%= task.name %></td>
+            <td style="background-color:yellow;"><%= percent%>%</td>
+            </tr>
+        
+    <% } %>
+    
+    <% if (percent==50) { %>
+         
+      <tr>
+        <td class="long"><%= task.name %></td>
+        <td style="background-color:yellow;"><%= percent%>%</td>
+        </tr>
+    
+    <% } %>
+    
+    <% if (percent==52) { %>
+         
+      <tr>
+        <td class="long"><%= task.name %></td>
+        <td style="background-color:yellow;"><%= percent%>%</td>
+        </tr>
+    
+    <% } %>
+    
+    <% if (percent==54) { %>
+         
+      <tr>
+        <td class="long"><%= task.name %></td>
+        <td style="background-color:yellow;"><%= percent%>%</td>
+        </tr>
+    
+    <% } %>
+    
+    <% if (percent==56) { %>
+         
+      <tr>
+        <td class="long"><%= task.name %></td>
+        <td style="background-color:yellow;"><%= percent%>%</td>
+        </tr>
+    
+    <% } %>
+    
+    <% if (percent==58) { %>
+         
+      <tr>
+        <td class="long"><%= task.name %></td>
+        <td style="background-color:yellow;"><%= percent%>%</td>
+        </tr>
+    
+    <% } %>
+    
+    <% if (percent==60) { %>
+         
+      <tr>
+        <td class="long"><%= task.name %></td>
+        <td ><span class="bar"><span class="sixty"></span><p><%= percent%>% </p></span></td>
+        </tr>
+    
+    <% } %>
+
+    <% if (percent==62){ %>
+      <tr>
+      <td class="long"><%= task.name %></td>
+      <td style="background-color:red;"><%= percent%>%</td>
+      </tr>
+      <% } %>
+      
+      <% if (percent==64) { %>
+        <tr>
+          <td class="long"><%= task.name %></td>
+          <td style="background-color:orange;"><%= percent%>%</td>
+          </tr>
+        <% } %>
+      
+      <% if (percent==66) { %>
+        <tr>
+            <td class="long"><%= task.name %></td>
+            <td style="background-color:greenyellow;"><%= percent%>%</td>
+            </tr>
+      <% } %>
+      
+      <% if (percent==68) { %>
+           
+            <tr>
+              <td class="long"><%= task.name %></td>
+              <td style="background-color:yellow;"><%= percent%>%</td>
+              </tr>
+          
+      <% } %>
+      
+      <% if (percent==70) { %>
+           
+        <tr>
+          <td class="long"><%= task.name %></td>
+          <td style="background-color:yellow;"><%= percent%>%</td>
+          </tr>
+      
+      <% } %>
+      
+      <% if (percent==72) { %>
+           
+        <tr>
+          <td class="long"><%= task.name %></td>
+          <td style="background-color:yellow;"><%= percent%>%</td>
+          </tr>
+      
+      <% } %>
+      
+      <% if (percent==74) { %>
+           
+        <tr>
+          <td class="long"><%= task.name %></td>
+          <td style="background-color:yellow;"><%= percent%>%</td>
+          </tr>
+      
+      <% } %>
+      
+      <% if (percent==76) { %>
+           
+        <tr>
+          <td class="long"><%= task.name %></td>
+          <td style="background-color:yellow;"><%= percent%>%</td>
+          </tr>
+      
+      <% } %>
+      
+      <% if (percent==78) { %>
+           
+        <tr>
+          <td class="long"><%= task.name %></td>
+          <td style="background-color:yellow;"><%= percent%>%</td>
+          </tr>
+      
+      <% } %>
+      
+      <% if (percent==80) { %>
+           
+        <tr>
+          <td class="long"><%= task.name %></td>
+          <td ><span class="bar"><span class="eighty"></span><p><%= percent%>% </p></span></td>
+          </tr>
+      
+      <% } %>
+
+      <% if (percent==82){ %>
+        <tr>
+        <td class="long"><%= task.name %></td>
+        <td style="background-color:red;"><%= percent%>%</td>
+        </tr>
+        <% } %>
+        
+        <% if (percent==84) { %>
+          <tr>
+            <td class="long"><%= task.name %></td>
+            <td style="background-color:orange;"><%= percent%>%</td>
+            </tr>
+          <% } %>
+        
+        <% if (percent==86) { %>
+          <tr>
+              <td class="long"><%= task.name %></td>
+              <td style="background-color:greenyellow;"><%= percent%>%</td>
+              </tr>
+        <% } %>
+        
+        <% if (percent==88) { %>
+             
+              <tr>
+                <td class="long"><%= task.name %></td>
+                <td style="background-color:yellow;"><%= percent%>%</td>
+                </tr>
+            
+        <% } %>
+        
+        <% if (percent==90) { %>
+             
+          <tr>
+            <td class="long"><%= task.name %></td>
+            <td style="background-color:yellow;"><%= percent%>%</td>
+            </tr>
+        
+        <% } %>
+        
+        <% if (percent==92) { %>
+             
+          <tr>
+            <td class="long"><%= task.name %></td>
+            <td style="background-color:yellow;"><%= percent%>%</td>
+            </tr>
+        
+        <% } %>
+        
+        <% if (percent==94) { %>
+             
+          <tr>
+            <td class="long"><%= task.name %></td>
+            <td style="background-color:yellow;"><%= percent%>%</td>
+            </tr>
+        
+        <% } %>
+        
+        <% if (percent==96) { %>
+             
+          <tr>
+            <td class="long"><%= task.name %></td>
+            <td style="background-color:yellow;"><%= percent%>%</td>
+            </tr>
+        
+        <% } %>
+        
+        <% if (percent==98) { %>
+             
+          <tr>
+            <td class="long"><%= task.name %></td>
+            <td style="background-color:yellow;"><%= percent%>%</td>
+            </tr>
+        
+        <% } %>
+        
+        <% if (percent==100) { %>
+             
+          <tr>
+            <td class="long"><%= task.name %></td>
+            <td style="background-color:yellow;"><%= percent%>%</td>
+            </tr>
+        
+        <% } %>
+
 <% }) %>
   </table>
 
