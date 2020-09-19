@@ -267,6 +267,7 @@ input[type=submit]:hover {
   }
 }
 
+
 /*----------------------------------------Table--------------------------------------*/
 table {
   font-family: avenir, sans-serif;
@@ -434,3 +435,57 @@ border-bottom: 2px solid;
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
+
+.atable{
+
+  background-color: #E5E5E5;
+  margin-left: 20px;
+  width: 90%;
+  /*height: 600px;*/
+  border-radius: 9px;
+}
+
+.long{
+  padding: 20px;
+  text-align: center;
+  background-image: url("images/box.png");
+  background-size: 80% 80%;
+ 
+  background-repeat: no-repeat;
+  background-position: center;
+  /*font-size: 25px;*/
+  font-weight: bold;
+  color:  #192A59;
+  border-bottom: none;
+}
+
+.progress {
+  margin:20px auto;
+  padding:0;
+  width:90%;
+  height:30px;
+  overflow:hidden;
+  background :white;
+  border-radius:6px;
+}
+
+.bar {
+	position:relative;
+  float:left;
+  min-width:1%;
+  height:100%;
+  background:cornflowerblue;
+}
+
+.percent {
+	position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  margin:0;
+  font-family:tahoma,arial,helvetica;
+  font-size:12px;
+  color:white;
+}
+
+

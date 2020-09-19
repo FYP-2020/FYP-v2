@@ -23,14 +23,19 @@ app.get('/', (req, res) => {
   })
 //====================== E TUGASAN=========================================================================
   app.get('/test',(req,res)=>{
-    res.render('test.ejs')
+    mysqlConnection.query('SELECT * FROM taskpoint ORDER BY peratus DESC' , function(error, results, fields) {
+      res.render('test.ejs', {
+        taskpoint : results
+      });
+     });
+    
 })
  
   app.post('/test',urlencodedParser,function(req,res) {
     
       mysqlConnection.query('SELECT * FROM userprofile WHERE name = ? AND pass = ?', [req.body.name,req.body.pass], function(error, results, fields) {
         if (results.length > 0) {  
-            res.render('test');      			
+            res.redirect('test');      			
         }else {
           res.render('error');
         }	
@@ -64,9 +69,9 @@ app.get('/', (req, res) => {
           console.log(jsonObj.task);
           console.log(jsonObj.peranan);
 
-          if(jsonObj.peranan==="Penganjur" || "Pencatat Minit Mesyuarat" ){
+          if(jsonObj.peranan==="Penganjur" || jsonObj.peranan==="Pencatat Minit Mesyuarat" ){
             
-            mysqlConnection.query('UPDATE taskdetail SET mesyuarat = CONCAT(mesyuarat, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+            mysqlConnection.query('UPDATE taskdetail SET mesyuarat = CONCAT(mesyuarat, "," ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
              
              if(error) throw error;
              console.log("1 meeting detail inserted");
@@ -76,12 +81,18 @@ app.get('/', (req, res) => {
                console.log("1 meeting point inserted");
      
               });
+              mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+                if(error) throw error;
+                console.log("total points updated");
+      
+               });
            }
+
            else if (jsonObj.peranan==="Penyerah Tugas"){
 
            if(jsonObj.task==="Luar Sekolah"){
             
-            mysqlConnection.query('UPDATE taskdetail SET luar = CONCAT(luar, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+            mysqlConnection.query('UPDATE taskdetail SET luar = CONCAT(luar, "," ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
              
              if(error) throw error;
              console.log("1 out school detail inserted");
@@ -92,12 +103,17 @@ app.get('/', (req, res) => {
      
      
               });
+              mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+3 WHERE name = ? ', [arr[i]], function(error, results, fields){
+                if(error) throw error;
+                console.log("total points updated");
+      
+               });
            }
 
-           else if(jsonObj.task==="Tugasan Sekolah" || "Tugasan Umum"){
+           else if(jsonObj.task==="Tugasan Sekolah" || jsonObj.task=== "Tugasan Umum"){
             if(jsonObj.tahap==="Tinggi"){
             
-              mysqlConnection.query('UPDATE taskdetail SET tinggi = CONCAT(tinggi, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+              mysqlConnection.query('UPDATE taskdetail SET tinggi = CONCAT(tinggi, "," ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
                
                if(error) throw error;
                console.log("1 hard detail inserted");
@@ -108,11 +124,16 @@ app.get('/', (req, res) => {
        
        
                 });
+                mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+3 WHERE name = ? ', [arr[i]], function(error, results, fields){
+                  if(error) throw error;
+                  console.log("total points updated");
+        
+                 });
              }
   
             else if(jsonObj.tahap==="Sederhana"){
               
-              mysqlConnection.query('UPDATE taskdetail SET sederhana = CONCAT(sederhana, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+              mysqlConnection.query('UPDATE taskdetail SET sederhana = CONCAT(sederhana, "," ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
                
                if(error) throw error;
                console.log("1 medium detail inserted");
@@ -123,11 +144,16 @@ app.get('/', (req, res) => {
        
        
                 });
+                mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+2 WHERE name = ? ', [arr[i]], function(error, results, fields){
+                  if(error) throw error;
+                  console.log("total points updated");
+        
+                 });
              }
   
              else{
               
-              mysqlConnection.query('UPDATE taskdetail SET rendah = CONCAT(rendah, " " ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
+              mysqlConnection.query('UPDATE taskdetail SET rendah = CONCAT(rendah, "," ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
                
                if(error) throw error;
                console.log("1 easy detail inserted");
@@ -138,6 +164,11 @@ app.get('/', (req, res) => {
        
        
                 });
+                mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+                  if(error) throw error;
+                  console.log("total points updated");
+        
+                 });
              }
             }
 

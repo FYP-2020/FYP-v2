@@ -55,6 +55,7 @@ window.onclick = function(event) {
   }
 }
 </script>
+
 </head>
 <body>
 <!-- top navigation -->
@@ -97,105 +98,57 @@ window.onclick = function(event) {
       </div>
 </div>
 
-  <div class="container"> <!-- Form -->
-    
+  <!-- Form -->
+  <div class="container"> 
   <h2><b>Status Bebanan Keseluruhan</b></h2>
-
-  <table>
+  </div>
+  <div class="atable"> 
+  <table >
       <tr>
-<th>Nama</th>
-<th>Status</th>
+<th></th>
+<th></th>
 </tr>
+<% taskpoint.forEach(function(task) { %>
+<% var percent = Math.round(task.peratus/50 * 100) %>
 
+<% if (percent<30){ %>
+<tr>
+<td class="long"><%= task.name %></td>
+<td style="background-color:red;"><%= percent%>%</td>
+</tr>
+<% } %>
+
+<% if (percent>29 && percent<50) { %>
+  <tr>
+    <td class="long"><%= task.name %></td>
+    <td style="background-color:orange;"><%= percent%>%</td>
+    </tr>
+  <% } %>
+
+  <% if (percent>49 && percent<70) { %>
+    <tr>
+      <td class="long"><%= task.name %></td>
+      <td style="background-color:greenyellow;"><%= percent%>%</td>
+      </tr>
+    <% } %>
+
+    <% if (percent>69 && percent<101) { %>
+     
+      <tr>
+        
+        <td class="long"><%= task.name %></td>
+     
+        <td style="background-color:yellow;"><%= percent%>%</td>
+      
+        </tr>
+      </div>
+      </div>
+      <% } %>
+<% }) %>
   </table>
 
 
-  <!-- <form action="/pengurusanTugas" method="POST">
-  <!-- <form action="/quotes" method="POST"> 
-     <div class="row">//
-       <div class="col-25">
-      <label for="peranan">Peranan</label></div>
-           <div class="col-75" style="font-size: 15px;">
-          <input type="radio" id="peranan" name="peranan" value="Penyerah Tugas" required>Penyerah Tugas</div></div>
-
-    <div class="row">
-      <div class="col-25">
-      <label for="taskCategory">Kategori * </label>
-        </div>
-        <div class="col-75">
-          <select id="taskCategory" name="task" required>
-            <option value="Tugasan Sekolah">Tugasan Sekolah</option>
-            <option value="Luar Sekolah">Luar Sekolah</option>
-            <option value="Tugasan Umum">Tugasan Umum</option>
-          </select>
-        </div></div>
-
-         <div class="row">
-       <div class="col-25">
-      <label for="tarikh">Tarikh * </label></div>
-           <div class="col-75">
-          <input type="date" id="tarikh" name="tarikh" required></div></div>
-
-       <div class="row">
-       <div class="col-25">
-      <label for="from">Masa</label></div>
-           <div class="col-75">
-          <input type="time" id="timefrom" name="from" >
-          <input type="time" id="timeto" name="to" ></div>   </div>
-
-       <div class="row">
-       <div class="col-25">
-       <label for="Lokasi">Lokasi</label></div>
-       <div class="col-75">
-          <input type="text" id="location" placeholder="Lokasi" name="Lokasi" /></div>
-       </div>
-
-        <div class="row">       
-       <div class="col-25">
-       <label for="Tajuk">Tajuk</label></div>
-       <div class="col-75">
-          <input type="text" id="title" placeholder="Tajuk" name="Tajuk" /></div></div>
-
-       <div class="row"> 
-      <div class="col-25">
-      <label for="Nota">Tugas</label></div>
-      <div class="col-75">
-          <input type="text" id="notes" placeholder="Nota" name="Nota" /></div></div>
-
-       <div class="row"> 
-      <div class="col-25">
-      <label for="tarikhakhir">Tarikh Akhir * </label></div>
-      <div class="col-75">
-          <input type="date" id="tarikhakhir" name="tarikhakhir" required>  </div></div>
-
-    <div class="col-25">
-     <label for="tahap">Tahap Kesukaran * </label></div>
-      <div class="col-75">
-        <select id="tahap" name="tahap" required>
-          <option value="Tinggi">Tinggi</option>
-          <option value="Sederhana">Sederhana</option>
-          <option value="Rendah">Rendah</option>
-           <option value="Sangat Rendah">Sangat Rendah</option>
-        </select></div>
-
-      <table style="margin-top: 80px;" action="/getdetails" method = "GET">
-        <tr>
-          <th> <input type="checkbox" onclick="checkPage(this)" id="name1" name="name1" value="name1">Nama</th>
-          <th>Ketersediaan</th>
-          <th>Status Bebanan</th>
-        </tr>
-         <//% for(var i = 0; i < userprofile.length; i++) {%>
-        <tr>
-          <td><input type="checkbox" id="name1" name="name1[]" value="<//%= userprofile[i].fullname %>"> &nbsp; <//%= userprofile[i].fullname %></td>
-          <td>n/a</td>
-          <td>n/a</td>
-        </tr>
-         <//% } %>
-      </table>
-      <br>
-           <div id="tasksdiv" class="row" style="margin-right: 15%;">
-            <input id="tasksbtn" type="submit" value="Hantar"></div>
-        </form> -->
+  
 
   </div>
 
