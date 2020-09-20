@@ -446,18 +446,49 @@ border-bottom: 2px solid;
 }
 
 .long{
-  padding: 20px;
+  /*padding: 20px;
   text-align: center;
   background-image: url("images/box.png");
   background-size: 80% 80%;
  
   background-repeat: no-repeat;
   background-position: center;
-  /*font-size: 25px;*/
+  font-size: 25px;
   font-weight: bold;
   color:  #192A59;
+  border-bottom: none; */
+  background: white;
+  background-size: 80% 80%;
+   /*background-size: 20% 60%;*/
+   font-size: 20px;
+   border-radius: 3px;
+   overflow: hidden;
+   box-shadow: 0 0 5px #93B5EF;
+  text-align: center;
   border-bottom: none;
+  /*margin-left: 100px;*/
+  font-weight: bold;
+  width:50%;
+
 }
+
+.short{
+  border-bottom: none;
+  margin-left: auto;
+  margin-right: auto;
+ width: 20%;
+}
+
+.tb{
+  
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 15px;
+  border-collapse: separate;
+ 
+}
+
 
 
 

@@ -176,7 +176,7 @@ window.onclick = function(event) {
    
           <th> <input type="checkbox" onclick="checkPage(this)" id="name1" name="name1" value="name1">Nama</th>
           <th>Ketersediaan</th>
-          <th>Status Bebanan</th>
+          <th style="text-align: center;">Status Bebanan</th>
         </tr>
         
           <% userprofile.forEach(function(user){ %>
@@ -184,7 +184,19 @@ window.onclick = function(event) {
           
           <td><input type="checkbox" id="name1" name="names" value="<%= user.fullname %>"> &nbsp; <%= user.fullname %></td>
           <td>n/a</td>
-          <td>n/a</td> <!--coding sama ngan kira points-->
+          <%var percent= Math.round(user.percentage/50*100) %>
+          <% if (percent<30){ %>
+            <td style="background-color: #FF5E5E; text-align: center;">Sangat Rendah</td> 
+          <%}%>
+          <% if (percent>29 && percent<50){ %>
+            <td style="background-color: #FCAC65; text-align: center;">Rendah</td> 
+          <%}%>
+          <% if (percent>49 && percent<70){ %>
+            <td style="background-color: #ADFE6E; text-align: center;">Sederhana</td> 
+          <%}%>
+          <% if (percent>69 && percent<101){ %>
+            <td style="background-color: #FFFF46; text-align: center;">Tinggi</td> 
+          <%}%>
         </tr>
         <% }); %>
          

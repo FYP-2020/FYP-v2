@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
   });
 
   app.get('/completeprofile', function(req,res){
-    mysqlConnection.query('SELECT * FROM userprofile' , function(error, results, fields) {
+    mysqlConnection.query('SELECT * FROM userprofile ORDER BY percentage'  , function(error, results, fields) {
      res.render('completeprofile.ejs', {
        userprofile : results
      });
@@ -86,6 +86,11 @@ app.get('/', (req, res) => {
                 console.log("total points updated");
       
                });
+               mysqlConnection.query('UPDATE userprofile SET percentage = percentage+1 WHERE fullname = ? ', [arr[i]], function(error, results, fields){
+                if(error) throw error;
+                console.log("total points updated");
+      
+               });
            }
 
            else if (jsonObj.peranan==="Penyerah Tugas"){
@@ -104,6 +109,11 @@ app.get('/', (req, res) => {
      
               });
               mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+3 WHERE name = ? ', [arr[i]], function(error, results, fields){
+                if(error) throw error;
+                console.log("total points updated");
+      
+               });
+               mysqlConnection.query('UPDATE userprofile SET percentage = percentage+3 WHERE fullname = ? ', [arr[i]], function(error, results, fields){
                 if(error) throw error;
                 console.log("total points updated");
       
@@ -129,6 +139,11 @@ app.get('/', (req, res) => {
                   console.log("total points updated");
         
                  });
+                 mysqlConnection.query('UPDATE userprofile SET percentage = percentage+3 WHERE fullname = ? ', [arr[i]], function(error, results, fields){
+                  if(error) throw error;
+                  console.log("total points updated");
+        
+                 });
              }
   
             else if(jsonObj.tahap==="Sederhana"){
@@ -149,6 +164,11 @@ app.get('/', (req, res) => {
                   console.log("total points updated");
         
                  });
+                 mysqlConnection.query('UPDATE userprofile SET percentage = percentage+2 WHERE fullname = ? ', [arr[i]], function(error, results, fields){
+                  if(error) throw error;
+                  console.log("total points updated");
+        
+                 });
              }
   
              else{
@@ -165,6 +185,11 @@ app.get('/', (req, res) => {
        
                 });
                 mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+                  if(error) throw error;
+                  console.log("total points updated");
+        
+                 });
+                 mysqlConnection.query('UPDATE userprofile SET percentage = percentage+1 WHERE fullname = ? ', [arr[i]], function(error, results, fields){
                   if(error) throw error;
                   console.log("total points updated");
         

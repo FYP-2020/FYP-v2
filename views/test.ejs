@@ -54,6 +54,14 @@ window.onclick = function(event) {
     }
   }
 }
+
+function toggle_div_fun(id){
+  var divelement = document.getElementById(id);
+  if(divelement.style.display=='none')
+     divelement.style.display='block';
+  else
+     divelement.style.display = 'none';
+}
 </script>
 
 <style>
@@ -67,24 +75,141 @@ window.onclick = function(event) {
 }
 .bar p{
   font-weight: bold;
-   text-align: right;
-  
+  text-align: right;
+  position:static;
    margin-top: 5px;
 }
 
-.ten{
-  width:10%; animation: ten 2s; height: 30px; float:left; background: red;
+.papar{
+  font-size: 8px;
+      padding:5px;
+      background-color: white;
+      border-radius: 10px;
+      cursor: pointer;
 }
-
+.two{
+  width:2%; animation: ten 2s; height: 30px; float:left; background: red; 
+}
+.four{
+  width:4%; animation: ten 2s; height: 30px; float:left; background: red;
+}
+.six{
+  width:6%; animation: ten 2s; height: 30px; float:left; background: red;
+}
+.eight{
+  width:8%; animation: ten 2s; height: 30px; float:left; background: red;color: white;
+}
+.ten{
+  width:10%; animation: ten 2s; height: 30px; float:left; background: red;color: white;
+}
+.twelve{
+  width:12%; animation: ten 2s; height: 30px; float:left; background: red;color: white;
+}
+.forteen{
+  width:14%; animation: ten 2s; height: 30px; float:left; background: red;color: white;
+}
+.sixteen{
+  width:16%; animation: ten 2s; height: 30px; float:left; background: red;color: white;
+}
+.eighteen{
+  width:18%; animation: ten 2s; height: 30px; float:left; background: red;color: white;
+}
+.twenty{
+  width:20%; animation: ten 2s; height: 30px; float:left; background: red;color: white;
+}
+.twentwo{
+  width:22%; animation: ten 2s; height: 30px; float:left; background: red;color: white;
+}
+.twentyfour{
+  width:24%; animation: ten 2s; height: 30px; float:left; background: red;color: white;
+}
+.twentysix{
+  width:26%; animation: ten 2s; height: 30px; float:left; background: red;color: white;
+}
+.twentyeight{
+  width:28%; animation: ten 2s; height: 30px; float:left; background: red;color: white;
+}
+.thirty{
+  width:30%; animation: ten 2s; height: 30px; float:left; background: orange;
+}
+.thirtytwo{
+  width:32%; animation: ten 2s; height: 30px; float:left; background: orange;
+}.thirtyfour{
+  width:34%; animation: ten 2s; height: 30px; float:left; background: orange;
+}.thirtysix{
+  width:36%; animation: ten 2s; height: 30px; float:left; background: orange;
+}.thirtyeight{
+  width:38%; animation: ten 2s; height: 30px; float:left; background: orange;
+}
 .forty{
   width: 40%; animation: ten 2s; height: 30px; float:left; background:orange;
 }
-
+.fortytwo{
+  width:42%; animation: ten 2s; height: 30px; float:left; background: orange;
+}.fortyfour{
+  width:44%; animation: ten 2s; height: 30px; float:left; background: orange;
+}.fortysix{
+  width:46%; animation: ten 2s; height: 30px; float:left; background: orange;
+}.fortyeight{
+  width:48%; animation: ten 2s; height: 30px; float:left; background: orange;
+}
+.fifty{
+  width: 50%; animation: ten 2s; height: 30px; float:left; background:greenyellow;
+}
+.fiftytwo{
+  width: 52%; animation: ten 2s; height: 30px; float:left; background:greenyellow;
+}.fiftyfour{
+  width: 54%; animation: ten 2s; height: 30px; float:left; background:greenyellow;
+}.fiftysix{
+  width: 56%; animation: ten 2s; height: 30px; float:left; background:greenyellow;
+}.fiftyeight{
+  width: 58%; animation: ten 2s; height: 30px; float:left; background:greenyellow;
+}
 .sixty{
   width: 60%; animation: ten 2s; height: 30px; float:left; background:greenyellow;
+}.sixtytwo{
+  width: 62%; animation: ten 2s; height: 30px; float:left; background:greenyellow;
+}.sixtyfour{
+  width: 64%; animation: ten 2s; height: 30px; float:left; background:greenyellow;
+}.sixtysix{
+  width: 66%; animation: ten 2s; height: 30px; float:left; background:greenyellow;
+}.sixtyeight{
+  width: 68%; animation: ten 2s; height: 30px; float:left; background:greenyellow;
+}
+.seventy{
+  width: 70%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.seventytwo{
+  width: 72%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.seventyfour{
+  width: 74%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.seventysix{
+  width: 76%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.seventyeight{
+  width: 78%; animation: ten 2s; height: 30px; float:left; background:yellow;
 }
 .eighty{
   width: 80%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}
+.eightytwo{
+  width: 82%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.eightyfour{
+  width: 84%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.eightysix{
+  width: 86%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.eightyeight{
+  width: 88%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.ninety{
+  width: 90%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.ninetytwo{
+  width: 92%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.ninetyfour{
+  width: 94%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.ninetysix{
+  width: 96%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.ninetyeight{
+  width: 98%; animation: ten 2s; height: 30px; float:left; background:yellow;
+}.hundred{
+  width: 100%; animation: ten 2s; height: 30px; float:left; background:yellow;
 }
 
 @keyframes ten{
@@ -143,8 +268,9 @@ window.onclick = function(event) {
   <h2><b>Status Bebanan Keseluruhan</b></h2>
   </div>
   <div class="atable"> 
-  <table >
+  <table class="tb">
       <tr>
+<th></th>
 <th></th>
 <th></th>
 </tr>
@@ -155,8 +281,8 @@ window.onclick = function(event) {
      
   <tr>
     <td class="long"><%= task.name %></td>
-    <td >
-      <span class="bar"><span ></span><p><%= percent%>% </p></span>
+    <td class="short">
+      <span class="bar"><span ><p><%= percent%>% </p></span></span>
     </td>
     </tr>
 
@@ -165,21 +291,27 @@ window.onclick = function(event) {
 <% if (percent==2){ %>
 <tr>
 <td class="long"><%= task.name %></td>
-<td style="background-color:red;"><%= percent%>%</td>
+<td class="short">
+      <span class="bar"><span class="two"></span><p style="text-align: unset;"><%= percent%>% </p></span>
+    </td>
 </tr>
 <% } %>
 
 <% if (percent==4) { %>
   <tr>
     <td class="long"><%= task.name %></td>
-    <td style="background-color:orange;"><%= percent%>%</td>
+    <td class="short">
+      <span class="bar"><span class="four"></span><p style="text-align: unset;"><%= percent%>% </p></span>
+    </td>
     </tr>
   <% } %>
 
 <% if (percent==6) { %>
   <tr>
       <td class="long"><%= task.name %></td>
-      <td style="background-color:greenyellow;"><%= percent%>%</td>
+      <td class="short">
+      <span class="bar"><span class="six"></span><p style="text-align: unset;"><%= percent%>% </p></span>
+    </td>
       </tr>
 <% } %>
 
@@ -187,7 +319,9 @@ window.onclick = function(event) {
      
       <tr>
         <td class="long"><%= task.name %></td>
-        <td style="background-color:yellow;"><p><%= percent%>%</p></td>
+        <td class="short">
+      <span class="bar"><span class="eight"><p><%= percent%>% </p></span></span>
+    </td>
         </tr>
     
 <% } %>
@@ -196,8 +330,8 @@ window.onclick = function(event) {
      
   <tr>
     <td class="long"><%= task.name %></td>
-    <td >
-      <span class="bar"><span class="ten"></span><p><%= percent%>% </p></span>
+    <td class="short">
+      <span class="bar"><span class="ten"><p><%= percent%>% </p></span></span>
     </td>
     </tr>
 
@@ -207,7 +341,9 @@ window.onclick = function(event) {
      
   <tr>
     <td class="long"><%= task.name %></td>
-    <td style="background-color:yellow;"><%= percent%>%</td>
+    <td class="short">
+      <span class="bar"><span class="twelve"><p><%= percent%>% </p></span></span>
+    </td>
     </tr>
 
 <% } %>
@@ -216,7 +352,9 @@ window.onclick = function(event) {
      
   <tr>
     <td class="long"><%= task.name %></td>
-    <td style="background-color:yellow;"><%= percent%>%</td>
+    <td class="short">
+      <span class="bar"><span class="forteen"><p><%= percent%>% </p></span></span>
+    </td>
     </tr>
 
 <% } %>
@@ -225,7 +363,9 @@ window.onclick = function(event) {
      
   <tr>
     <td class="long"><%= task.name %></td>
-    <td style="background-color:yellow;"><%= percent%>%</td>
+    <td class="short">
+      <span class="bar"><span class="sixteen"><p><%= percent%>% </p></span></span>
+    </td>
     </tr>
 
 <% } %>
@@ -234,7 +374,9 @@ window.onclick = function(event) {
      
   <tr>
     <td class="long"><%= task.name %></td>
-    <td style="background-color:yellow;"><%= percent%>%</td>
+    <td class="short">
+      <span class="bar"><span class="eighteen"><p><%= percent%>% </p></span></span>
+    </td>
     </tr>
 
 <% } %>
@@ -243,7 +385,9 @@ window.onclick = function(event) {
      
   <tr>
     <td class="long"><%= task.name %></td>
-    <td style="background-color:yellow;"><%= percent%>%</td>
+    <td class="short">
+      <span class="bar"><span class="twenty"><p><%= percent%>% </p></span></span>
+    </td>
     </tr>
 
 <% } %>
@@ -251,21 +395,27 @@ window.onclick = function(event) {
 <% if (percent==22){ %>
   <tr>
   <td class="long"><%= task.name %></td>
-  <td style="background-color:red;"><%= percent%>%</td>
+  <td class="short">
+      <span class="bar"><span class="twentwo"><p><%= percent%>% </p></span></span>
+    </td>
   </tr>
   <% } %>
   
   <% if (percent==24) { %>
     <tr>
       <td class="long"><%= task.name %></td>
-      <td style="background-color:orange;"><%= percent%>%</td>
+      <td class="short">
+      <span class="bar"><span class="twentyfour"><p><%= percent%>% </p></span></span>
+    </td>
       </tr>
     <% } %>
   
   <% if (percent==26) { %>
     <tr>
         <td class="long"><%= task.name %></td>
-        <td style="background-color:greenyellow;"><%= percent%>%</td>
+        <td class="short">
+      <span class="bar"><span class="twentysix"><p><%= percent%>% </p></span></span>
+    </td>
         </tr>
   <% } %>
   
@@ -273,7 +423,9 @@ window.onclick = function(event) {
        
         <tr>
           <td class="long"><%= task.name %></td>
-          <td style="background-color:yellow;"><%= percent%>%</td>
+          <td class="short">
+      <span class="bar"><span class="twentyeight"><p><%= percent%>% </p></span></span>
+    </td>
           </tr>
       
   <% } %>
@@ -282,7 +434,9 @@ window.onclick = function(event) {
        
     <tr>
       <td class="long"><%= task.name %></td>
-      <td style="background-color:yellow;"><%= percent%>%</td>
+      <td class="short">
+      <span class="bar"><span class="thirty"><p><%= percent%>% </p></span></span>
+    </td>
       </tr>
   
   <% } %>
@@ -291,7 +445,9 @@ window.onclick = function(event) {
        
     <tr>
       <td class="long"><%= task.name %></td>
-      <td style="background-color:yellow;"><%= percent%>%</td>
+      <td class="short">
+      <span class="bar"><span class="thirtytwo"><p><%= percent%>% </p></span></span>
+    </td>
       </tr>
   
   <% } %>
@@ -300,7 +456,9 @@ window.onclick = function(event) {
        
     <tr>
       <td class="long"><%= task.name %></td>
-      <td style="background-color:yellow;"><%= percent%>%</td>
+      <td class="short">
+      <span class="bar"><span class="thirtyfour"><p><%= percent%>% </p></span></span>
+    </td>
       </tr>
   
   <% } %>
@@ -309,7 +467,9 @@ window.onclick = function(event) {
        
     <tr>
       <td class="long"><%= task.name %></td>
-      <td style="background-color:yellow;"><%= percent%>%</td>
+      <td class="short">
+      <span class="bar"><span class="thirtysix"><p><%= percent%>% </p></span></span>
+    </td>
       </tr>
   
   <% } %>
@@ -318,7 +478,9 @@ window.onclick = function(event) {
        
     <tr>
       <td class="long"><%= task.name %></td>
-      <td style="background-color:yellow;"><%= percent%>%</td>
+      <td class="short">
+      <span class="bar"><span class="thirtyeight"><p><%= percent%>% </p></span></span>
+    </td>
       </tr>
   
   <% } %>
@@ -327,7 +489,7 @@ window.onclick = function(event) {
        
     <tr>
       <td class="long"><%= task.name %></td>
-      <td><span class="bar"><span class="forty"></span><p><%= percent%>% </p></span></td>
+      <td class="short"><span class="bar"><span class="forty"><p><%= percent%>% </p></span></span></td>
       </tr>
   
   <% } %>
@@ -335,21 +497,27 @@ window.onclick = function(event) {
   <% if (percent==42){ %>
     <tr>
     <td class="long"><%= task.name %></td>
-    <td style="background-color:red;"><%= percent%>%</td>
+    <td class="short">
+      <span class="bar"><span class="fortytwo"><p><%= percent%>% </p></span></span>
+    </td>
     </tr>
     <% } %>
     
     <% if (percent==44) { %>
       <tr>
         <td class="long"><%= task.name %></td>
-        <td style="background-color:orange;"><%= percent%>%</td>
+        <td class="short">
+      <span class="bar"><span class="fortyfour"><p><%= percent%>% </p></span></span>
+    </td>
         </tr>
       <% } %>
     
     <% if (percent==46) { %>
       <tr>
           <td class="long"><%= task.name %></td>
-          <td style="background-color:greenyellow;"><%= percent%>%</td>
+          <td class="short">
+      <span class="bar"><span class="fortysix"><p><%= percent%>% </p></span></span>
+    </td>
           </tr>
     <% } %>
     
@@ -357,7 +525,9 @@ window.onclick = function(event) {
          
           <tr>
             <td class="long"><%= task.name %></td>
-            <td style="background-color:yellow;"><%= percent%>%</td>
+            <td class="short">
+      <span class="bar"><span class="fortyeight"><p><%= percent%>% </p></span></span>
+    </td>
             </tr>
         
     <% } %>
@@ -366,7 +536,9 @@ window.onclick = function(event) {
          
       <tr>
         <td class="long"><%= task.name %></td>
-        <td style="background-color:yellow;"><%= percent%>%</td>
+        <td class="short">
+      <span class="bar"><span class="fifty"><p><%= percent%>% </p></span></span>
+    </td>
         </tr>
     
     <% } %>
@@ -375,7 +547,9 @@ window.onclick = function(event) {
          
       <tr>
         <td class="long"><%= task.name %></td>
-        <td style="background-color:yellow;"><%= percent%>%</td>
+        <td class="short">
+      <span class="bar"><span class="fiftytwo"><p><%= percent%>% </p></span></span>
+    </td>
         </tr>
     
     <% } %>
@@ -384,7 +558,9 @@ window.onclick = function(event) {
          
       <tr>
         <td class="long"><%= task.name %></td>
-        <td style="background-color:yellow;"><%= percent%>%</td>
+        <td class="short">
+      <span class="bar"><span class="fiftyfour"><p><%= percent%>% </p></span></span>
+    </td>
         </tr>
     
     <% } %>
@@ -393,7 +569,9 @@ window.onclick = function(event) {
          
       <tr>
         <td class="long"><%= task.name %></td>
-        <td style="background-color:yellow;"><%= percent%>%</td>
+        <td class="short">
+      <span class="bar"><span class="fiftysix"><p><%= percent%>% </p></span></span>
+    </td>
         </tr>
     
     <% } %>
@@ -402,7 +580,9 @@ window.onclick = function(event) {
          
       <tr>
         <td class="long"><%= task.name %></td>
-        <td style="background-color:yellow;"><%= percent%>%</td>
+        <td class="short">
+      <span class="bar"><span class="fiftyeight"><p><%= percent%>% </p></span></span>
+    </td>
         </tr>
     
     <% } %>
@@ -411,7 +591,7 @@ window.onclick = function(event) {
          
       <tr>
         <td class="long"><%= task.name %></td>
-        <td ><span class="bar"><span class="sixty"></span><p><%= percent%>% </p></span></td>
+        <td class="short"><span class="bar"><span class="sixty"><p><%= percent%>% </p></span></span></td>
         </tr>
     
     <% } %>
@@ -419,21 +599,27 @@ window.onclick = function(event) {
     <% if (percent==62){ %>
       <tr>
       <td class="long"><%= task.name %></td>
-      <td style="background-color:red;"><%= percent%>%</td>
+      <td class="short">
+      <span class="bar"><span class="sixtytwo"><p><%= percent%>% </p></span></span>
+    </td>
       </tr>
       <% } %>
       
       <% if (percent==64) { %>
         <tr>
           <td class="long"><%= task.name %></td>
-          <td style="background-color:orange;"><%= percent%>%</td>
+          <td class="short">
+      <span class="bar"><span class="sixtyfour"><p><%= percent%>% </p></span></span>
+    </td>
           </tr>
         <% } %>
       
       <% if (percent==66) { %>
         <tr>
             <td class="long"><%= task.name %></td>
-            <td style="background-color:greenyellow;"><%= percent%>%</td>
+            <td class="short">
+      <span class="bar"><span class="sixtysix"><p><%= percent%>% </p></span></span>
+    </td>
             </tr>
       <% } %>
       
@@ -441,7 +627,9 @@ window.onclick = function(event) {
            
             <tr>
               <td class="long"><%= task.name %></td>
-              <td style="background-color:yellow;"><%= percent%>%</td>
+              <td class="short">
+      <span class="bar"><span class="sixtyeight"><p><%= percent%>% </p></span></span>
+    </td>
               </tr>
           
       <% } %>
@@ -450,7 +638,9 @@ window.onclick = function(event) {
            
         <tr>
           <td class="long"><%= task.name %></td>
-          <td style="background-color:yellow;"><%= percent%>%</td>
+          <td class="short">
+      <span class="bar"><span class="seventy"><p><%= percent%>% </p></span></span>
+    </td>
           </tr>
       
       <% } %>
@@ -459,7 +649,9 @@ window.onclick = function(event) {
            
         <tr>
           <td class="long"><%= task.name %></td>
-          <td style="background-color:yellow;"><%= percent%>%</td>
+          <td class="short">
+      <span class="bar"><span class="seventytwo"><p><%= percent%>% </p></span></span>
+    </td>
           </tr>
       
       <% } %>
@@ -468,7 +660,9 @@ window.onclick = function(event) {
            
         <tr>
           <td class="long"><%= task.name %></td>
-          <td style="background-color:yellow;"><%= percent%>%</td>
+          <td class="short">
+      <span class="bar"><span class="seventyfour"><p><%= percent%>% </p></span></span>
+    </td>
           </tr>
       
       <% } %>
@@ -477,7 +671,9 @@ window.onclick = function(event) {
            
         <tr>
           <td class="long"><%= task.name %></td>
-          <td style="background-color:yellow;"><%= percent%>%</td>
+          <td class="short">
+      <span class="bar"><span class="seventysix"><p><%= percent%>% </p></span></span>
+    </td>
           </tr>
       
       <% } %>
@@ -486,7 +682,9 @@ window.onclick = function(event) {
            
         <tr>
           <td class="long"><%= task.name %></td>
-          <td style="background-color:yellow;"><%= percent%>%</td>
+          <td class="short">
+      <span class="bar"><span class="seventyeight"><p><%= percent%>% </p></span></span>
+    </td>
           </tr>
       
       <% } %>
@@ -495,7 +693,7 @@ window.onclick = function(event) {
            
         <tr>
           <td class="long"><%= task.name %></td>
-          <td ><span class="bar"><span class="eighty"></span><p><%= percent%>% </p></span></td>
+          <td class="short"><span class="bar"><span class="eighty"><p><%= percent%>% </p></span></span></td>
           </tr>
       
       <% } %>
@@ -503,21 +701,27 @@ window.onclick = function(event) {
       <% if (percent==82){ %>
         <tr>
         <td class="long"><%= task.name %></td>
-        <td style="background-color:red;"><%= percent%>%</td>
+        <td class="short">
+      <span class="bar"><span class="eightytwo"><p><%= percent%>% </p></span></span>
+    </td>
         </tr>
         <% } %>
         
         <% if (percent==84) { %>
           <tr>
             <td class="long"><%= task.name %></td>
-            <td style="background-color:orange;"><%= percent%>%</td>
+            <td class="short">
+      <span class="bar"><span class="eightyfour"><p><%= percent%>% </p></span></span>
+    </td>
             </tr>
           <% } %>
         
         <% if (percent==86) { %>
           <tr>
               <td class="long"><%= task.name %></td>
-              <td style="background-color:greenyellow;"><%= percent%>%</td>
+              <td class="short">
+      <span class="bar"><span class="eightysix"><p><%= percent%>% </p></span></span>
+    </td>
               </tr>
         <% } %>
         
@@ -525,7 +729,9 @@ window.onclick = function(event) {
              
               <tr>
                 <td class="long"><%= task.name %></td>
-                <td style="background-color:yellow;"><%= percent%>%</td>
+                <td class="short">
+      <span class="bar"><span class="eightyeight"><p><%= percent%>% </p></span></span>
+    </td>
                 </tr>
             
         <% } %>
@@ -534,7 +740,9 @@ window.onclick = function(event) {
              
           <tr>
             <td class="long"><%= task.name %></td>
-            <td style="background-color:yellow;"><%= percent%>%</td>
+            <td class="short">
+      <span class="bar"><span class="ninety"><p><%= percent%>% </p></span></span>
+    </td>
             </tr>
         
         <% } %>
@@ -543,7 +751,9 @@ window.onclick = function(event) {
              
           <tr>
             <td class="long"><%= task.name %></td>
-            <td style="background-color:yellow;"><%= percent%>%</td>
+            <td class="short">
+      <span class="bar"><span class="ninetytwo"><p><%= percent%>% </p></span></span>
+    </td>
             </tr>
         
         <% } %>
@@ -552,7 +762,9 @@ window.onclick = function(event) {
              
           <tr>
             <td class="long"><%= task.name %></td>
-            <td style="background-color:yellow;"><%= percent%>%</td>
+            <td class="short">
+      <span class="bar"><span class="ninetyfour"><p><%= percent%>% </p></span></span>
+    </td>
             </tr>
         
         <% } %>
@@ -561,7 +773,9 @@ window.onclick = function(event) {
              
           <tr>
             <td class="long"><%= task.name %></td>
-            <td style="background-color:yellow;"><%= percent%>%</td>
+            <td class="short">
+      <span class="bar"><span class="ninetysix"><p><%= percent%>% </p></span></span>
+    </td>
             </tr>
         
         <% } %>
@@ -569,8 +783,22 @@ window.onclick = function(event) {
         <% if (percent==98) { %>
              
           <tr>
-            <td class="long"><%= task.name %></td>
-            <td style="background-color:yellow;"><%= percent%>%</td>
+            <td class="long"><%= task.name %>
+              <div id="section" style="display: none; font-weight: unset;">cuba try test<br>
+                <table>
+                 <th>mesyuarat</th> <th>luar</th>
+                 <tr><td>sukan</td> <td>pertandingan</td></tr>
+  
+                </table>
+                
+                </div>
+            </td>
+            <td class="short">
+      <span class="bar"><span class="ninetyeight"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('section');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
+    </td>
             </tr>
         
         <% } %>
@@ -578,12 +806,27 @@ window.onclick = function(event) {
         <% if (percent==100) { %>
              
           <tr>
-            <td class="long"><%= task.name %></td>
-            <td style="background-color:yellow;"><%= percent%>%</td>
+            <td class="long"><%= task.name %>
+              <div id="sectiontohide" style="display: none; font-weight: unset;">cuba try test<br>
+              <table>
+               <th>mesyuarat</th> <th>luar</th>
+               <tr><td>sukan</td> <td>pertandingan</td></tr>
+
+              </table>
+              
+              </div>
+            </td>
+            <td class="short">
+      <span class="bar"><span class="hundred"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('sectiontohide');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
+    </td>
             </tr>
         
         <% } %>
-
+       
+       
 <% }) %>
   </table>
 
