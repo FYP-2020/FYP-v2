@@ -467,7 +467,7 @@ border-bottom: 2px solid;
   text-align: center;
   border-bottom: none;
   /*margin-left: 100px;*/
-  font-weight: bold;
+  /*font-weight: bold;*/
   width:50%;
 
 }
@@ -487,6 +487,41 @@ border-bottom: 2px solid;
   border-spacing: 15px;
   border-collapse: separate;
  
+}
+
+.cont { 
+  width:700px; 
+  height:200px; 
+  background-color:lightblue; 
+  padding-top:20px; 
+  padding-left:10px; 
+  padding-right:10px; 
+  border-radius: 5px;
+  display: none;
+  margin-top: 10px;
+} 
+.meet { 
+  float:left; 
+  width:220px; 
+  height:180px; 
+  background-color:white; 
+  border-radius: 3px;
+  text-align: center;
+} 
+.out { 
+  float:left; 
+  width: 220px;
+  height:180px; 
+  background-color:white;  
+  border-radius: 3px;
+  margin-left:20px; 
+} 
+.tas { 
+  float:right; 
+  width:220px; 
+  height:180px; 
+  background-color:white; 
+  border-radius: 3px;
 }
 
 
