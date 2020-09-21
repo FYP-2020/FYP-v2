@@ -481,7 +481,7 @@ border-bottom: 2px solid;
 
 .tb{
   
-  width: 80%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   border-spacing: 15px;
@@ -490,7 +490,7 @@ border-bottom: 2px solid;
 }
 
 .cont { 
-  width:700px; 
+  width:800px; 
   height:200px; 
   background-color:lightblue; 
   padding-top:20px; 
@@ -499,10 +499,12 @@ border-bottom: 2px solid;
   border-radius: 5px;
   display: none;
   margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
 } 
 .meet { 
   float:left; 
-  width:220px; 
+  width:250px; 
   height:180px; 
   background-color:white; 
   border-radius: 3px;
@@ -512,17 +514,17 @@ border-bottom: 2px solid;
 } 
 .out { 
   float:left; 
-  width: 220px;
+  width: 250px;
   height:180px; 
   background-color:white;  
   border-radius: 3px;
-  margin-left:20px;
+  margin-left:25px;
   font-size: 18px;
   padding-top: 5px;
 } 
 .tas { 
   float:right; 
-  width:220px; 
+  width:250px; 
   height:180px; 
   background-color:white; 
   border-radius: 3px;

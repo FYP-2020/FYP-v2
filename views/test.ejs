@@ -285,7 +285,42 @@ function toggle_div_fun(id){
 <% if (percent==0) { %>
      
   <tr>
-    <td class="long"><%= task.name %></td>
+     <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
     <td class="short">
       <span class="bar"><span ><p><%= percent%>% </p></span></span>
     </td>
@@ -295,27 +330,141 @@ function toggle_div_fun(id){
 
 <% if (percent==2){ %>
 <tr>
-<td class="long"><%= task.name %></td>
+ <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
 <td class="short">
       <span class="bar"><span class="two"></span><p style="text-align: unset;"><%= percent%>% </p></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
 </tr>
 <% } %>
 
 <% if (percent==4) { %>
   <tr>
-    <td class="long"><%= task.name %></td>
+     <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
     <td class="short">
       <span class="bar"><span class="four"></span><p style="text-align: unset;"><%= percent%>% </p></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
     </tr>
   <% } %>
 
 <% if (percent==6) { %>
   <tr>
-      <td class="long"><%= task.name %></td>
+       <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
       <td class="short">
       <span class="bar"><span class="six"></span><p style="text-align: unset;"><%= percent%>% </p></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
       </tr>
 <% } %>
@@ -323,9 +472,47 @@ function toggle_div_fun(id){
 <% if (percent==8) { %>
      
       <tr>
-        <td class="long"><%= task.name %></td>
+         <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
         <td class="short">
       <span class="bar"><span class="eight"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
         </tr>
     
@@ -334,9 +521,47 @@ function toggle_div_fun(id){
 <% if (percent==10) { %>
      
   <tr>
-    <td class="long"><%= task.name %></td>
+     <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
     <td class="short">
       <span class="bar"><span class="ten"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
     </tr>
 
@@ -345,9 +570,47 @@ function toggle_div_fun(id){
 <% if (percent==12) { %>
      
   <tr>
-    <td class="long"><%= task.name %></td>
+     <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
     <td class="short">
       <span class="bar"><span class="twelve"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
     </tr>
 
@@ -356,9 +619,47 @@ function toggle_div_fun(id){
 <% if (percent==14) { %>
      
   <tr>
-    <td class="long"><%= task.name %></td>
+     <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
     <td class="short">
       <span class="bar"><span class="forteen"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
     </tr>
 
@@ -367,9 +668,47 @@ function toggle_div_fun(id){
 <% if (percent==16) { %>
      
   <tr>
-    <td class="long"><%= task.name %></td>
+     <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
     <td class="short">
       <span class="bar"><span class="sixteen"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
     </tr>
 
@@ -378,9 +717,47 @@ function toggle_div_fun(id){
 <% if (percent==18) { %>
      
   <tr>
-    <td class="long"><%= task.name %></td>
+     <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
     <td class="short">
       <span class="bar"><span class="eighteen"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
     </tr>
 
@@ -389,9 +766,47 @@ function toggle_div_fun(id){
 <% if (percent==20) { %>
      
   <tr>
-    <td class="long"><%= task.name %></td>
+     <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
     <td class="short">
       <span class="bar"><span class="twenty"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
     </tr>
 
@@ -399,27 +814,141 @@ function toggle_div_fun(id){
 
 <% if (percent==22){ %>
   <tr>
-  <td class="long"><%= task.name %></td>
+   <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
   <td class="short">
       <span class="bar"><span class="twentwo"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
   </tr>
   <% } %>
   
   <% if (percent==24) { %>
     <tr>
-      <td class="long"><%= task.name %></td>
+       <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
       <td class="short">
       <span class="bar"><span class="twentyfour"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
       </tr>
     <% } %>
   
   <% if (percent==26) { %>
     <tr>
-        <td class="long"><%= task.name %></td>
+         <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
         <td class="short">
       <span class="bar"><span class="twentysix"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
         </tr>
   <% } %>
@@ -427,9 +956,47 @@ function toggle_div_fun(id){
   <% if (percent==28) { %>
        
         <tr>
-          <td class="long"><%= task.name %></td>
+           <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
           <td class="short">
       <span class="bar"><span class="twentyeight"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
           </tr>
       
@@ -438,9 +1005,47 @@ function toggle_div_fun(id){
   <% if (percent==30) { %>
        
     <tr>
-      <td class="long"><%= task.name %></td>
+       <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
       <td class="short">
       <span class="bar"><span class="thirty"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
       </tr>
   
@@ -449,9 +1054,47 @@ function toggle_div_fun(id){
   <% if (percent==32) { %>
        
     <tr>
-      <td class="long"><%= task.name %></td>
+       <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
       <td class="short">
       <span class="bar"><span class="thirtytwo"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
       </tr>
   
@@ -460,9 +1103,47 @@ function toggle_div_fun(id){
   <% if (percent==34) { %>
        
     <tr>
-      <td class="long"><%= task.name %></td>
+       <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
       <td class="short">
       <span class="bar"><span class="thirtyfour"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
       </tr>
   
@@ -471,9 +1152,47 @@ function toggle_div_fun(id){
   <% if (percent==36) { %>
        
     <tr>
-      <td class="long"><%= task.name %></td>
+       <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
       <td class="short">
       <span class="bar"><span class="thirtysix"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
       </tr>
   
@@ -524,6 +1243,7 @@ function toggle_div_fun(id){
     <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
       
     </td>
+   
       </tr>
   
   <% } %>
@@ -531,35 +1251,187 @@ function toggle_div_fun(id){
   <% if (percent==40) { %>
        
     <tr>
-      <td class="long"><%= task.name %></td>
+       <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
       <td class="short"><span class="bar"><span class="forty"><p><%= percent%>% </p></span></span></td>
+      <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
+      </td>
       </tr>
   
   <% } %>
 
   <% if (percent==42){ %>
     <tr>
-    <td class="long"><%= task.name %></td>
+     <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
     <td class="short">
       <span class="bar"><span class="fortytwo"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
     </tr>
     <% } %>
     
     <% if (percent==44) { %>
       <tr>
-        <td class="long"><%= task.name %></td>
+         <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
         <td class="short">
       <span class="bar"><span class="fortyfour"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
         </tr>
       <% } %>
     
     <% if (percent==46) { %>
       <tr>
-          <td class="long"><%= task.name %></td>
+           <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
           <td class="short">
       <span class="bar"><span class="fortysix"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
           </tr>
     <% } %>
@@ -567,9 +1439,46 @@ function toggle_div_fun(id){
     <% if (percent==48) { %>
          
           <tr>
-            <td class="long"><%= task.name %></td>
+             <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
             <td class="short">
       <span class="bar"><span class="fortyeight"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
             </tr>
         
@@ -578,9 +1487,46 @@ function toggle_div_fun(id){
     <% if (percent==50) { %>
          
       <tr>
-        <td class="long"><%= task.name %></td>
+         <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
         <td class="short">
       <span class="bar"><span class="fifty"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
         </tr>
     
@@ -589,9 +1535,46 @@ function toggle_div_fun(id){
     <% if (percent==52) { %>
          
       <tr>
-        <td class="long"><%= task.name %></td>
+         <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
         <td class="short">
       <span class="bar"><span class="fiftytwo"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
         </tr>
     
@@ -600,9 +1583,46 @@ function toggle_div_fun(id){
     <% if (percent==54) { %>
          
       <tr>
-        <td class="long"><%= task.name %></td>
+         <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
         <td class="short">
       <span class="bar"><span class="fiftyfour"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
         </tr>
     
@@ -611,9 +1631,46 @@ function toggle_div_fun(id){
     <% if (percent==56) { %>
          
       <tr>
-        <td class="long"><%= task.name %></td>
+         <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
         <td class="short">
       <span class="bar"><span class="fiftysix"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
         </tr>
     
@@ -622,9 +1679,46 @@ function toggle_div_fun(id){
     <% if (percent==58) { %>
          
       <tr>
-        <td class="long"><%= task.name %></td>
+         <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
         <td class="short">
       <span class="bar"><span class="fiftyeight"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
         </tr>
     
@@ -633,35 +1727,184 @@ function toggle_div_fun(id){
     <% if (percent==60) { %>
          
       <tr>
-        <td class="long"><%= task.name %></td>
+         <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
         <td class="short"><span class="bar"><span class="sixty"><p><%= percent%>% </p></span></span></td>
+        <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
+        </td>
         </tr>
     
     <% } %>
 
     <% if (percent==62){ %>
       <tr>
-      <td class="long"><%= task.name %></td>
+       <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
       <td class="short">
       <span class="bar"><span class="sixtytwo"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
       </tr>
       <% } %>
       
       <% if (percent==64) { %>
         <tr>
-          <td class="long"><%= task.name %></td>
+           <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
           <td class="short">
       <span class="bar"><span class="sixtyfour"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
           </tr>
         <% } %>
       
       <% if (percent==66) { %>
         <tr>
-            <td class="long"><%= task.name %></td>
+             <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
             <td class="short">
       <span class="bar"><span class="sixtysix"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
             </tr>
       <% } %>
@@ -669,9 +1912,46 @@ function toggle_div_fun(id){
       <% if (percent==68) { %>
            
             <tr>
-              <td class="long"><%= task.name %></td>
+               <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
               <td class="short">
       <span class="bar"><span class="sixtyeight"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
               </tr>
           
@@ -680,9 +1960,46 @@ function toggle_div_fun(id){
       <% if (percent==70) { %>
            
         <tr>
-          <td class="long"><%= task.name %></td>
+           <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
           <td class="short">
       <span class="bar"><span class="seventy"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
           </tr>
       
@@ -691,9 +2008,46 @@ function toggle_div_fun(id){
       <% if (percent==72) { %>
            
         <tr>
-          <td class="long"><%= task.name %></td>
+           <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
           <td class="short">
       <span class="bar"><span class="seventytwo"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
           </tr>
       
@@ -702,9 +2056,46 @@ function toggle_div_fun(id){
       <% if (percent==74) { %>
            
         <tr>
-          <td class="long"><%= task.name %></td>
+           <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
           <td class="short">
       <span class="bar"><span class="seventyfour"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
           </tr>
       
@@ -713,9 +2104,46 @@ function toggle_div_fun(id){
       <% if (percent==76) { %>
            
         <tr>
-          <td class="long"><%= task.name %></td>
+           <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
           <td class="short">
       <span class="bar"><span class="seventysix"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
           </tr>
       
@@ -724,9 +2152,46 @@ function toggle_div_fun(id){
       <% if (percent==78) { %>
            
         <tr>
-          <td class="long"><%= task.name %></td>
+           <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
           <td class="short">
       <span class="bar"><span class="seventyeight"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
           </tr>
       
@@ -735,35 +2200,184 @@ function toggle_div_fun(id){
       <% if (percent==80) { %>
            
         <tr>
-          <td class="long"><%= task.name %></td>
+           <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
           <td class="short"><span class="bar"><span class="eighty"><p><%= percent%>% </p></span></span></td>
+          <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
+          </td>
           </tr>
       
       <% } %>
 
       <% if (percent==82){ %>
         <tr>
-        <td class="long"><%= task.name %></td>
+         <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
         <td class="short">
       <span class="bar"><span class="eightytwo"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
         </tr>
         <% } %>
         
         <% if (percent==84) { %>
           <tr>
-            <td class="long"><%= task.name %></td>
+             <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
             <td class="short">
       <span class="bar"><span class="eightyfour"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
             </tr>
           <% } %>
         
         <% if (percent==86) { %>
           <tr>
-              <td class="long"><%= task.name %></td>
+               <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
               <td class="short">
       <span class="bar"><span class="eightysix"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
               </tr>
         <% } %>
@@ -771,9 +2385,46 @@ function toggle_div_fun(id){
         <% if (percent==88) { %>
              
               <tr>
-                <td class="long"><%= task.name %></td>
+                 <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
                 <td class="short">
       <span class="bar"><span class="eightyeight"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
                 </tr>
             
@@ -782,9 +2433,46 @@ function toggle_div_fun(id){
         <% if (percent==90) { %>
              
           <tr>
-            <td class="long"><%= task.name %></td>
+             <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
             <td class="short">
       <span class="bar"><span class="ninety"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
             </tr>
         
@@ -793,9 +2481,46 @@ function toggle_div_fun(id){
         <% if (percent==92) { %>
              
           <tr>
-            <td class="long"><%= task.name %></td>
+             <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
             <td class="short">
       <span class="bar"><span class="ninetytwo"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
             </tr>
         
@@ -804,9 +2529,46 @@ function toggle_div_fun(id){
         <% if (percent==94) { %>
              
           <tr>
-            <td class="long"><%= task.name %></td>
+             <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
             <td class="short">
       <span class="bar"><span class="ninetyfour"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
             </tr>
         
@@ -815,9 +2577,46 @@ function toggle_div_fun(id){
         <% if (percent==96) { %>
              
           <tr>
-            <td class="long"><%= task.name %></td>
+             <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
             <td class="short">
       <span class="bar"><span class="ninetysix"><p><%= percent%>% </p></span></span>
+    </td><td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
             </tr>
         
@@ -827,19 +2626,45 @@ function toggle_div_fun(id){
              
           <tr>
             <td class="long"><%= task.name %>
-              <div id="section" style="display: none; font-weight: unset;">cuba try test<br>
-                <table>
-                 <th>mesyuarat</th> <th>luar</th>
-                 <tr><td>sukan</td> <td>pertandingan</td></tr>
-  
-                </table>
-                
+              <div id="<%= task.name %>" class="cont">
+                <div class="meet">Mesyuarat
+                <% for (var i=1; i<meeting.length;i++) { %>
+                 <ol style="list-style: none; text-align: center;  padding: 0px; ">
+                  <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+                 </ol>
+                <%}%>
                 </div>
+                <div class="out"> Aktiviti Luar Sekolah
+                <% for (var i=1; i<out.length;i++) { %>
+                 <ol style="list-style: none; text-align: center;  padding: 0px; ">
+                  <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+                 </ol>
+                <%}%>
+                </div>
+                <div class="tas">Tugasan
+                  <% for (var i=1; i<hard.length;i++) { %>
+                   <ol style="list-style: none; text-align: center;  padding: 0px; ">
+                    <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+                   </ol>
+                  <%}%>
+                  <% for (var i=1; i<medium.length;i++) { %>
+                    <ol style="list-style: none; text-align: center;  padding: 0px; ">
+                     <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+                    </ol>
+                   <%}%>
+                   <% for (var i=1; i<easy.length;i++) { %>
+                    <ol style="list-style: none; text-align: center;  padding: 0px; ">
+                     <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+                    </ol>
+                   <%}%>
+                </div>
+              </div>
+            
             </td>
             <td class="short">
       <span class="bar"><span class="ninetyeight"><p><%= percent%>% </p></span></span>
     </td>
-    <td class="short"><button class="papar" onclick="toggle_div_fun('section');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
       
     </td>
             </tr>
@@ -849,19 +2674,46 @@ function toggle_div_fun(id){
         <% if (percent==100) { %>
              
           <tr>
-            <td class="long"><%= task.name %> 
-              <div id="sectiontohide" class="cont">
-                <div class="meet"></div>
-                <div class="out"></div>
-                <div class="tas"></div>
-             
-              
+            <td class="long"><%= task.name %>
+              <div id="<%= task.name %>" class="cont">
+                <div class="meet">Mesyuarat
+                <% for (var i=1; i<meeting.length;i++) { %>
+                 <ol style="list-style: none; text-align: center;  padding: 0px; ">
+                  <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+                 </ol>
+                <%}%>
+                </div>
+                <div class="out"> Aktiviti Luar Sekolah
+                <% for (var i=1; i<out.length;i++) { %>
+                 <ol style="list-style: none; text-align: center;  padding: 0px; ">
+                  <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+                 </ol>
+                <%}%>
+                </div>
+                <div class="tas">Tugasan
+                  <% for (var i=1; i<hard.length;i++) { %>
+                   <ol style="list-style: none; text-align: center;  padding: 0px; ">
+                    <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+                   </ol>
+                  <%}%>
+                  <% for (var i=1; i<medium.length;i++) { %>
+                    <ol style="list-style: none; text-align: center;  padding: 0px; ">
+                     <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+                    </ol>
+                   <%}%>
+                   <% for (var i=1; i<easy.length;i++) { %>
+                    <ol style="list-style: none; text-align: center;  padding: 0px; ">
+                     <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+                    </ol>
+                   <%}%>
+                </div>
               </div>
+            
             </td>
             <td class="short">
       <span class="bar"><span class="hundred"><p><%= percent%>% </p></span></span>
     </td>
-    <td class="short"><button class="papar" onclick="toggle_div_fun('sectiontohide');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('s<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
       
     </td>
             </tr>
