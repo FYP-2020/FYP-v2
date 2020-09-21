@@ -507,6 +507,8 @@ border-bottom: 2px solid;
   background-color:white; 
   border-radius: 3px;
   text-align: center;
+  font-size: 18px;
+  padding-top: 5px;
 } 
 .out { 
   float:left; 
@@ -514,7 +516,9 @@ border-bottom: 2px solid;
   height:180px; 
   background-color:white;  
   border-radius: 3px;
-  margin-left:20px; 
+  margin-left:20px;
+  font-size: 18px;
+  padding-top: 5px;
 } 
 .tas { 
   float:right; 
@@ -522,6 +526,8 @@ border-bottom: 2px solid;
   height:180px; 
   background-color:white; 
   border-radius: 3px;
+  font-size: 18px;
+  padding-top: 5px;
 }
 
 

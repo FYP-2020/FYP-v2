@@ -71,21 +71,13 @@ app.get('/', (req, res) => {
 
           if(jsonObj.peranan==="Penganjur" || jsonObj.peranan==="Pencatat Minit Mesyuarat" ){
             
-            mysqlConnection.query('UPDATE taskdetail SET mesyuarat = CONCAT(mesyuarat, "," ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
-             
-             if(error) throw error;
-             console.log("1 meeting detail inserted");
-            });
-            mysqlConnection.query('UPDATE taskpoint SET mesyuarat = mesyuarat+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+            mysqlConnection.query('UPDATE taskpoint SET mesyuarat = mesyuarat+1, mesyuaratdetail = CONCAT(mesyuaratdetail, "," ,?), peratus = peratus+1  WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
                if(error) throw error;
                console.log("1 meeting point inserted");
-     
+               console.log("1 meeting detail inserted");
+               console.log("total points updated");
               });
-              mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
-                if(error) throw error;
-                console.log("total points updated");
-      
-               });
+            
                mysqlConnection.query('UPDATE userprofile SET percentage = percentage+1 WHERE fullname = ? ', [arr[i]], function(error, results, fields){
                 if(error) throw error;
                 console.log("total points updated");
@@ -97,22 +89,13 @@ app.get('/', (req, res) => {
 
            if(jsonObj.task==="Luar Sekolah"){
             
-            mysqlConnection.query('UPDATE taskdetail SET luar = CONCAT(luar, "," ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
-             
-             if(error) throw error;
-             console.log("1 out school detail inserted");
-            });
-            mysqlConnection.query('UPDATE taskpoint SET luar = luar+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+            mysqlConnection.query('UPDATE taskpoint SET luar = luar+1, luardetail = CONCAT(luardetail, "," ,?), peratus = peratus+3 WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
                if(error) throw error;
                console.log("1 out school point inserted");
-     
-     
+               console.log("1 out school detail inserted");
+               console.log("total points updated");
               });
-              mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+3 WHERE name = ? ', [arr[i]], function(error, results, fields){
-                if(error) throw error;
-                console.log("total points updated");
-      
-               });
+          
                mysqlConnection.query('UPDATE userprofile SET percentage = percentage+3 WHERE fullname = ? ', [arr[i]], function(error, results, fields){
                 if(error) throw error;
                 console.log("total points updated");
@@ -123,22 +106,13 @@ app.get('/', (req, res) => {
            else if(jsonObj.task==="Tugasan Sekolah" || jsonObj.task=== "Tugasan Umum"){
             if(jsonObj.tahap==="Tinggi"){
             
-              mysqlConnection.query('UPDATE taskdetail SET tinggi = CONCAT(tinggi, "," ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
-               
-               if(error) throw error;
-               console.log("1 hard detail inserted");
-              });
-              mysqlConnection.query('UPDATE taskpoint SET tinggi = tinggi+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+              mysqlConnection.query('UPDATE taskpoint SET tinggi = tinggi+1,tinggidetail = CONCAT(tinggidetail, "," ,?), peratus = peratus+3  WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
                  if(error) throw error;
                  console.log("1 hard point inserted");
-       
-       
+                 console.log("1 hard detail inserted");
+                 console.log("total points updated");
                 });
-                mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+3 WHERE name = ? ', [arr[i]], function(error, results, fields){
-                  if(error) throw error;
-                  console.log("total points updated");
-        
-                 });
+              
                  mysqlConnection.query('UPDATE userprofile SET percentage = percentage+3 WHERE fullname = ? ', [arr[i]], function(error, results, fields){
                   if(error) throw error;
                   console.log("total points updated");
@@ -148,22 +122,13 @@ app.get('/', (req, res) => {
   
             else if(jsonObj.tahap==="Sederhana"){
               
-              mysqlConnection.query('UPDATE taskdetail SET sederhana = CONCAT(sederhana, "," ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
-               
-               if(error) throw error;
-               console.log("1 medium detail inserted");
-              });
-              mysqlConnection.query('UPDATE taskpoint SET sederhana = sederhana+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+              mysqlConnection.query('UPDATE taskpoint SET sederhana = sederhana+1, sederhanadetail = CONCAT(sederhanadetail, "," ,?), peratus = peratus+2 WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
                  if(error) throw error;
                  console.log("1 medium point inserted");
-       
-       
+                 console.log("1 medium detail inserted");
+                 console.log("total points updated");
                 });
-                mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+2 WHERE name = ? ', [arr[i]], function(error, results, fields){
-                  if(error) throw error;
-                  console.log("total points updated");
-        
-                 });
+               
                  mysqlConnection.query('UPDATE userprofile SET percentage = percentage+2 WHERE fullname = ? ', [arr[i]], function(error, results, fields){
                   if(error) throw error;
                   console.log("total points updated");
@@ -173,22 +138,13 @@ app.get('/', (req, res) => {
   
              else{
               
-              mysqlConnection.query('UPDATE taskdetail SET rendah = CONCAT(rendah, "," ,?) WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
-               
-               if(error) throw error;
-               console.log("1 easy detail inserted");
-              });
-              mysqlConnection.query('UPDATE taskpoint SET rendah = rendah+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
+              mysqlConnection.query('UPDATE taskpoint SET rendah = rendah+1, rendahdetail = CONCAT(rendahdetail, "," ,?), peratus = peratus+1 WHERE name = ? ', [req.body.Tajuk,arr[i]], function(error, results, fields){
                  if(error) throw error;
                  console.log("1 easy point inserted");
-       
-       
+                 console.log("1 easy detail inserted");
+                 console.log("total points updated");
                 });
-                mysqlConnection.query('UPDATE taskpoint SET peratus = peratus+1 WHERE name = ? ', [arr[i]], function(error, results, fields){
-                  if(error) throw error;
-                  console.log("total points updated");
-        
-                 });
+                
                  mysqlConnection.query('UPDATE userprofile SET percentage = percentage+1 WHERE fullname = ? ', [arr[i]], function(error, results, fields){
                   if(error) throw error;
                   console.log("total points updated");

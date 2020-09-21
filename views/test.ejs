@@ -276,6 +276,11 @@ function toggle_div_fun(id){
 </tr>
 <% taskpoint.forEach(function(task) { %>
 <% var percent = Math.round(task.peratus/50 * 100) %>
+<% var meeting = task.mesyuaratdetail.split(",") %>
+<% var out = task.luardetail.split(",") %>
+<% var hard = task.tinggidetail.split(",") %>
+<% var medium = task.sederhanadetail.split(",") %>
+<% var easy = task.rendahdetail.split(",") %>
 
 <% if (percent==0) { %>
      
@@ -477,9 +482,47 @@ function toggle_div_fun(id){
   <% if (percent==38) { %>
        
     <tr>
-      <td class="long"><%= task.name %></td>
+      <td class="long"><%= task.name %>
+        <div id="<%= task.name %>" class="cont">
+          <div class="meet">Mesyuarat
+          <% for (var i=1; i<meeting.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="out"> Aktiviti Luar Sekolah
+          <% for (var i=1; i<out.length;i++) { %>
+           <ol style="list-style: none; text-align: center;  padding: 0px; ">
+            <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= out[i]%></li>
+           </ol>
+          <%}%>
+          </div>
+          <div class="tas">Tugasan
+            <% for (var i=1; i<hard.length;i++) { %>
+             <ol style="list-style: none; text-align: center;  padding: 0px; ">
+              <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li>
+             </ol>
+            <%}%>
+            <% for (var i=1; i<medium.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li>
+              </ol>
+             <%}%>
+             <% for (var i=1; i<easy.length;i++) { %>
+              <ol style="list-style: none; text-align: center;  padding: 0px; ">
+               <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li>
+              </ol>
+             <%}%>
+          </div>
+        </div>
+      
+      </td>
       <td class="short">
       <span class="bar"><span class="thirtyeight"><p><%= percent%>% </p></span></span>
+    </td>
+    <td class="short"><button class="papar" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
     </td>
       </tr>
   
