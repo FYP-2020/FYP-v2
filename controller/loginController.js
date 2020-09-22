@@ -22,20 +22,29 @@ app.get('/', (req, res) => {
   res.render('login.ejs');
   })
 //====================== E TUGASAN=========================================================================
-  app.get('/test',(req,res)=>{
+  app.get('/keseluruhanProgresTugasan',(req,res)=>{
     mysqlConnection.query('SELECT * FROM taskpoint ORDER BY peratus DESC' , function(error, results, fields) {
-      res.render('test.ejs', {
+      res.render('keseluruhanProgresTugasan.ejs', {
         taskpoint : results
       });
      });
     
 })
+
+app.get('/test',(req,res)=>{
+  mysqlConnection.query('SELECT * FROM taskpoint ORDER BY peratus DESC' , function(error, results, fields) {
+    res.render('test.ejs', {
+      taskpoint : results
+    });
+   });
+  
+})
  
-  app.post('/test',urlencodedParser,function(req,res) {
+  app.post('/keseluruhanProgresTugasan',urlencodedParser,function(req,res) {
     
       mysqlConnection.query('SELECT * FROM userprofile WHERE name = ? AND pass = ?', [req.body.name,req.body.pass], function(error, results, fields) {
         if (results.length > 0) {  
-            res.redirect('test');      			
+            res.redirect('keseluruhanProgresTugasan');      			
         }else {
           res.render('error');
         }	

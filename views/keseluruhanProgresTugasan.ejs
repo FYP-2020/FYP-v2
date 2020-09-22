@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<link rel="stylesheet" type="text/css" href="main.css">
+<!-- JavaScript -->
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "200px";
+  document.getElementById("main").style.marginLeft = "200px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+
+var d = new Date();
+document.getElementById("demo").innerHTML = d.getMonth() + 1;
+</script>
+</head>
+<body>
+
+<div style='background-color: #93B5EF; text-align: center;'>
+<button class="topHeader"></button>  
+<img src="images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()"   />
+<img src="images/skse.png" class = "imageL" alt="hide menu">
+<img src="images/User.png" alt="Logout" onclick="window.location.href = '/';" class = "imageR">
+<img src="images/task-icon-png-3.png" onclick="window.location.href = '#';" class = "imageR" alt="Task">
+<a href="#" >
+	<img src="images/notification.png" onclick="window.location.href = '#';" class = "imageR" alt="Notification">
+	<!-- <p class="badge">3</p> -->
+</a>
+</div>
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="#">E Tugasan</a>
+  <a href="/attendance">E Kehadiran</a>
+</div>       
+
+<div id="main" data-position="header">
+
+<div style="box-shadow: 0 8px 6px -6px black;">
+<ul>
+    <li><a class="current" >Utama</a></li>
+    <li><a  href="/completeProfile">Atur Tugasan</a></li>
+    <li ><a  href="/pengurusanTugas">Pengurusan Tugas</a></li>  
+    <li ><a href="#about">Ketersediaan</a></li>
+</ul>
+
+<div class="dropdown">
+  <button class="dropbtn">Mesyuarat</button>
+  <div class="dropdown-content">
+          <a href="/manageMeetingInvitation">Atur Jemputan</a>
+          <a href="/meetingInfo">Minit Mesyuarat</a>
+          <a href="/viewMeetingInfo">Senarai Minit Mesyuarat</a>
+      </div>  
+      </div>
+</div>
+
+     
+</body>
+</html>
