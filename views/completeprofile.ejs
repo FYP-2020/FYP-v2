@@ -186,19 +186,19 @@ window.onclick = function(event) {
           <td>n/a</td>
           <%var percent= Math.round(user.percentage/50*100) %>
           <% if (percent<30){ %>
-            <td style="background-color: #FF5E5E; text-align: center;">Sangat Rendah</td> 
+            <td ><p style="background-color: #FF5E5E ; text-align: center; width: 70%; padding: 5px; border-radius: 10px; margin-left: auto; margin-right: auto; margin-top: 5px; margin-bottom: 5px; ">Sangat Rendah</p></td> 
           <%}%>
           <% if (percent>29 && percent<50){ %>
-            <td style="background-color: #FCAC65; text-align: center;">Rendah</td> 
+            <td ><p style="background-color: #FCAC65; text-align: center; width: 70%; padding: 5px; border-radius: 10px; margin-left: auto; margin-right: auto; margin-top: 5px; margin-bottom: 5px; ">Rendah</p></td> 
           <%}%>
           <% if (percent>49 && percent<70){ %>
-            <td style="background-color: #ADFE6E; text-align: center;">Sederhana</td> 
+            <td > <p style="background-color: #ADFE6E; text-align: center; width: 70%; padding: 5px; border-radius: 10px; margin-left: auto; margin-right: auto; margin-top: 5px; margin-bottom: 5px; ">Sederhana</p></td> 
           <%}%>
           <% if (percent>69 && percent<101){ %>
-            <td style="background-color: #FFFF46; text-align: center;">Tinggi</td> 
+            <td ><p style="background-color: #FFFF46; text-align: center; width: 70%; padding: 5px; border-radius: 10px; margin-left: auto; margin-right: auto; margin-top: 5px; margin-bottom: 5px; ">Tinggi</p></td> 
           <%}%>
         </tr>
-        <% }); %>
+        <% }); %>  
          
       </table>
       <br>
