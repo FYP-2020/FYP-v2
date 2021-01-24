@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+ 
+</head>
+<body>
+  <form>
+
+   <input type="date" id="tarikh" onchange="filterTable()">
+
+    <select id="timefrom" onchange="filterTable()">
+    <option>Select</option>
+    <option>7:30</option> <!--slot 1 -->
+    <option>8:00</option>
+    <option>8:30</option>
+    <option>9:00</option>
+    <option>9:30</option>
+    <option>10:00</option>
+    <option>10:30</option>
+    <option>11:00</option>
+    <option>11:30</option>
+    <option>12:00</option>
+    <option>12:30</option>
+    <option>13:00</option>
+    <option>13:30</option>
+    <option>14:00</option>
+    <option>14:30</option>
+    <option>15:00</option>
+    <option>15:30</option>
+    <option>16:00</option>
+    <option>16:30</option>
+    <option>17:00</option>
+    <option>17:30</option>
+    <option>18:00</option> <!--slot 22 -->
+  </select>
+
+  <select id="timeuntil" onchange="filterTable()">
+    <option>Select</option>
+    <option>8:00</option>
+    <option>8:30</option>
+    <option>9:00</option>
+    <option>9:30</option>
+    <option>10:00</option>
+    <option>10:30</option>
+    <option>11:00</option>
+    <option>11:30</option>
+    <option>12:00</option>
+    <option>12:30</option>
+    <option>13:00</option>
+    <option>13:30</option>
+    <option>14:00</option>
+    <option>14:30</option>
+    <option>15:00</option>
+    <option>15:30</option>
+    <option>16:00</option>
+    <option>16:30</option>
+    <option>17:00</option>
+    <option>17:30</option>
+    <option>18:00</option>
+    <option>18:30</option>
+  </select>
+
+  
+
+
+   <!--input type="submit">-->
+
+  <%let today = new Date().toISOString().slice(0, 10)%>
+  <% var date = today.split("-");%>
+  <% if(date[1]==="11") { %>
+   <table id="myTable" >
+     <tr>
+    <th><input type="checkbox"  id="name1" name="name1" value="name1">Nama</th>
+    <th>date</th>
+    <th>day</th>
+    <th>slot_1</th>
+    <th>slot_2</th>
+    <th>slot_3</th>
+    <th>slot_4</th>
+    <th>slot_5</th>
+    <th>slot_6</th>
+    <th>slot_7</th>
+    <th>slot_8</th>
+    <th>slot_9</th>
+    <th>slot_10</th>
+    <th>slot_11</th>
+    <th>slot_12</th>
+    <th>slot_13</th>
+    <th>slot_14</th>
+    <th>slot_15</th>
+    <th>slot_16</th>
+    <th>slot_17</th>
+    <th>slot_18</th>
+    <th>slot_19</th>
+    <th>slot_20</th>
+    <th>slot_21</th>
+    <th>slot_22</th>
+    <th>status</th>  
+  </tr>
+
+    <% availabilityStaff.forEach(function(user){ %>
+    <tr>
+    <td><%= user.name %></td>
+    <td><%= user.date%></td>
+    <td><%= user.day %></td>    <!--0-->
+    <td><%= user.slot_1 %></td> <!--1-->
+    <td><%= user.slot_2 %></td> <!--2-->
+    <td><%= user.slot_3 %></td> <!--3-->
+    <td><%= user.slot_4 %></td> <!--4-->
+    <td><%= user.slot_5 %></td> <!--5-->
+    <td><%= user.slot_6 %></td> <!--6-->
+    <td><%= user.slot_7 %></td> <!--7-->
+    <td><%= user.slot_8 %></td> <!--8-->
+    <td><%= user.slot_9 %></td> <!--9-->
+    <td><%= user.slot_10 %></td> <!--10-->
+    <td><%= user.slot_11 %></td> <!--11-->
+    <td><%= user.slot_12 %></td> <!--12-->
+    <td><%= user.slot_13 %></td> <!--13-->
+    <td><%= user.slot_14 %></td> <!--14-->
+    <td><%= user.slot_15 %></td> <!--15-->
+    <td><%= user.slot_16 %></td> <!--16-->
+    <td><%= user.slot_17 %></td> <!--17-->
+    <td><%= user.slot_18 %></td> <!--18-->
+    <td><%= user.slot_19 %></td> <!--19-->
+    <td><%= user.slot_20 %></td> <!--20-->
+    <td><%= user.slot_21 %></td> <!--21-->
+    <td><%= user.slot_22 %></td> <!--22-->
+    <td><%= user.percentage11 %></td>
+
+    </tr>
+
+    <% }); %>  
+
+   </table>
+
+   <%}%>
+    </form>
+    </body>
+
+    <script>
+      function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+      
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+ 
+  function filterTable() 
+{
+    // Variables
+    var date, dropdown1, dropdown2, table, rows, cells, filter1, filter2, start, finish;
+    var slot=[];
+    var range = 0;
+    //var slot = new Array();
+    date = document.getElementById("tarikh");
+    dropdown1 = document.getElementById("timefrom");
+    dropdown2 = document.getElementById("timeuntil");
+    table = document.getElementById("myTable");
+    console.log(table);
+    rows = table.getElementsByTagName("tr");
+   // console.log(rows);
+
+    // convert date to day
+    var dateToday = new Date(date.value);
+	var weekday = new Array(7);
+	weekday[0] = "Sunday";
+	weekday[1] = "Monday";
+	weekday[2] = "Tuesday";
+	weekday[3] = "Wednesday";
+	weekday[4] = "Thursday";
+	weekday[5] = "Friday";
+	weekday[6] = "Saturday";
+
+	var day = weekday[dateToday.getDay()];
+  console.log(day);
+  
+  var y = JSON.stringify(dateToday.getFullYear());
+                    var m = JSON.stringify(dateToday.getMonth()+1);
+                    var d = JSON.stringify(dateToday.getDate());
+                    var str="-";
+                    var tarikhstr = y.concat(str).concat(m).concat(str).concat(d);
+
+    filter1 = dropdown1.value;
+    filter2 = dropdown2.value;
+    console.log(filter1);
+    console.log(filter2);
+    start = 0;
+    finish = 0;
+
+     var start_ar = ["7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", 
+     "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"];
+
+	 var finish_ar = ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", 
+	 "16:00", "16:30", "17:00", "17:30", "18:00", "18:30"];
+
+
+	  for (var i = 0; i < start_ar.length; i++)  { 
+	      if((filter1===start_ar[i]))
+	        { start = i+1;} //1
+	      }
+
+	  for (var i = 0; i < finish_ar.length; i++) {       
+	      if((filter2===finish_ar[i]))
+	        { finish = i+1;} //22
+	      }
+
+	
+		   
+	     console.log(start);
+	     console.log(finish);
+	     range = finish-start;
+	     console.log(range);
+
+     
+
+
+
+
+
+
+            if (range == 0){
+                //filter = dropdown.value;
+               // table.style.visibility= 'visible';
+			    // Loops through rows and hides those with countries that don't match the filter
+			    var count = 0;
+			    for (let row of rows) { // `for...of` loops through the NodeList
+			      cells = row.getElementsByTagName("td");
+			      console.log(cells);
+			      slot = cells[start+2] ; // gets the 2nd `td` or nothing
+            let hari = cells[2];
+            let tarikh= cells[1];
+			      console.log(slot);      
+			      console.log(hari);
+			      // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+			      if(count == 0){
+			      if ((filter1 === "Select" || filter2 === "Select" || !slot || !hari || (slot.textContent==="")) ) {
+			      
+			          row.style.display = ""; // shows this row
+			    }
+			      else {
+			        row.style.display = "none"; // hides this row
+			      }
+			    }
+
+			    else if(count > 0){
+			      if ((filter1 === "Select" || filter2 === "Select" ||  (slot.textContent===""))  && hari.textContent=== day && tarikh.textContent===tarikhstr ) {
+			            
+			          row.style.display = ""; // shows this row
+			    }
+			      else {
+			        row.style.display = "none"; // hides this row
+			      }
+			    }
+			    
+			    count= count+1;
+			    }
+			}
+
+			else if (range == 1){
+                //filter = dropdown.value;
+               // table.style.visibility= 'visible';
+			    // Loops through rows and hides those with countries that don't match the filter
+			    var count = 0;
+			    for (let row of rows) { // `for...of` loops through the NodeList
+			      cells = row.getElementsByTagName("td");
+			      console.log(cells);
+			      slot_ar = [cells[start+1], cells[start+2] ]; // gets the 2nd `td` or nothing
+			      let hari = cells[1];
+			      console.log(slot_ar);      
+			      console.log(hari);
+			      // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+			      if(count == 0){
+			      if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+			      
+			          row.style.display = ""; // shows this row
+			    }
+			      else {
+			        row.style.display = "none"; // hides this row
+			      }
+			    }
+
+			    else if(count > 0){
+			      if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+			      
+			          row.style.display = ""; // shows this row
+			    }
+			      else {
+			        row.style.display = "none"; // hides this row
+			      }
+			    }
+			    
+			    count= count+1;
+			    }
+			}
+
+			else if (range == 2){
+			    var count = 0;
+			    for (let row of rows) {
+			      cells = row.getElementsByTagName("td");
+			      console.log(cells);
+			      slot_ar = [cells[start+1], cells[start+2], cells[start+3]]; 
+			      let hari = cells[1];
+			      console.log(slot_ar);      
+			      console.log(hari);
+			      // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+			      if(count == 0){
+			      if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+			      
+			          row.style.display = ""; // shows this row
+			    }
+			      else {
+			        row.style.display = "none"; // hides this row
+			      }
+			    }
+
+			    else if(count > 0){
+			      if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+			      
+			          row.style.display = ""; // shows this row
+			    }
+			      else {
+			        row.style.display = "none"; // hides this row
+			      }
+			    }
+			    
+			    count= count+1;
+			    }
+			}
+
+			else if (range == 3){
+			    var count = 0;
+			    for (let row of rows) {
+			      cells = row.getElementsByTagName("td");
+			      console.log(cells);
+			      slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4]]; 
+			      let hari = cells[1];
+			      console.log(slot_ar);      
+			      console.log(hari);
+			      // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+			      if(count == 0){
+			      if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+			      
+			          row.style.display = ""; // shows this row
+			    }
+			      else {
+			        row.style.display = "none"; // hides this row
+			      }
+			    }
+
+			    else if(count > 0){
+			      if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+			      
+			          row.style.display = ""; // shows this row
+			    }
+			      else {
+			        row.style.display = "none"; // hides this row
+			      }
+			    }
+			    
+			    count= count+1;
+			    }
+			}
+
+			else if (range == 4){
+	          var count = 0;
+	          for (let row of rows) {
+	            cells = row.getElementsByTagName("td");
+	            console.log(cells);
+	            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5]]; 
+	            let hari = cells[1];
+	            console.log(slot_ar);      
+	            console.log(hari);
+	            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+	            if(count == 0){ //to skip header
+	            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+	            
+	                row.style.display = ""; // shows this row
+	          }
+	            else {
+	              row.style.display = "none"; // hides this row
+	            }
+	          }
+
+	          else if(count > 0){
+	            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+	            
+	                row.style.display = ""; // shows this row
+	          }
+	            else {
+	              row.style.display = "none"; // hides this row
+	            }
+	          }
+	          
+	          count= count+1;
+	          }
+	      }
+
+	      else if (range == 5){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+        if (range == 6){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="")))  
+             && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+       if (range == 7){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") 
+             && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") 
+             && (slot_ar[7].textContent===""))) && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 8){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], cells[start+9]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 9){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], cells[start+9], cells[start+10]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 10){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], cells[start+9], cells[start+10], cells[start+11]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 11){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], cells[start+9], cells[start+10], cells[start+11], cells[start+12]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="") && (slot_ar[11].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 12){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], cells[start+9], cells[start+10], cells[start+11], cells[start+12], cells[start+13]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="") && (slot_ar[11].textContent==="") && (slot_ar[12].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 13){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], cells[start+9], cells[start+10], cells[start+11], cells[start+12], cells[start+13], cells[start+14]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="") && (slot_ar[11].textContent==="") && (slot_ar[12].textContent==="") && (slot_ar[13].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 14){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], cells[start+9], cells[start+10], cells[start+11], cells[start+12], cells[start+13], cells[start+14], cells[start+15]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="") && (slot_ar[11].textContent==="") && (slot_ar[12].textContent==="") && (slot_ar[13].textContent==="") && (slot_ar[14].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 15){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], cells[start+9], cells[start+10], cells[start+11], cells[start+12], cells[start+13], cells[start+14], cells[start+15], cells[start+16]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="") && (slot_ar[11].textContent==="") && (slot_ar[12].textContent==="") && (slot_ar[13].textContent==="") && (slot_ar[14].textContent==="") && (slot_ar[15].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+  	  }
+
+          if (range == 16){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], cells[start+9], cells[start+10], cells[start+11], cells[start+12], cells[start+13], cells[start+14], cells[start+15], cells[start+16], cells[start+17]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") 
+             && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") 
+             && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="") 
+             && (slot_ar[11].textContent==="") && (slot_ar[12].textContent==="") && (slot_ar[13].textContent==="") && (slot_ar[14].textContent==="") 
+             && (slot_ar[15].textContent==="") && (slot_ar[16].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+       if (range == 17){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], 
+            cells[start+9], cells[start+10], cells[start+11], cells[start+12], cells[start+13], cells[start+14], cells[start+15], cells[start+16], 
+            cells[start+17], cells[start+18]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") 
+             && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") 
+             && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="") 
+             && (slot_ar[11].textContent==="") && (slot_ar[12].textContent==="") && (slot_ar[13].textContent==="") && (slot_ar[14].textContent==="") 
+             && (slot_ar[15].textContent==="") && (slot_ar[16].textContent==="") && (slot_ar[17].textContent==="")))  && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 18){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], 
+            cells[start+9], cells[start+10], cells[start+11], cells[start+12], cells[start+13], cells[start+14], cells[start+15], cells[start+16], 
+            cells[start+17], cells[start+18], cells[start+19]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") 
+             && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") 
+             && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="") 
+             && (slot_ar[11].textContent==="") && (slot_ar[12].textContent==="") && (slot_ar[13].textContent==="") && (slot_ar[14].textContent==="") 
+             && (slot_ar[15].textContent==="") && (slot_ar[16].textContent==="") && (slot_ar[17].textContent==="") && (slot_ar[18].textContent==="")))  
+             && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 19){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], 
+            cells[start+9], cells[start+10], cells[start+11], cells[start+12], cells[start+13], cells[start+14], cells[start+15], cells[start+16], 
+            cells[start+17], cells[start+18], cells[start+19], cells[start+20]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") 
+             && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") 
+             && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="") 
+             && (slot_ar[11].textContent==="") && (slot_ar[12].textContent==="") && (slot_ar[13].textContent==="") && (slot_ar[14].textContent==="") 
+             && (slot_ar[15].textContent==="") && (slot_ar[16].textContent==="") && (slot_ar[17].textContent==="") && (slot_ar[18].textContent==="")
+             && (slot_ar[19].textContent===""))) && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 20){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], 
+            cells[start+9], cells[start+10], cells[start+11], cells[start+12], cells[start+13], cells[start+14], cells[start+15], cells[start+16], 
+            cells[start+17], cells[start+18], cells[start+19], cells[start+20], cells[start+21]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") 
+             && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") 
+             && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="") 
+             && (slot_ar[11].textContent==="") && (slot_ar[12].textContent==="") && (slot_ar[13].textContent==="") && (slot_ar[14].textContent==="") 
+             && (slot_ar[15].textContent==="") && (slot_ar[16].textContent==="") && (slot_ar[17].textContent==="") && (slot_ar[18].textContent==="")
+             && (slot_ar[19].textContent==="") && (slot_ar[20].textContent===""))) && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+
+      if (range == 21){
+          var count = 0;
+          for (let row of rows) {
+            cells = row.getElementsByTagName("td");
+            console.log(cells);
+            slot_ar = [cells[start+1], cells[start+2], cells[start+3], cells[start+4], cells[start+5], cells[start+6], cells[start+7], cells[start+8], 
+            cells[start+9], cells[start+10], cells[start+11], cells[start+12], cells[start+13], cells[start+14], cells[start+15], cells[start+16], 
+            cells[start+17], cells[start+18], cells[start+19], cells[start+20], cells[start+21], cells[start+22]]; 
+            let hari = cells[1];
+            console.log(slot_ar);      
+            console.log(hari);
+            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+            if(count == 0){
+            if ((filter1 === "Select" || filter2 === "Select" || !slot_ar || !hari || (slot_ar.textContent==="")) ) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+
+          else if(count > 0){
+            if ((filter1 === "Select" || filter2 === "Select" ||  ((slot_ar[0].textContent==="") && (slot_ar[1].textContent==="") && (slot_ar[2].textContent==="") 
+             && (slot_ar[3].textContent==="") && (slot_ar[4].textContent==="") && (slot_ar[5].textContent==="") && (slot_ar[6].textContent==="") 
+             && (slot_ar[7].textContent==="") && (slot_ar[8].textContent==="") && (slot_ar[9].textContent==="") && (slot_ar[10].textContent==="") 
+             && (slot_ar[11].textContent==="") && (slot_ar[12].textContent==="") && (slot_ar[13].textContent==="") && (slot_ar[14].textContent==="") 
+             && (slot_ar[15].textContent==="") && (slot_ar[16].textContent==="") && (slot_ar[17].textContent==="") && (slot_ar[18].textContent==="")
+             && (slot_ar[19].textContent==="") && (slot_ar[20].textContent==="") && (slot_ar[21].textContent===""))) && hari.textContent=== day && tarikh.textContent===tarikhstr) {
+            
+                row.style.display = ""; // shows this row
+          }
+            else {
+              row.style.display = "none"; // hides this row
+            }
+          }
+          
+          count= count+1;
+          }
+      }
+	
+}
+      
+ </script>
+ 
+</html>
+  
+ 

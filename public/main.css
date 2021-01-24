@@ -1,4 +1,17 @@
 /*-----------------------------Aturan Tugas--------------------------*/
+
+html {
+
+  font-family: 'Open-Sans-Regular';
+
+  font-size: 15px;
+
+  line-height: 1.4;
+
+  color: #444;
+
+}
+
 h2{
   color: #122d54;
 }
@@ -34,6 +47,23 @@ li a:hover:not(.current) {
 body {
   font-family: "Avenir", sans-serif;
   color: #122d54;
+}
+
+/* ------------------------------------ */
+a {
+  margin: 0px;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+
+a:focus {
+  outline: none !important;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 /*------------------------------------------------Sidebar---------------------------------------*/
@@ -76,10 +106,10 @@ body {
 
 /*-------------------------------------------------Top header---------------------------------------*/
 .topHeader {
-  /*font-size: 20px;*/
-  height: 20px;
-  padding: 25px 15px;
-  background-color: #93B5EF;
+  background: #24C6DC;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #514A9D, #24C6DC);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #514A9D, #24C6DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ text-align: center; height: 20px; padding-top: 7px; padding-bottom: 27px;
   border: none;
 }
 
@@ -116,8 +146,29 @@ padding-top: 5px;
 cursor: pointer;
 }
 
+.imageCenter{
+height: 37px;
+width: 37px; 
+background-repeat:no-repeat;
+/*float:left;*/
+padding-top: 5px;
+cursor: pointer;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
 .imageL:hover {
-  background-color: #444;
+  background-color: #24C6DC;
+}
+
+.imageLDate{
+height: 37px;
+width: 37px; 
+background-repeat:no-repeat;
+float:left;
+padding-top: 5px;
+cursor: pointer;
 }
 
 .badge {
@@ -136,7 +187,7 @@ cursor: pointer;
   color: #5E6988;
   background-color: white;
   padding: 16px;
-  font-size: 16px;
+  font-size: 15px;
   border: none;
   cursor: pointer;
 }
@@ -153,6 +204,7 @@ cursor: pointer;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  font-size: 15px;
 }
 
 .dropdown-content a {
@@ -240,6 +292,50 @@ input[type=submit]:hover {
   background-color: #d5deeb;
 }
 
+input[type=button] {
+  background-color: #93B5EF;
+  color: #122d54;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=button]:hover {
+  background-color: #d5deeb;
+}
+
+.sendInfo input[type=submit] {
+  background-color: #93B5EF;
+  color: #122d54;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1%;
+  float: right;
+}
+
+.sendInfo input[type=submit]:hover {
+  background-color: #d5deeb;
+}
+
+.sendInfo input[type=button] {
+  background-color: #93B5EF;
+  color: #122d54;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1%;
+  float: left;
+}
+
+.sendInfo input[type=button]:hover {
+  background-color: #d5deeb;
+}
+
 .col-25 {
   float: left;
   width: 25%;
@@ -281,23 +377,17 @@ td {
   padding: 8px;
 }
 
+.minutes tr td{
+  border-bottom: 1px hidden #dddddd;
+  text-align: left;
+  padding: 15px 5px;
+}
+
 th {
   text-align: left;
   padding: 8px;
 }
 
-/*Time placeholder*/
-#timefrom:before {
-content:'Dari:';
-margin-right:.6em;
-color:#9d9d9d;
-}
-
-#timeto:before {
-content:'Sehingga:';
-margin-right:.6em;
-color:#9d9d9d;
-}
 /*-----------------------------------------Pengurusan Tugasan-------------------------------------------------*/
 .mySlides {display: none}
 /*img {vertical-align: middle;}*/

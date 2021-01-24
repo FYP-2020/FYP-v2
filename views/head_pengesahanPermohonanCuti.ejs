@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/styles.css" />
+<link rel="icon" type="image/png" href="/images/skse.png"/>
+<title>Pengesahan Permohonan Cuti</title>
+<!--aaaaa-->
+<script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "200px";
+      
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+    function changeValue(){
+      document.getElementById("tickbutton").value = "1";
+
+    }
+    function alertBerjaya(){
+     alert("Kelulusan berjaya dimaklumkan")
+
+    }
+    function sendEmail(){
+     //var reason = prompt("Sila nyatakan sebab anda menolak permohonan ini:")
+     //document.getElementById("reject").value=reason;
+     alert("Kelulusan berjaya dimaklumkan")
+    }
+   
+    
+    </script>
+    <style>
+     tr:not(:first-child){
+background-color: white; 
+width: auto; 
+border-radius: 50px;
+height: 50px;
+border-color: #707070;
+display: flex;
+flex-basis: 100%;
+padding: 10px 0;
+margin-top:  25px;
+margin-bottom: 25px;
+margin-right: 5px;
+margin-left: 5px;
+box-shadow: 0 0 4px black;
+}
+
+td{
+
+flex-basis: 100%;
+}
+th{
+  flex-basis: 100%;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  opacity: 0;
+  visibility: hidden;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color:  #ABCAFF;
+}
+.popup .content {
+  /*max-height: 30%;*/
+  overflow: auto;
+}
+    </style>
+</head>
+<body>
+  <div class="topHeader">
+    <img src="images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()">
+    <img src="images/skse.png" class = "imageL" alt="hide menu">
+    <img src="images/User.png" alt="Logout"  onclick="window.location.href = '/logout';"  class = "imageR">
+    <span style="float: right; line-height: 3; padding-right: 10px;"><%= name%></span>
+    </a>
+    </div>
+
+        <div id="mySidebar" class="sidebar">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+          <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+          <a href="/keberadaanHarian">E Kehadiran</a>
+        </div> 
+
+        <div id="main">
+            <div style="box-shadow: 0 8px 6px -6px black;">
+          
+                <ul class="nav">
+                <li><a  href="/keberadaanHarian">Utama</a></li>
+               </ul>
+             
+                       <div class="dropdown">
+                        <button class="dropbtn">Kelulusan</button>
+                        <div class="dropdown-content">
+                                <a href="/head_pengesahanPermohonanKeluar">Kelulusan Permohonan Keluar</a>
+                                <a href="/head_pengesahanPermohonanCuti">Kelulusan Permohonan Cuti</a>
+                            </div>  
+                            </div>
+              </div>
+       
+
+        
+        
+
+          
+<h2>Kelulusan Permohonan Cuti</h2>
+
+
+
+<!--#e5e5e5-->
+<div style="overflow: auto; max-height: 430px; width: 98%; margin-left: 20px;">
+<table style="border-collapse: separate; background: #666666; width: 100%; " >
+<tr style="display: flex; flex-basis: 100%;" >
+<th>Nama </th>
+<th>Tarikh Permohonan</th>
+<th>Kategori Cuti</th>
+<th>Jenis Cuti</th>
+<th>Tarikh Mula</th>
+<th>Tarikh Akhir</th>
+<th>Catatan</th>
+<th>Tindakan</th>
+</tr>
+<% leaveApplication.forEach(function(a){%>
+<form action="/updateapproval" method="POST">
+<tr>
+<td class="longb">
+   <input type="hidden" name="name" value="<%= a.name %>"> <%= a.name %> 
+</td>
+<td class="longb" >
+    <input type="hidden" name="date" value="<%= a.applydate %>">  <%= a.applydate %>
+</td>
+<td class="longb" >
+    <input type="hidden" name="category" value="<%= a.leaveCategory%>"> <%= a.leaveCategory%>
+</td>
+<td class="longb" style="font-size: small;">
+    <input type="hidden" name="type"  value="<%= a.leaveType%>"><%= a.leaveType%>
+</td>
+<td class="longb">
+   <input type="hidden"name="start" value="<%= a.startDate%>"> <%= a.startDate%>
+</td>
+<td class="longb">
+    <input type="hidden"name="end" value="<%= a.endDate%>"> <%= a.endDate%>
+    <input type="hidden"name="totalday" value="<%= a.totalday%>"> 
+    <input type="hidden"name="email" value="<%= a.email%>">
+    <input type="hidden"name="usercategory" value="<%= a.category%>">
+    <input id="reject" type="hidden"name="reason" value="b">
+ </td>
+ <td class="longb" style="font-size: small;">
+    <input type="hidden"name="remark" value="<%= a.remark%>"> <%= a.remark%>
+    
+ </td>
+<td style="text-align: center;"><button type="submit" title="Telah diluluskan melalui HRMIS" id="tickbutton"  ><img src="images/tick.png"></button> <button id="crossbutton" type="submit" formaction="/updateapproval_reject"  title="Telah ditolak melalui HRMIS"><img src="images/cross.png"></button></td>
+</tr>
+
+
+
+</form>
+<%})%>
+<div id="berjayalulus" class="overlay" >
+
+  <div class="popup">
+  <p style="font-size: 20px; margin-top:50px; text-align: center;" >Status kelulusan berjaya dimaklumkan</p><br><br>
+  <a class="close" href="#">&times;</a>
+  <div class="content">
+         
+</div>
+</div> </div>
+
+<div id="berjayatolak" class="overlay" >
+
+  <div class="popup">
+  <p style="font-size: 20px; margin-top:50px; text-align: center;" >Status kelulusan berjaya dimaklumkan</p><br><br>
+  <a class="close" href="#">&times;</a>
+  <div class="content">
+         
+</div>
+</div> </div>
+</table></div>
+
+
+
+<script src="/main.js"></script>
+
+
+
+
+
+</div>
+
+</body>
+
+</html>

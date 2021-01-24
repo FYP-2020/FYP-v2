@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/styles.css" />
+<link rel="icon" type="image/png" href="/images/skse.png"/>
+<title>Pengesahan Permohonan Keluar</title>
+<!--aaaaa-->
+<script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "200px";
+     
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+
+    function enterReason(){
+       // document.getElementById("test").style.display="";
+    }
+    
+   
+    
+    </script>
+    <style>
+    .overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  opacity: 0;
+  display: none;
+}
+.overlay:target {
+  display: block;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color:  #ABCAFF;
+}
+.popup .content {
+  /*max-height: 30%;*/
+  overflow: auto;
+}
+.okbtn{
+  font-size: 15px;
+      padding: 10px 15px;
+      background-color: #ABCAFF;
+      border-radius: 10px;
+      border-color: transparent;
+      cursor: pointer;
+      outline: none;
+}
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+tr:not(:first-child){
+background-color: white; 
+width: auto; 
+border-radius: 50px;
+height: 45px;
+border-color: #707070;
+display: flex;
+flex-basis: 100%;
+padding: 10px 0;
+margin-top:  25px;
+margin-bottom: 25px;
+margin-right: 5px;
+margin-left: 5px;
+box-shadow: 0 0 4px black;
+}
+
+td{
+
+flex-basis: 100%;
+}
+th{
+  flex-basis: 100%;
+}
+
+    </style>
+</head>
+<body>
+  <div class="topHeader">
+    <img src="images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()">
+    <img src="images/skse.png" class = "imageL" alt="hide menu">
+    <img src="images/User.png" alt="Logout"  onclick="window.location.href = '/logout';"  class = "imageR">
+    <span style="float: right; line-height: 3; padding-right: 10px;"><%= name%></span>
+    </a>
+    </div>
+        <div id="mySidebar" class="sidebar">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+          <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+          <a href="/keberadaanHarian">E Kehadiran</a>
+        </div> 
+
+        <div id="main">
+            <div style="box-shadow: 0 8px 6px -6px black;">
+          
+                <ul class="nav">
+                <li><a href="/keberadaanHarian">Utama</a></li>
+               </ul>
+               
+                       <div class="dropdown">
+                        <button class="dropbtn">Kelulusan</button>
+                        <div class="dropdown-content">
+                                <a href="/head_pengesahanPermohonanKeluar">Kelulusan Permohonan Keluar</a>
+                                <a href="/head_pengesahanPermohonanCuti">Kelulusan Permohonan Cuti</a>
+                            </div>  
+                            </div>
+              </div>
+          
+
+        
+        
+
+          
+
+<%let today = new Date()%>
+<% var month = new Array(12)%>
+<%month[0]= "Januari"%>
+<%month[1]= "Februari"%>
+<%month[2]= "Mac"%>
+<%month[3]= "April"%>
+<%month[4]= "Mei"%>
+<%month[5]= "Jun"%>
+<%month[6]= "Julai"%>
+<%month[7]= "Ogos"%>
+<%month[8]= "September"%>
+<%month[9]= "Oktober"%>
+<%month[10]= "November"%>
+<%month[11]= "Disember"%>
+<%var bulan = month[today.getMonth()]%>
+<h2>Kelulusan Permohonan Keluar</h2>
+<h2 style="display: inline; margin-left: 750px; position:absolute"><%=today.getDate()%> <%=bulan%> <%=today.getFullYear()%></h2>
+
+
+
+<div style="overflow: auto; max-height: 430px; width: 98%; margin-left: 20px;">
+  <table style="border-collapse: separate; background: #666666; width: 100%; " >
+<tr style="display: flex; flex-basis: 100%;" >
+<th>Nama </th>
+<th style="display: none;">Tarikh</th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;Masa Keluar</th>
+<th>Masa Masuk</th>
+<th>Perkara</th>
+<th>Tindakan</th>
+</tr>
+
+<% //hourlyleave.forEach(function(h){%>
+  <%for(var i=0; i < h.length ; i++) {%>
+<form action="/permohonankeluar_lulus" method="POST">
+<tr >
+  <%var temp = i%>
+<td style="display: none;"><input name="id" value="<%=h[i].hourly_id%>"><%=h[i].hourly_id%></td>
+<td class="longb" >
+   <input type="hidden" name="name" value="<%= h[i].name %>"> <%= h[i].name %> 
+</td>
+<td class="longb" style="display: none;">
+    <input type="hidden" name="date" value="<%= h[i].applydate %>">  <%= h[i].applydate %>
+</td>
+<td class="longb" >
+    <input type="hidden" name="start" value="<%= h[i].leavetime%>"> <%= h[i].leavetime%>
+</td>
+<td class="longb" >
+    <input type="hidden" name="finish" value="<%= h[i].entertime%>"><%= h[i].entertime%>
+</td>
+<td class="longb">
+   <input type="hidden"name="reason" value="<%= h[i].reason%>"> <%= h[i].reason%>
+   <input type="hidden"name="email" value="<%= h[i].email%>"> 
+</td>
+
+<td style="text-align: center;"><button type="submit" id="tickbutton" >
+  <img src="images/tick.png"></button> <a id="crossbutton" type="button" href="#<%=h[i].hourly_id%>"><img src="images/cross.png"></a>
+ <div id="<%=h[i].hourly_id%>" class="overlay" >  
+      <div class="popup">
+      <p style="font-size: 20px; margin-top:50px; text-align: center;" >Sila nyatakan sebab anda menolak permohonan ini</p>
+      <a class="close" href="#">&times;</a>
+      <div class="content">
+              <input name="rejectreason" style="width: 80%; margin-bottom: 50px; margin-left: 10px;  height: 80px;  font-size: 17px; outline: none;"><br>
+              <button class="okbtn"style="margin-left: 350px;" type="submit" formaction="/permohonankeluar_tolak/<%= h[temp].hourly_id%>_<%=h[temp].reason%>"> OK</button>
+      </div>
+    </div>
+  </div>
+
+</td>
+
+</tr>
+
+
+
+
+
+</form>
+<%}%>
+<div id="berjayalulus" class="overlay" >
+  
+  <div class="popup">
+  <p style="font-size: 20px; margin-top:50px; text-align: center;" >Permohonan berjaya diluluskan</p><br><br>
+  <a class="close" href="#">&times;</a>
+  <div class="content">
+         
+</div>
+</div> </div>
+
+<div id="berjayatolak" class="overlay" >
+
+  <div class="popup">
+  <p style="font-size: 20px; margin-top:50px; text-align: center;" >Permohonan berjaya ditolak</p><br><br>
+  <a class="close" href="#">&times;</a>
+  <div class="content">
+         
+  </div>
+</div>
+</div>  
+</table></div>
+
+
+
+<script src="/main.js"></script>
+
+
+
+
+
+</div>
+
+</body>
+
+</html>

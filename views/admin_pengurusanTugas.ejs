@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>Pengurusan Tugas</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+<!--===============================================================================================-->
+<link rel="icon" type="image/png" href="images/skse.png"/>
+<!--===============================================================================================-->
+  <!-- <link rel="stylesheet" type="text/css" href="vendor-table/bootstrap/css/bootstrap.min.css"> -->
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="fonts-table/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor-table/animate/animate.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor-table/select2/select2.min.css">
+<!--===============================================================================================-->
+  <!-- <link rel="stylesheet" type="text/css" href="vendor-table/perfect-scrollbar/perfect-scrollbar.css"> -->
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="css-table/util.css">
+  <link rel="stylesheet" type="text/css" href="css-table/main.css">
+<!--===============================================================================================-->
+
+<!-- JavaScript -->
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "200px";
+  document.getElementById("main").style.marginLeft = "200px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+
+<style type="text/css">
+  table{
+     overflow: scroll;
+     max-height: 40%;
+  }
+</style>
+</head>
+<body>
+
+<div class="topHeader">
+<img src="images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()"   />
+<img src="images/skse.png" class = "imageL" alt="hide menu">
+<img src="images/User.png" alt="Logout" onclick="window.location.href = '/logout';" class = "imageR" title="Logout">
+<span style="float: right; line-height: 3; padding-right: 10px;"><%= name%></span>
+</div>
+
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+ <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+ <a href="/keberadaanHarian">E Kehadiran</a>
+</div>       
+
+<!-- <div id="main" data-position="header"> -->
+
+<!---------------------------------------- Second top navigation bar--------------------------------------------- -->
+<div style="box-shadow: 0 8px 6px -6px black;">
+<ul>
+    <li><a href="/keseluruhanProgresTugasan">Utama</a></li>
+    <li><a href="/admin_ketersediaanKakitangan">Ketersediaan</a></li>
+</ul>
+
+<div class="dropdown">
+  <button class="dropbtn">Tugasan</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturTugasan">Atur Tugasan</a>
+          <a class="current" href="/admin_pengurusanTugas">Pengurusan Tugas</a>
+          <a href="/kemaskiniProgresTugasan">Kemas Kini Perkembangan Tugasan</a>
+      </div>  
+      </div>
+<div class="dropdown">
+  <button class="dropbtn">Mesyuarat</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturanJemputanMesyuarat">Atur Jemputan</a>
+          <a href="/senaraiJemputanProgram">Senarai Jemputan Mesyuarat</a>
+      </div>  
+      </div>
+</div>
+
+<body>
+   <div class="container"> <!-- Form -->
+    
+  <h2><b>Pengurusan Tugasan</b></h2>  
+
+  
+  <div action="/admin_pengurusanTugas" method = "GET">
+  <h3 style="color: #5E6988; margin-top: 3%; margin-bottom: 1%;">Tugasan Tetapan Masa</h3>
+  <div class="limiter" >
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table100">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">Tarikh</th>
+                <th class="column1">Masa</th>
+                <th class="column1">Tajuk</th>
+                <th class="column1">Tugas</th>
+                <th class="column1">Penyerah Tugas</th>
+                <th class="column1">Peranan</th>
+                <th class="column1">Pemilik Tugas</th>
+                <th class="column1">Lokasi</th>
+                <th class="column1">Tahap Kesukaran</th>
+                <th colspan="2" class="column1">Tindakan</th>
+              </tr>
+            </thead>
+            <tbody>
+
+                <% for(var i=tasksMgmt.length - 1 ; i >= 0 ; i--) {%>
+                 <%if(tasksMgmt[i].task === "Tugasan Tetapan Masa"){%>
+                  <tr>
+                    <% var name1 %>
+                    <% var name2 %>
+                    <% var name3  %>
+                    <% var search %>
+                    <% var replaceWith %>
+                    <% var name4 %>
+                    <%var nameArr = []%>           
+
+                    <% name1 = tasksMgmt[i].names %>
+                    <% name2 = name1.replace("[","") %>
+                    <% name3 = name2.replace("]","") %>
+                    <% search = '"' %>
+                    <% replaceWith = '' %>
+                    <% name4 = name3.split(search).join(replaceWith)%>
+                    <% nameArr.push(name4.split(","))%>
+                    
+                    <td class="column1"><%= tasksMgmt[i].date %></td>
+                    <td class="column1"><%= tasksMgmt[i].timeFrom %> - <%= tasksMgmt[i].timeUntil %></td>
+                    <td class="column1"><%= tasksMgmt[i].title %></td>
+                    <td class="column1"><%= tasksMgmt[i].note %></td>
+                    <td class="column1"><%= tasksMgmt[i].owner_name%></td>
+                    <%if(tasksMgmt[i].owner_name == name){%>
+                    <td class="column1"><%= tasksMgmt[i].role %></td>
+                    <%}%>
+                    <%if(tasksMgmt[i].owner_name !== name){%>
+                    <td class="column1">Penerima Tugas</td>
+                    <%}%>
+                    <td class="column1">
+                    <%for(var p = 0; p< nameArr.length; p++) { %>  
+                      <%for(var j = 0; j< nameArr[p].length; j++) { %>
+                      <%= nameArr[p][j] %><br>
+                      <%}%>
+                    <%}%> 
+                    </td>                   
+                    <td class="column1"><%= tasksMgmt[i].location %></td>
+                    <td class="column1"><%= tasksMgmt[i].tahap %></td>
+                    <%if(tasksMgmt[i].owner_name == name){%>
+                    <td class="column1">
+                      <span><button><a onclick="return confirm('Anda pasti?')" href="/edit_TugasanTetapanMasa/<%=tasksMgmt[i].id%>"><img src="images/edit.png" class="iconCrud"></a></button></span>                  
+                    </td>
+                     <td class="column1">
+                      <span><button id="delete-button">
+                        <a onclick="return confirm('Anda pasti?')" href="/delete/<%=tasksMgmt[i].id%>_<%= tasksMgmt[i].timeFrom %>_<%= tasksMgmt[i].timeUntil %>_<%= tasksMgmt[i].date %>_<%= tasksMgmt[i].names%>_<%= tasksMgmt[i].tahap%>_<%= tasksMgmt[i].title %>">
+                          <img src="images/delete.png" class="iconCrud"></a></button></span>
+                    </td>
+                    <%}%>
+                    <%if(tasksMgmt[i].owner_name != name){%>
+                    <td class="column1"></td>
+                    <td class="column1"></td>
+                    <%}%>
+                   
+                  </tr>
+                   <%}%>
+                <% } %>    
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="color: #5E6988; margin-top: 3%; margin-bottom: 1%;">Tugasan Fleksibel Masa</h3>
+  <div class="limiter" >
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table100">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">Tajuk</th>
+                <th class="column1">Tugas</th>
+                <th class="column1">Penyerah Tugas</th>
+                <th class="column1">Peranan</th>
+                <th class="column1">Tahap Kesukaran</th>
+                <th class="column1">Status Pemilik Tugas</th>
+                <th class="column1">Tarikh Akhir</th> 
+                <th colspan="2" class="column1">Tindakan</th>
+
+              </tr>
+            </thead>
+            <tbody>
+
+              <%var duplicateID = []%>
+              <%var count = []%>
+              <%var index = 0%>
+              <%var x = 0%>
+
+              <!-- To get unique uniqueID -->
+               <% for(var i=0; i< tasksMgmt.length; i++) {%>
+               <%if(tasksMgmt[i].task === "Tugasan Fleksibel Masa"){%>
+                  <%if((tasksMgmt[i].taskowner == name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner !== name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner == name && tasksMgmt[i].owner_name !== name)){%>
+
+                         <% if(duplicateID.length == 0){%>
+                         <%duplicateID.push(tasksMgmt[i].uniqueID)%>
+                         <%}%>
+
+                         <%if(duplicateID.length>0){%>
+
+                           <%for(var check = 0; check< duplicateID.length; check++){%>
+                              
+                              
+                                <%if(duplicateID[check] == tasksMgmt[i].uniqueID){%>
+                                  <%var x = 1%>
+                                <%}%>
+
+                           <%}%>
+
+                           <%if(x == 0){%>
+                               <%duplicateID.push(tasksMgmt[i].uniqueID)%>
+                           <%}%>
+
+                         <%}%>
+
+                         <%x = 0%>
+                    <%}%>
+                  <%}%>
+               <%}%>    
+
+              <!-- To count each uniqueID -->              
+                <%for(var check = 0; check< duplicateID.length; check++){%>                
+                      <%for(var i = 0; i< tasksMgmt.length; i++){%>
+                        <%if(duplicateID[check] == tasksMgmt[i].uniqueID){%>
+                          <%index = index + 1%>
+                        <%}%>
+                      <%}%>
+
+                      <%count.push(index)%>
+                      <%index = 0%>
+                <%}%>
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+              <%for(var j = 0; j< duplicateID.length; j++){%>
+                
+                  <%for(var i=0; i< tasksMgmt.length; i++) {%>
+
+                  <%if(duplicateID[j] == tasksMgmt[i].uniqueID){%>
+                     <%if(tasksMgmt[i].task === "Tugasan Fleksibel Masa"){ %>
+                      <%if((tasksMgmt[i].taskowner == name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner !== name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner == name && tasksMgmt[i].owner_name !== name)){%>
+                      <tr>        
+                        <td class="column1" rowspan="1"><%= tasksMgmt[i].title %></td>
+                        <td class="column1"><%= tasksMgmt[i].note %></td>
+                        <td class="column1"><%= tasksMgmt[i].owner_name%></td>
+                         <%if(tasksMgmt[i].owner_name == name){%>
+                        <td class="column1"><%= tasksMgmt[i].role %></td>
+                        <%}%>
+
+                        <%if(tasksMgmt[i].owner_name !== name){%>
+                        <td class="column1">Penerima Tugas</td>
+                        <%}%>
+
+                        <td class="column1"><%= tasksMgmt[i].tahap %></td>
+                        <%var date2 = new Date(new Date().toISOString().slice(0, 10))%>
+                        <%var date1 = new Date(tasksMgmt[i].dueDate)%>
+                        <%var diffTime =  date2.getTime() - date1.getTime()%>
+                        <%var diffDays = diffTime / (1000 * 3600 * 24)%>
+
+                        <td class="column1">
+                          <div class="dropdown">
+                            <button class="dropbtn" style="font-family: OpenSans-Regular; font-size: 14px; text-align: left;">Perkembangan Tugasan</button>
+                            <div class="dropdown-content" style="min-width: 300px;">
+                              <%for(var displayOwner = 0; displayOwner< tasksMgmt.length; displayOwner++){%>
+                                  <%var date4 = new Date(new Date().toISOString().slice(0, 10))%>
+                                  <%var date3 = new Date(tasksMgmt[displayOwner].dueDate)%>
+                                  <%var diffTime1 =  date4.getTime() - date3.getTime()%>
+                                  <%var diffDays1 = diffTime1 / (1000 * 3600 * 24)%>
+
+                                  <%if(duplicateID[j] == tasksMgmt[displayOwner].uniqueID){%>
+                                        <%if(tasksMgmt[displayOwner].status == "Belum Mula" && diffDays1 > 0){%>
+                                        <a href="#" style="color: red; float: left;"><%= tasksMgmt[displayOwner].taskowner%><span style="float:right; padding-left: 10px;">[<%= tasksMgmt[displayOwner].status %>]</span></a>
+                                        <%}%>
+                                        <%if(tasksMgmt[displayOwner].status == "Belum Mula" && diffDays1 < 0){%>
+                                         <a href="#" style="float: left;"><%= tasksMgmt[displayOwner].taskowner%><span style="float:right;padding-left: 10px;">[<%= tasksMgmt[displayOwner].status %>]</span></a>
+                                        <%}%>
+                                        <%if(tasksMgmt[displayOwner].status == "Sedang Dijalankan" && diffDays1 > 0){%>
+                                         <a href="#" style="color: red; float: left;"><%= tasksMgmt[displayOwner].taskowner%><span style="float:right;padding-left: 10px;">[<%= tasksMgmt[displayOwner].status %>]</span></a>
+                                        <%}%>
+                                        <%if(tasksMgmt[displayOwner].status == "Sedang Dijalankan" && diffDays1 < 0){%>
+                                        <a href="#" style="float: left;"><%= tasksMgmt[displayOwner].taskowner%><span style="float:right;padding-left: 10px;">[<%= tasksMgmt[displayOwner].status %>]</span></a>
+                                        <%}%>
+                                        <%if(tasksMgmt[displayOwner].status == "Selesai"){%>
+                                        <a href="#" style="color: green; float: left;"><%= tasksMgmt[displayOwner].taskowner%><span style="float:right;padding-left: 10px;">[<%= tasksMgmt[displayOwner].status %>]</span></a>
+                                        <%}%>
+                                        <%if(tasksMgmt[displayOwner].status == null){%>
+                                         <a href="#" style="float: left;"></a>
+                                        <%}%>
+                                  <%}%>
+                              <%}%>
+                            </div>  
+                          </div>
+                        </td>
+                        
+                        <%if(diffDays > 0){%>
+                        <td class="column1" style="color: red;"><%= tasksMgmt[i].dueDate %></td> 
+                        <%}%>
+                        <%if(diffDays <= 0){%>
+                        <td class="column1"><%= tasksMgmt[i].dueDate %></td> 
+                        <%}%>                        
+
+                         <%if(tasksMgmt[i].owner_name == name){%>
+                        <td class="column1">
+                          <span><button><a onclick="return confirm('Anda pasti?')" href="/edit_TugasanFleksibelMasa/<%=tasksMgmt[i].id%>"><img src="images/edit.png" class="iconCrud"></a></button></span>                  
+                        </td>
+                         <td class="column1">
+                          <span><button id="delete-button"><a onclick="return confirm('Anda pasti?')" href="/delete_TFM/<%=tasksMgmt[i].id%>_<%= tasksMgmt[i].uniqueID%>_<%= tasksMgmt[i].title %>_<%=  tasksMgmt[i].names%>_<%=  tasksMgmt[i].tahap%>"><img src="images/delete.png" class="iconCrud"></a></button></span>
+                        </td>
+                        <%}%>
+                        <%if(tasksMgmt[i].owner_name != name){%>
+                        <td class="column1"></td>
+                        <td class="column1"></td>
+                        <%}%>
+                      
+                      </tr>
+
+                    <%duplicateID[j] = "0"%>
+                          <%}%>
+                      <%}%>   
+                    <%}%>
+                 <%}%>                
+              <%}%>            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="color: #5E6988; margin-top: 3%; margin-bottom: 1%;">Tugasan Mesyuarat</h3>
+  <div class="limiter" >
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table100">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">Tajuk</th>
+                <th class="column1">Tugas</th>
+                <th class="column1">Penyerah Tugas</th>
+                <th class="column1">Peranan</th>
+                <th class="column1">Tahap Kesukaran</th>
+                <th class="column1">Status Pemilik Tugas</th>
+                <th class="column1">Tarikh Akhir</th> 
+              </tr>
+            </thead>
+            <tbody>
+
+              <%var duplicateID = []%>
+              <%var count = []%>
+              <%var index = 0%>
+              <%var x = 0%>
+
+              <!-- To get unique uniqueID -->
+               <% for(var i=0; i< tasksMgmt.length; i++) {%>
+               <%if(tasksMgmt[i].task === "Tugasan Mesyuarat"){%>
+                  <%if((tasksMgmt[i].taskowner == name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner !== name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner == name && tasksMgmt[i].owner_name !== name)){%>
+
+                         <% if(duplicateID.length == 0){%>
+                         <%duplicateID.push(tasksMgmt[i].id)%>
+                         <%}%>
+
+                         <%if(duplicateID.length>0){%>
+
+                           <%for(var check = 0; check< duplicateID.length; check++){%>                              
+                              
+                                <%if(duplicateID[check] == tasksMgmt[i].id){%>
+                                  <%var x = 1%>
+                                <%}%>
+
+                           <%}%>
+
+                           <%if(x == 0){%>
+                               <%duplicateID.push(tasksMgmt[i].id)%>
+                           <%}%>
+
+                         <%}%>
+
+                         <%x = 0%>
+                    <%}%>
+                  <%}%>
+               <%}%>    
+
+              <!-- To count each uniqueID -->              
+                <%for(var check = 0; check< duplicateID.length; check++){%>                
+                      <%for(var i = 0; i< tasksMgmt.length; i++){%>
+                        <%if(duplicateID[check] == tasksMgmt[i].id){%>
+                          <%index = index + 1%>
+                        <%}%>
+                      <%}%>
+
+                      <%count.push(index)%>
+                      <%index = 0%>
+                <%}%>
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+              <%for(var j = 0; j< duplicateID.length; j++){%>
+                
+                  <%for(var i=0; i< tasksMgmt.length; i++) {%>
+
+                  <%if(duplicateID[j] == tasksMgmt[i].id){%>
+                     <%if(tasksMgmt[i].task === "Tugasan Mesyuarat"){ %>
+                      <%if((tasksMgmt[i].taskowner == name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner !== name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner == name && tasksMgmt[i].names.search(name) >= 0)){%>
+                      <tr>        
+                        <td class="column1" rowspan="1"><%= tasksMgmt[i].title %></td>
+                        <td class="column1"><%= tasksMgmt[i].note %></td>
+                        <td class="column1"><%= tasksMgmt[i].owner_name%></td>
+                         <%if(tasksMgmt[i].owner_name == name){%>
+                        <td class="column1"><%= tasksMgmt[i].role %></td>
+                        <%}%>
+
+                        <%if(tasksMgmt[i].owner_name !== name){%>
+                        <td class="column1">Penerima Tugas</td>
+                        <%}%>
+
+                        <td class="column1"><%= tasksMgmt[i].tahap %></td>
+                        <%var date2 = new Date(new Date().toISOString().slice(0, 10))%>
+                        <%var date1 = new Date(tasksMgmt[i].dueDate)%>
+                        <%var diffTime =  date2.getTime() - date1.getTime()%>
+                        <%var diffDays = diffTime / (1000 * 3600 * 24)%>
+
+                        <td class="column1">
+                          <div class="dropdown">
+                            <button class="dropbtn" style="font-family: OpenSans-Regular; font-size: 14px; text-align: left;">Perkembangan Tugasan</button>
+                            <div class="dropdown-content" style="min-width: 300px;">
+                              <%for(var displayOwner = 0; displayOwner< tasksMgmt.length; displayOwner++){%>
+                                  <%var date4 = new Date(new Date().toISOString().slice(0, 10))%>
+                                  <%var date3 = new Date(tasksMgmt[displayOwner].dueDate)%>
+                                  <%var diffTime1 =  date4.getTime() - date3.getTime()%>
+                                  <%var diffDays1 = diffTime1 / (1000 * 3600 * 24)%>
+
+                                  <% var name1 %>
+                                  <% var name2 %>
+                                  <% var name3  %>
+                                  <% var search %>
+                                  <% var replaceWith %>
+                                  <% var name4 %>
+                                  <% var nameArr = []%>   
+                                  <% var checkname = []%>        
+
+                                  <% name1 = tasksMgmt[displayOwner].names %>
+                                  <% name2 = name1.replace("[","") %>
+                                  <% name3 = name2.replace("]","") %>
+                                  <% search = '"' %>
+                                  <% replaceWith = '' %>
+                                  <% name4 = name3.split(search).join(replaceWith)%>
+                                  <% nameArr.push(name4.split(","))%>
+
+                                   <%for(var p = 0; p< nameArr.length; p++) { %>  
+                                      <%for(var r = 0; r< nameArr[p].length; r++) { %>
+                                      <% checkname.push(nameArr[p][r]) %>
+                                      <%}%>
+                                    <%}%> 
+
+                                  <%for(var q = 0; q< checkname.length; q++){%>
+                                  <%if(duplicateID[j] == tasksMgmt[displayOwner].id && checkname[q] == tasksMgmt[displayOwner].taskowner){%>
+                                        <%if(tasksMgmt[displayOwner].status == "Belum Mula" && diffDays1 > 0){%>
+                                        <a href="#" style="color: red; float: left;"><%= tasksMgmt[displayOwner].taskowner%><span style="float:right; padding-left: 10px;">[<%= tasksMgmt[displayOwner].status %>]</span></a>
+                                        <%}%>
+                                        <%if(tasksMgmt[displayOwner].status == "Belum Mula" && diffDays1 < 0){%>
+                                         <a href="#" style="float: left;"><%= tasksMgmt[displayOwner].taskowner%><span style="float:right;padding-left: 10px;">[<%= tasksMgmt[displayOwner].status %>]</span></a>
+                                        <%}%>
+                                        <%if(tasksMgmt[displayOwner].status == "Sedang Dijalankan" && diffDays1 > 0){%>
+                                         <a href="#" style="color: red; float: left;"><%= tasksMgmt[displayOwner].taskowner%><span style="float:right;padding-left: 10px;">[<%= tasksMgmt[displayOwner].status %>]</span></a>
+                                        <%}%>
+                                        <%if(tasksMgmt[displayOwner].status == "Sedang Dijalankan" && diffDays1 < 0){%>
+                                        <a href="#" style="float: left;"><%= tasksMgmt[displayOwner].taskowner%><span style="float:right;padding-left: 10px;">[<%= tasksMgmt[displayOwner].status %>]</span></a>
+                                        <%}%>
+                                        <%if(tasksMgmt[displayOwner].status == "Selesai"){%>
+                                        <a href="#" style="color: green; float: left;"><%= tasksMgmt[displayOwner].taskowner%><span style="float:right;padding-left: 10px;">[<%= tasksMgmt[displayOwner].status %>]</span></a>
+                                        <%}%>
+                                        <%if(tasksMgmt[displayOwner].status == null){%>
+                                         <a href="#" style="float: left;"></a>
+                                        <%}%>
+                                  <%}%>
+                                  <%}%>
+                              <%}%>
+                            </div>  
+                          </div>
+                        </td>
+                        
+                        <%if(diffDays > 0){%>
+                        <td class="column1" style="color: red;"><%= tasksMgmt[i].dueDate %></td> 
+                        <%}%>
+                        <%if(diffDays <= 0){%>
+                        <td class="column1"><%= tasksMgmt[i].dueDate %></td> 
+                        <%}%>                 
+
+                      </tr>
+
+                    <%duplicateID[j] = "0"%>
+                          <%}%>
+                      <%}%>   
+                    <%}%>
+                 <%}%>                
+              <%}%>            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-bottom: 10%;"></div>
+</div>
+<!--===============================================================================================-->  
+  <script src="vendor-table/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<!--   <script src="vendor-table/bootstrap/js/popper.js"></script> -->  
+<!-- <script src="vendor-table/bootstrap/js/bootstrap.min.js"></script> -->
+<!--===============================================================================================-->
+  <script src="vendor-table/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+  <script src="js-table/main.js"></script>
+</div>
+</body>
+
+</body>
+</html>
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+              <!--   <% for(var i=0; i< tasksMgmt.length; i++) {%>
+                 <%if(tasksMgmt[i].task === "Tugasan Fleksibel Masa"){%>
+                  <%if((tasksMgmt[i].taskowner == name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner !== name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner == name && tasksMgmt[i].owner_name !== name)){%>
+                  <tr>        
+                    <% var name1 %>
+                    <% var name2 %>
+                    <% var name3  %>
+                    <% var search %>
+                    <% var replaceWith %>
+                    <% var name4 %>
+                    <%var nameArr = []%>           
+
+                    <% name1 = tasksMgmt[i].names %>
+                    <% name2 = name1.replace("[","") %>
+                    <% name3 = name2.replace("]","") %>
+                    <% search = '"' %>
+                    <% replaceWith = '' %>
+                    <% name4 = name3.split(search).join(replaceWith)%>
+                    <% nameArr.push(name4.split(","))%>   
+                            
+                    <td class="column1" rowspan="1"><%= tasksMgmt[i].title %></td>
+                    <td class="column1"><%= tasksMgmt[i].note %></td>
+                    <td class="column1"><%= tasksMgmt[i].owner_name%></td>
+                     <%if(tasksMgmt[i].owner_name == name){%>
+                    <td class="column1"><%= tasksMgmt[i].role %></td>
+                    <%}%>
+                    <%if(tasksMgmt[i].owner_name !== name){%>
+                    <td class="column1">Penerima Tugas</td>
+                    <%}%>
+                     <td class="column1">
+                    <%for(var p = 0; p< nameArr.length; p++) { %>  
+                      <%for(var j = 0; j< nameArr[p].length; j++) { %>
+                      <%= nameArr[p][j] %><br>
+                      <%}%>
+                    <%}%> 
+                    </td>             
+                    <td class="column1"><%= tasksMgmt[i].tahap %></td>
+                    <%var date2 = new Date(new Date().toISOString().slice(0, 10))%>
+                    <%var date1 = new Date(tasksMgmt[i].dueDate)%>
+                    <%var diffTime =  date2.getTime() - date1.getTime()%>
+                    <%var diffDays = diffTime / (1000 * 3600 * 24)%>
+
+                     <%if((tasksMgmt[i].taskowner == name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner !== name  && tasksMgmt[i].owner_name == name) || (tasksMgmt[i].taskowner == name && tasksMgmt[i].owner_name !== name)){%>
+                    <td class="column1"><%= tasksMgmt[i].taskowner%></td>
+                    <%}%>
+
+                     <%if(tasksMgmt[i].taskowner !== name && tasksMgmt[i].owner_name !== name){%>
+                    <td class="column1"></td>
+                    <%}%>
+                     
+                    <%if(tasksMgmt[i].status == "Belum Mula" && diffDays > 0){%>
+                    <td class="column1" style="color: red;"><%= tasksMgmt[i].status %></td> 
+                    <td class="column1" style="color: red;"><%= tasksMgmt[i].dueDate %></td> 
+                    <%}%>
+                    <%if(tasksMgmt[i].status == "Belum Mula" && diffDays <= 0){%>
+                    <td class="column1"><%= tasksMgmt[i].status %></td> 
+                    <td class="column1"><%= tasksMgmt[i].dueDate %></td> 
+                    <%}%>
+                    <%if(tasksMgmt[i].status == "Sedang Dijalankan" && diffDays > 0){%>
+                    <td class="column1" style="color: red;"><%= tasksMgmt[i].status %></td> 
+                    <td class="column1" style="color: red;"><%= tasksMgmt[i].dueDate %></td> 
+                    <%}%>
+                    <%if(tasksMgmt[i].status == "Sedang Dijalankan" && diffDays <= 0){%>
+                    <td class="column1"><%= tasksMgmt[i].status %></td> 
+                    <td class="column1"><%= tasksMgmt[i].dueDate %></td> 
+                    <%}%>
+                    <%if(tasksMgmt[i].status == "Selesai"){%>
+                    <td class="column1" style="color: green;"><%= tasksMgmt[i].status %></td> 
+                    <td class="column1" style="color: green;"><%= tasksMgmt[i].dueDate %></td> 
+                    <%}%>
+
+                    <%if(tasksMgmt[i].status == null){%>
+                    <td class="column1" style="color: green;"></td> 
+                    <td class="column1" style="color: green;"></td> 
+                    <%}%>
+
+                     <%if(tasksMgmt[i].owner_name == name){%>
+                    <td class="column1">
+                      <span><button><a onclick="return alert('Anda pasti?')" href="/edit_TugasanFleksibelMasa/<%=tasksMgmt[i].id%>"><img src="images/edit.png" class="iconCrud"></a></button></span>                  
+                    </td>
+                     <td class="column1">
+                      <span><button id="delete-button"><a onclick="return alert('Anda pasti?')" href="/delete_TFM/<%=tasksMgmt[i].id%>_<%= tasksMgmt[i].uniqueID%>_<%= tasksMgmt[i].title %>_<%=  tasksMgmt[i].names%>_<%=  tasksMgmt[i].tahap%>"><img src="images/delete.png" class="iconCrud"></a></button></span>
+                    </td>
+                    <%}%>
+                    <%if(tasksMgmt[i].owner_name != name){%>
+                    <td class="column1"></td>
+                    <td class="column1"></td>
+                    <%}%>
+                  
+                  </tr>
+                    <%}%>
+                <% } %>    
+
+                    <%}%> -->

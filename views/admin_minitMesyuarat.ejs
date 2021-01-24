@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="icon" type="image/png" href="images/skse.png"/>
+<!--===============================================================================================-->
+  <!-- <link rel="stylesheet" type="text/css" href="vendor-table/bootstrap/css/bootstrap.min.css"> -->
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="fonts-table/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor-table/animate/animate.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor-table/select2/select2.min.css">
+<!--===============================================================================================-->
+  <!-- <link rel="stylesheet" type="text/css" href="vendor-table/perfect-scrollbar/perfect-scrollbar.css"> -->
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="css-table/util.css">
+  <link rel="stylesheet" type="text/css" href="css-table/main.css">
+<!--===============================================================================================-->
+<script src = "login.js" type="text/javascript"></script>
+<!-- JavaScript -->
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "200px";
+  document.getElementById("main").style.marginLeft = "200px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+
+var d = new Date();
+document.getElementById("demo").innerHTML = d.getMonth() + 1;
+</script>
+</head>
+<body>
+
+<div class="topHeader">
+<img src="images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()"   />
+<img src="images/skse.png" class = "imageL" alt="hide menu">
+<img src="images/User.png" alt="Logout" onclick="window.location.href = '/logout';" class = "imageR">
+<img src="images/task-icon-png-3.png" onclick="window.location.href = '/kemaskiniProgresTugasan';" class = "imageR" alt="Task">
+<a href="#" >
+	<img src="images/notification.png" onclick="window.location.href = '/senaraiJemputanProgram';" class = "imageR" alt="Notification">
+	<!-- <p class="badge">3</p> -->
+</a>
+</div>
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+  <a href="/keberadaanHarian">E Kehadiran</a>
+</div>       
+
+<div id="main"  data-position="header">
+	
+<div style="box-shadow: 0 8px 6px -6px black;">
+<ul>
+    <li><a href="/keseluruhanProgresTugasan">Utama</a></li>
+    <li><a href="/admin_aturTugasan">Atur Tugasan</a></li>
+    <li ><a href="/admin_pengurusanTugas">Pengurusan Tugas</a></li>  
+    <li ><a href="/admin_ketersediaanKakitangan">Ketersediaan</a></li>
+</ul>
+
+<div class="dropdown">
+  <button class="dropbtn">Mesyuarat</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturanJemputanMesyuarat">Atur Jemputan</a>
+          <a href="/admin_aturMinitMesyuarat">Minit Mesyuarat</a>
+          <a class="current" href="/admin_minitMesyuarat">Senarai Minit Mesyuarat</a>
+      </div>  
+      </div>
+</div>
+
+ <div class="container"> <!-- Form -->
+    
+  <h2><b>Senarai Minit Mesyuarat</b></h2>  
+
+  
+  <div action="/admin_minitMesyuarat" method = "GET">
+  <div class="limiter" >
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table100">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">Tajuk</th>
+                <th class="column1">Lokasi</th>
+                <th class="column1">Tarikh</th>
+                <th class="column1">Masa</th>
+                <th class="column1">Item</th>
+                <th class="column1">Nota</th>
+                <th class="column1">Jenis</th>
+                <th class="column1">Tahap Kesukaran</th>
+                <th class="column1">Pemilik</th>
+                <th class="column1">Tarikh Akhir</th>
+              </tr>
+            </thead>
+            <tbody>
+
+           <% meetingInfo.forEach(function(info){ %>
+                  <tr>                    
+                    <td class="column1"><%= info.tajuk %></td>
+                    <td class="column1"><%= info.lokasi %></td>
+                    <td class="column1"><%= info.tarikh%></td>
+                    <td class="column1"><%= info.timeFrom%> - <%= timeTo%></td>        
+                    <td class="column1"><%= info.item %></td>
+                    <td class="column1"><%= info.nota %></td>  
+                    <td class="column1"><%= info.jenis %></td>
+                    <td class="column1"><%= info.tahap %></td>
+                    <td class="column1"><%= info.task_owner %></td>
+                    <td class="column1"><%= info.tarikhakhir%></td>
+                  </tr>
+                <% }) %>    
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/styles.css" />
+<link rel="icon" type="image/png" href="/images/skse.png"/>
+<title>Maklum Penglibatan</title>
+<script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "200px";
+     
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+
+    function alterOption(){
+    var category = document.getElementById("categorydrop");
+    var leave = category.value;
+    var def = document.getElementById("default");
+    var a = document.getElementById("perkhidmatan");
+    var  b = document.getElementById("perubatan");
+    var c = document.getElementById("tidakberekod");
+    var d = document.getElementById("cutilain");
+
+   
+
+     if(leave==="Cuti Kerana Perkhidmatan"){
+        
+        a.style.display='inline-block';
+        b.style.display='none';
+        c.style.display='none';
+        d.style.display='none';
+        def.style.display='none';
+        a.name='type';
+        b.name='';
+        c.name='';
+        d.name='';
+        
+    }
+
+    else if(leave==="Cuti Kerana Perubatan"){
+        
+        b.style.display='inline-block';
+        a.style.display='none';
+        c.style.display='none';
+        d.style.display='none';
+        def.style.display='none';
+        b.name='type';
+        a.name='';
+        c.name='';
+        d.name='';
+    }
+    else if(leave==="Cuti Tidak Berekod"){
+        
+        c.style.display='inline-block';
+        b.style.display='none';
+        a.style.display='none';
+        d.style.display='none';
+        def.style.display='none';
+        c.name='type';
+        b.name='';
+        a.name='';
+        d.name='';
+    }
+    else{
+      
+      d.style.display='inline-block';
+      b.style.display='none';
+        c.style.display='none';
+        a.style.display='none';
+        def.style.display='none';
+        d.name='type';
+        b.name='';
+        c.name='';
+        a.name='';
+
+    }
+    
+
+    }
+
+    function calculateDay(){
+     var start = document.getElementById("start");
+     var finish = document.getElementById("finish");
+     var date1 = new Date(start.value);
+     var date2 = new Date(finish.value); 
+  
+// To calculate the time difference of two dates 
+var Difference_In_Time = date2.getTime() - date1.getTime(); 
+  
+// To calculate the no. of days between two dates 
+var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
+
+var total = document.getElementById("day");
+total.value= Difference_In_Days;
+
+    }
+    function requiredDate(){
+
+var endDate = document.getElementById("finish");
+    endDate.required=true;
+  if(endDate.oninvalid=true){
+    endDate.setCustomValidity('Sila isi ruangan ini');
+  }
+}
+    
+    function ValidateDate() {
+      var finish = document.getElementById("finish");
+      finish.required=false;
+          var startDate = document.getElementById("start").value;
+          var endDate = document.getElementById("finish").value;
+        
+          if ((Date.parse(endDate) < Date.parse(startDate))) {
+              document.getElementById("finish").setCustomValidity("Tarikh akhir lebih awal dari tarikh mula!");
+              //document.getElementById("finish").value = "";
+           }
+          if ((Date.parse(endDate) >= Date.parse(startDate))) {
+              document.getElementById("finish").innerText = "";
+              daydiff(startDate, endDate);
+          }
+      };
+
+      function parseDate(str) {
+          var mdy = str.split('/')
+          console.log(mdy)
+          return new Date(mdy[2], mdy[1] - 1, mdy[0]);
+      }
+    
+    </script>
+    <style>
+      form{
+max-width: 1200px;
+
+font-weight: bold;
+      color: #192A59;
+      margin-left: 60px;
+}
+form ul{
+
+  padding:0;
+	margin:0;
+	list-style:none;
+}
+
+form ul li{
+	display: block;
+	/* margin-bottom: 10px; */
+	min-height: 25px;
+}
+
+form ul li .field-split{
+	width: 40%;
+}
+
+form ul li .field-style{
+
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  width: 38%;
+  outline: none;
+}
+form ul li .field-full{
+	width: 100%;
+}
+form ul li .align-left{
+	float:left;
+}
+form ul li .align-right{
+	float:right;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  opacity: 0;
+  visibility: hidden;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 35%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color:  #ABCAFF;
+}
+.popup .content {
+  /*max-height: 30%;*/
+  overflow: auto;
+}
+
+    </style>
+</head>
+<body>
+  <div class="topHeader">
+    <img src="images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()">
+    <img src="images/skse.png" class = "imageL" alt="hide menu">
+    <img src="images/User.png" alt="Logout"  onclick="window.location.href = '/logout';"  class = "imageR">
+    <span style="float: right; line-height: 3; padding-right: 10px;"><%= name%></span>
+    </a>
+    </div>
+
+        <div id="main">
+
+          <div style="box-shadow: 0 8px 6px -6px black;">
+          
+            <ul class="nav">
+            <li><a  href="/keberadaanHarian">Utama</a></li>
+            <li><a  href="/permohonanKeluar">Permohonan</a></li></ul>
+            <div class="dropdown">
+              <button class="dropbtn">Pemakluman</button>
+              <div class="dropdown-content">
+                      <a href="/maklumPermohonanCuti">Maklum Permohonan Cuti</a>
+                      <a href="/maklumPenglibatan">Maklum Penglibatan Aktiviti Luar</a>
+                  </div>  
+                  </div>
+                 
+          </div>
+          
+            
+          
+          <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+            <a href="/attendance">E Kehadiran</a>
+          </div> 
+
+        
+        
+
+
+<%let today = new Date()%>
+<%let today2 = new Date().toISOString().slice(0, 10)%>
+<% var month = new Array(12)%>
+<%month[0]= "Januari"%>
+<%month[1]= "Februari"%>
+<%month[2]= "Mac"%>
+<%month[3]= "April"%>
+<%month[4]= "Mei"%>
+<%month[5]= "Jun"%>
+<%month[6]= "Julai"%>
+<%month[7]= "Ogos"%>
+<%month[8]= "September"%>
+<%month[9]= "Oktober"%>
+<%month[10]= "November"%>
+<%month[11]= "Disember"%>
+<%var bulan = month[today.getMonth()]%>
+<h2>Maklum Penglibatan Aktiviti Luar</h2>
+<h2 style="display: inline; margin-left: 680px;"><%=today.getDate()%> <%=bulan%> <%=today.getFullYear()%></h2>
+
+
+
+<form  action="/penglibatan" method="POST">
+
+<input class="tt" type="hidden" placeholder="" name="applydate" value="<%=today%>" required oninvalid="this.setCustomValidity('Sila isi ruangan ini ')" oninput="setCustomValidity('')"> <br>
+
+
+<ul>
+  <li>
+<p class="field-split align-left"style="font-size: 15px;">Nama</p> <p class="field-split align-right" style="font-size: 15px;">Aktiviti</p><br>
+</li>
+
+<li>
+<label class="field-split align-left"style="font-size: 15px; "><%= name %></label>
+<input type="text" class="field-style field-split align-right" name="act" required oninvalid="this.setCustomValidity('Sila isi ruangan ini ')" oninput="setCustomValidity('')">
+</li>
+
+
+<li>
+<br><br><br>
+
+<p class="field-split align-left"style="font-size: 15px;">Tarikh Mula</p> <p class="field-split align-right" style=" font-size: 15px;">Tarikh Akhir</p><br>
+</li>
+
+<li>
+
+<input class="field-style field-split align-left" type="date" name="startdate" id="start" required oninvalid="this.setCustomValidity('Sila isi ruangan ini ')" oninput="setCustomValidity(''),calculateDay()">
+<!--input class="t" type="time" placeholder="" name="leavetime" required oninvalid="this.setCustomValidity('Sila isi ruangan ini ')" oninput="setCustomValidity('')" -->
+
+<input class="field-style field-split align-right"type="date" name="finishdate" id="finish"  onchange="calculateDay(),setCustomValidity(''),ValidateDate()">
+<!--input class="t"  type="time" placeholder="" name="entertime" required oninvalid="this.setCustomValidity('Sila isi ruangan ini ')" oninput="setCustomValidity('')" -->
+</li>
+
+<li>
+<br><br>
+
+<br><br><br>
+<input type="hidden" id="day" name="totalday" value="">
+<input type="hidden"  name="usercategory" value="<%=category%>">
+<input type="hidden"  name="name" value="<%=name%>">
+<button type="submit"  class="hantar">Hantar</button>
+</li>
+</ul>
+
+<div id="berjaya" class="overlay" >
+
+  <div class="popup">
+  <p style="font-size: 20px; margin-top:50px; text-align: center;" >Penglibatan aktiviti luar anda berjaya dimaklumkan.</p><br><br>
+  <a class="close" href="#">&times;</a>
+  <div class="content">
+         
+</div>
+</div> </div>
+</form> 
+
+</ul>
+</div>
+<script>
+  window.onload = requiredDate();
+</script>
+
+</body>
+
+</html>

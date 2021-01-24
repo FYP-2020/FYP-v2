@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<link rel="stylesheet" type="text/css" href="/styles.css">
+<link rel="icon" type="image/png" href="/images/skse.png"/>
+<title>Agihan Tugasan Keseluruhan</title>
+<script src = "login.js" type="text/javascript"></script>
+<!-- JavaScript -->
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "200px";
+  
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+
+document.getElementById('select-all').onclick = function() {
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  for (var checkbox of checkboxes) {
+    checkbox.checked = this.checked;
+  }
+}
+
+ function checkAll(checkname, bx) {
+        for (i = checkname.length; i--; )
+            checkname[i].checked = bx.checked;
+    }    
+
+function checkPage(bx){                    
+    for (var tbls = document.getElementsByTagName("table"),i=tbls.length; i--; )
+        for (var bxs=tbls[i].getElementsByTagName("input"),j=bxs.length; j--; )
+           if (bxs[j].type=="checkbox")
+               bxs[j].checked = bx.checked;
+}
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+  
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+function toggle_div_fun(id){
+  
+  var divelement = document.getElementById(id);
+  // if(divelement.style.visibility==='hidden'|| divelement.style.display === ''){
+     divelement.style.visibility='visible';
+     divelement.style.opacity= 1;//}
+  
+  // else{
+  //    divelement.style.display = 'hidden';
+  //    divelement.style.opacity= 0;}
+     
+}
+
+function close(id){
+  var div = document.getElementById(id);
+  div.style.visibility='hidden';
+     div.style.opacity= 0;
+
+}
+function selectChange(val) {
+    //Set the value of action in action attribute of form element.
+    //Submit the form
+    $('#tarikh').submit();
+}
+</script>
+
+<style>
+ .overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  opacity: 0;
+  visibility: hidden;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 50px auto;
+  padding: 20px;
+  background: #F2F2F2;;
+  border-radius: 5px;
+  /* width: 30%; */
+  position: relative;
+  transition: all 5s ease-in-out;
+  width: 900px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  /* position: absolute; */
+  float: right;
+  top: 0px;
+  margin-left: 10px;
+  transition: all 200ms;
+  font-size: 40px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color:  #ABCAFF;
+}
+.popup .cont {
+  min-height: 40%;
+  max-height: 50%;
+  overflow: auto;
+  margin-top: 5px;
+}
+
+/*------ utiltity classes -----*/
+.fl{ float:left; }
+.fr{ float: right; }
+/*its also known as clearfix*/
+.group:before,
+.group:after {
+    content: "";
+    display: table;
+} 
+.group:after {
+    clear: both;
+}
+.group {
+    zoom: 1;  /*For IE 6/7 (trigger hasLayout) */
+}
+
+/* body {
+    background: #F2F2F2;
+    font-family: 'Droid Sans', sans-serif;
+    line-height: 1;
+    font-size: 16px;    
+} */
+/* .wrapper {
+    
+} */
+.pricing-table {
+    width: 95%;
+    margin: 10px auto;
+    text-align: center;
+    padding: 10px;
+    padding-right: 0;
+}
+.pricing-table .heading{
+    color: #9C9E9F;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    margin-bottom: 4rem;
+}
+.block{
+    width: 29.5%;    
+    margin: 0 15px;
+  
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;    
+/*    border: 1px solid red;*/
+}
+.block_m{
+    width: 45%;    
+    margin-right:30px;
+  
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;    
+/*    border: 1px solid red;*/
+}
+/*Shared properties*/
+.title,.pt-footer{
+    color: #FEFEFE;
+    text-transform: capitalize;
+    line-height: 2.5;
+    position: relative;
+}
+.content{
+   font-weight: bold;
+    position: relative;
+    color: #FEFEFE;
+    padding: 5px 0 5px 0;
+    border-radius: 5px;
+}
+/*arrow creation*/
+.content:after, .content:before,.pt-footer:before,.pt-footer:after {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.pt-footer:after,.pt-footer:before{
+    top:0;
+}
+.content:after,.pt-footer:after {
+	border-color: rgba(136, 183, 213, 0);	
+	border-width: 5px;
+	margin-left: -5px;
+}
+/*/arrow creation*/
+.price{
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0.625rem;
+}
+.price span{    
+    font-size: 3rem;
+    letter-spacing: 6px;
+    font-weight: bold; 
+    /* color: #93B5EF;  */
+    color: #0E4D92;
+          
+}
+.price sup{
+    font-size: 1.5rem;    
+    position: absolute;    
+    top: 12px;
+    left: -12px;
+}
+.hint{
+    font-style: italic;
+    font-size: 0.9rem;
+}
+.features{
+    list-style-type: none;    
+    background: #FFFFFF;
+    text-align: left;
+    color: #192A59;
+    /* padding:30px 22%; */
+    border-radius: 5px;
+    font-size: 0.9rem;
+    padding: 0;
+}
+.features li{
+    padding-top:10px;
+    padding-left: 15px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    width: 90%;
+}
+.features li span{
+   padding-right: 0.4rem; 
+}
+.pt-footer{
+    font-size: 0.95rem;
+    text-transform: capitalize;
+}
+/*tugasan tahap tinggi*/
+.personal .title{        
+    background: #78CFBF;    
+}
+.personal .content,.personal .pt-footer{
+  background: #ED213A;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.personal .content:after{	
+	border-top-color: #ED213A;	
+}
+.personal .pt-footer:after{
+    border-top-color: #FFFFFF;
+}
+/*tugasan sederhana*/
+.professional .title{
+    background: #3EC6E0;
+}
+.professional .content,.professional .pt-footer{
+  background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.professional .content:after{	
+	border-top-color:#FDC830;	
+}
+.professional .pt-footer:after{
+    border-top-color: #FFFFFF;
+}
+/*tugasan rendah*/
+.business .title{
+    background: #E3536C;
+}
+.business .content,.business .pt-footer{
+  background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.business .content:after{	
+	border-top-color: #56ab2f;	
+}
+.business .pt-footer:after {	
+	border-top-color: #FFFFFF;	
+}
+
+.meetings .content,.meetings .pt-footer{
+    background: #56CCF2;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.meetings .content:after{	
+	border-top-color: #56CCF2;	
+}
+.meetings .pt-footer:after {	
+	border-top-color: #FFFFFF;	
+}
+
+
+
+.bar{
+   background: white;
+   display: block;
+   height: 25px;
+   border-radius: 3px;
+   overflow: hidden;
+   box-shadow: 0 0 5px #93B5EF;
+   
+   
+   
+}
+.bar p{
+  font-weight: bold;
+  text-align: right;
+  position:static;
+   margin-top: 5px;
+}
+
+.papar{
+  font-size: 8px;
+      /* padding:5px; */
+      background-color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      border-color: transparent;
+      outline: none;
+      height: 10px;
+}
+.row{
+background-color: white; 
+width: auto; 
+border-radius: 50px;
+height: 45px;
+border-color: #707070;
+display: flex;
+flex-basis: 100%;
+padding: 10px 0;
+margin-top:  25px;
+/*margin-bottom: 25px;*/
+margin-right: 300px;
+margin-left: 300px;
+/* box-shadow: 0 0 5px #93B5EF; */
+box-shadow: 0 0 4px black;
+}
+.details{
+  
+/*  background-color: white;
+  height: 800px;
+  /*margin-right: 330px;
+margin-left: 330px;
+border-radius: 5px;
+box-shadow: 0 0 5px #93B5EF;
+width: 80%; */
+display: none;
+background-color: white ; 
+width: auto; 
+border-radius: 5px;
+height: fit-content;
+border-color: #707070;
+/*display: flex;*/
+flex-basis: 100%;
+padding: 10px 0;
+/*margin-top:  25px;*/
+/*margin-bottom: 25px;*/
+margin-right: 330px;
+margin-left: 330px;
+/*box-shadow: 0px 2px 2px #93B5EF;*/
+-moz-box-shadow: 0px 3px 8px #93B5EF;
+-webkit-box-shadow: 0px 3px 8px #93B5EF;
+box-shadow: 0px 3px 8px #93B5EF;
+}
+.first{
+
+padding: 15px 8px 8px 8px;
+        text-align: center;
+        /*background:white;*/
+       /* background-size: 80% 80%;*/
+       width: 40%;
+       /* background-repeat: no-repeat;
+        background-position: center;*/
+        font-size: 15px;
+        font-weight:bold;
+        color:  #192A59;
+        /*border-radius: 6px;*/
+       overflow: hidden;
+       /*box-shadow: 0 0 5px #93B5EF;*/
+       
+
+}
+.short{
+  border-bottom: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px 8px 8px 8px;
+ width: 40%;
+ 
+
+}
+/*td{
+
+flex-basis: 100%;
+}*/
+
+
+.three{
+  width:3%; animation: ten 2s; height: 30px; float:left; background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);; 
+}
+.five{
+  width:5%; animation: ten 2s; height: 30px; float:left; background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);;
+}
+.eight{
+  width:8%; animation: ten 2s; height: 30px; float:left; background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);;
+}
+.ten{
+  width:10%; animation: ten 2s; height: 30px; float:left; background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);;color: white;
+}
+.thirteen{
+  width:13%; animation: ten 2s; height: 30px; float:left; background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);;color: white;
+}
+.fifteen{
+  width:15%; animation: ten 2s; height: 30px; float:left; background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);;color: white;
+}
+.eighteen{
+  width:18%; animation: ten 2s; height: 30px; float:left; background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);;color: white;
+}
+.twenty{
+  width:20%; animation: ten 2s; height: 30px; float:left; background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);;color: white;
+}
+.twentythree{
+  width:23%; animation: ten 2s; height: 30px; float:left; background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);;color: white;
+}
+.twentyfive{
+  width:25%; animation: ten 2s; height: 30px; float:left;  background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+color: white;
+}
+.twentyeight{
+  width:28%; animation: ten 2s; height: 30px; float:left;background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+color: white;
+}
+
+.twentysix{
+  width:26%; animation: ten 2s; height: 30px; float:left; background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);;color: white;
+}
+.twentyeight{
+  width:28%; animation: ten 2s; height: 30px; float:left; background: #EB3349;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F45C43, #EB3349);;color: white;
+}
+.thirty{
+  width:30%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F37335, #FDC830);;
+}
+.thirtythree{
+  width:33%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F37335, #FDC830);;
+}.thirtyfive{
+  width:35%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F37335, #FDC830);;
+}.thirtyeight{
+  width:38%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F37335, #FDC830);;
+}.forty{
+  width:40%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F37335, #FDC830);;
+}
+.fortythree{
+  width: 43%; animation: ten 2s; height: 30px; float:left; background:orange;
+}
+.fortyfive{
+  width:45%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F37335, #FDC830);;
+}.fortyeight{
+  width:48%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F37335, #FDC830);;
+}/*.fortysix{
+  width:46%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+/* background: -webkit-linear-gradient(to bottom, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+/* background: linear-gradient(to bottom, #F37335, #FDC830);; */ 
+.fortyeight{
+  width:48%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #F37335, #FDC830);;
+}*/
+.fifty{
+  width: 50%; animation: ten 2s; height: 30px; float:left; background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #a8e063, #56ab2f);
+}
+.fiftythree{
+  width: 53%; animation: ten 2s; height: 30px; float:left; background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}.fiftyfive{
+  width: 55%; animation: ten 2s; height: 30px; float:left; background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #a8e063, #56ab2f);
+}.fiftyeight{
+  width: 58%; animation: ten 2s; height: 30px; float:left; background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #a8e063, #56ab2f);
+}.sixty{
+  width: 60%; animation: ten 2s; height: 30px; float:left; background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #a8e063, #56ab2f);
+}
+.sixtythree{
+  width: 63%; animation: ten 2s; height: 30px; float:left; background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #a8e063, #56ab2f);
+}.sixtyfive{
+  width: 65%; animation: ten 2s; height: 30px; float:left; background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #a8e063, #56ab2f);
+}.sixtyeight{
+  width: 68%; animation: ten 2s; height: 30px; float:left; background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #a8e063, #56ab2f);
+}
+.seventy{
+  width: 70%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}.seventythree{
+  width: 73%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}.seventyfive{
+  width: 75%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}.seventyeight{
+  width: 78%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}
+.eighty{
+  width: 80%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}
+.eightythree{
+  width: 83%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}.eightyfive{
+  width: 85%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}.eightyeight{
+  width: 88%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}.ninety{
+  width: 90%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}.ninetythree{
+  width: 93%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}.ninetyfive{
+  width: 95%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}.ninetyeight{
+  width: 98%; animation: ten 2s; height: 30px; float:left;   background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); 
+}.hundred{
+  width: 100%; animation: ten 2s; height: 30px; float:left; 
+  background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #ffffff, #fffc00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+@keyframes ten{
+  0%{
+    width:0%;
+  }
+}
+
+
+</style>
+
+</head>
+<body>
+<!-- top navigation -->
+<div class="topHeader">
+  <img src="images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()">
+  <img src="images/skse.png" class = "imageL" alt="hide menu">
+  <img src="images/User.png" alt="Logout"  onclick="window.location.href = '/logout';"  class = "imageR">
+  <span style="float: right; line-height: 3; padding-right: 10px;"><%= name%></span>
+  </a>
+  </div>
+<!-- Sidebar -->
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="#">E Tugasan</a>
+  <a href="/keberadaanHarian">E Kehadiran</a>
+</div>       
+
+
+<div id="main">
+
+  <div style="box-shadow: 0 8px 6px -6px black;">
+    <ul class="nav">
+        <li><a  href="/keseluruhanProgresTugasan">Utama</a></li> 
+        <li ><a href="/admin_ketersediaanKakitangan">Ketersediaan</a></li>
+       
+    </ul>
+    <div class="dropdown">
+      <button class="dropbtn">Tugasan</button>
+      <div class="dropdown-content">
+              <a href="/admin_aturTugasan">Atur Tugasan</a>
+              <a href="/admin_pengurusanTugas">Pengurusan Tugas</a>
+              <a href="/kemaskiniProgresTugasan">Kemas Kini Perkembangan Tugasan</a>
+          </div>  
+          </div>
+    
+    <div class="dropdown">
+      <button class="dropbtn">Mesyuarat</button>
+      <div class="dropdown-content">
+              <a href="/admin_aturanJemputanMesyuarat">Atur Jemputan</a>
+              <a href="/senaraiJemputanProgram">Senarai Minit Mesyuarat</a>
+          </div>  
+          </div>
+    </div>
+
+  <!-- Form -->
+ <%let today = new Date()%>
+  <% var month = new Array(12)%>
+  <%month[0]= "Januari"%>
+  <%month[1]= "Februari"%>
+  <%month[2]= "Mac"%>
+  <%month[3]= "April"%>
+  <%month[4]= "Mei"%>
+  <%month[5]= "Jun"%>
+  <%month[6]= "Julai"%>
+  <%month[7]= "Ogos"%>
+  <%month[8]= "September"%>
+  <%month[9]= "Oktober"%>
+  <%month[10]= "November"%>
+  <%month[11]= "Disember"%>
+  <%var bulan = month[today.getMonth()]%>
+  <h2 style="display: inline-block;" ><b>Status Bebanan Keseluruhan</b></h2>
+   <h2 style= "margin-left: 650px;"><%=bulan%> <%=today.getFullYear()%><a title="Analisis Bebanan Keseluruhan" href="/analisisBebanan"><img style="width: 50px;height: 50px; vertical-align: middle; display: inline;" src="images/analisis.png"></a></h2>
+  <!--<form style="display: inline; margin-left: 1000px;"id="tarikh" action="/agihanTugasanKeseluruhan" method="POST">
+    <Select style="width: 150px; font-size: 20px; font-weight: bold;  text-align: center;" onChange=selectChange(this.value)>
+      <option value="jan">Januari</option>
+      <option value="feb">Februari </option> 
+      <option value="mac">Mac </option> 
+      <option value="april">April </option>                   
+  </select>
+
+  </form>-->
+  
+
+
+ 
+  
+  <div style="overflow: auto; max-height: 400px; width: 90%; margin-left: 20px;">
+  <table style="border-collapse: separate; background: #666666; width: 100%;  border-radius: 6px; ">
+      <tr style="display: none;">
+<th></th>
+<th></th>
+<th></th>
+</tr>
+<% taskpoint.forEach(function(task) { %>
+<% var percent = Math.round(task.peratus/40 * 100) %>
+<%console.log(percent)%>
+<% var meeting = task.mesyuaratdetail.split(",") %>
+<% //var out = task.luardetail.split(",") %>
+<% var hard = task.tinggidetail.split(",") %>
+<% var medium = task.sederhanadetail.split(",") %>
+<% var easy = task.rendahdetail.split(",") %>
+
+
+<tr class="row">
+  <td class="first"><%= task.name %>
+  </td>
+
+
+<% if (percent<=0) { %>
+    <td class="short">
+      <span class="bar"><span ><p><%= percent%>% </p></span></span>
+    </td>
+<% } %>
+
+<% if (percent==3){ %>
+
+<td class="short">
+      <span class="bar"><span class="three"></span><p style="text-align: unset;"><%= percent%>% </p></span>
+    </td>
+<% } %>
+
+<% if (percent==5) { %>
+ 
+    <td class="short">
+      <span class="bar"><span class="five"></span><p style="text-align: unset;"><%= percent%>% </p></span>
+    </td>
+    
+  <% } %>
+
+<% if (percent==8) { %>
+     
+     
+        <td class="short">
+      <span class="bar"><span class="eight"><p><%= percent%>% </p></span></span>
+    </td>
+    
+    
+<% } %>
+
+<% if (percent==10) { %>
+     
+ 
+    <td class="short">
+      <span class="bar"><span class="ten"><p><%= percent%>% </p></span></span>
+    </td>
+    
+
+<% } %>
+
+<% if (percent==13) { %>
+     
+ 
+    <td class="short">
+      <span class="bar"><span class="thirteen"><p><%= percent%>% </p></span></span>
+    </td>
+    
+
+<% } %>
+
+<% if (percent==15) { %>
+     
+ 
+    <td class="short">
+      <span class="bar"><span class="fifteen"><p><%= percent%>% </p></span></span>
+    </td>
+    
+
+<% } %>
+
+
+<% if (percent==18) { %>
+     
+ 
+    <td class="short">
+      <span class="bar"><span class="eighteen"><p><%= percent%>% </p></span></span>
+    </td>
+    
+
+<% } %>
+
+<% if (percent==20) { %>
+     
+ 
+    <td class="short">
+      <span class="bar"><span class="twenty"><p><%= percent%>% </p></span></span>
+    </td>
+    
+
+<% } %>
+
+<% if (percent==23){ %>
+  
+  <td class="short">
+      <span class="bar"><span class="twentythree"><p><%= percent%>% </p></span></span>
+    </td>
+   
+  <% } %>
+  
+  <% if (percent==25) { %>
+   
+      <td class="short">
+      <span class="bar"><span class="twentyfive"><p><%= percent%>% </p></span></span>
+    </td>
+    
+    <% } %>
+  
+  <% if (percent==28) { %>
+       
+      
+          <td class="short">
+      <span class="bar"><span class="twentyeight"><p><%= percent%>% </p></span></span>
+    </td>
+    
+      
+  <% } %>
+  
+  <% if (percent==30) { %>
+       
+   
+      <td class="short">
+      <span class="bar"><span class="thirty"><p><%= percent%>% </p></span></span>
+    </td>
+    
+  
+  <% } %>
+  
+  <% if (percent==33) { %>
+       
+   
+      <td class="short">
+      <span class="bar"><span class="thirtythree"><p><%= percent%>% </p></span></span>
+    </td>
+    
+  
+  <% } %>
+  
+  <% if (percent==35) { %>
+       
+   
+      <td class="short">
+      <span class="bar"><span class="thirtyfive"><p><%= percent%>% </p></span></span>
+    </td>
+    
+  
+  <% } %>
+  
+  <% if (percent==38) { %>
+       
+    
+      <td class="short">
+      <span class="bar"><span class="thirtyeight"><p><%= percent%>% </p></span></span>
+    </td>
+    
+  
+  <% } %>
+  
+  <% if (percent==40) { %>
+       
+   
+      <td class="short"><span class="bar"><span class="forty"><p><%= percent%>% </p></span></span></td>
+      
+  
+  <% } %>
+
+  <% if (percent==43){ %>
+   
+    <td class="short">
+      <span class="bar"><span class="fortythree"><p><%= percent%>% </p></span></span>
+    </td>
+    
+    <% } %>
+    
+    <% if (percent==45) { %>
+     
+        <td class="short">
+      <span class="bar"><span class="fortyfive"><p><%= percent%>% </p></span></span>
+    </td>
+    
+      <% } %>
+    
+    <% if (percent==48) { %>
+         
+         
+            <td class="short">
+      <span class="bar"><span class="fortyeight"><p><%= percent%>% </p></span></span>
+    </td>
+        
+    <% } %>
+    
+    <% if (percent==50) { %>
+         
+     
+        <td class="short">
+      <span class="bar"><span class="fifty"><p><%= percent%>% </p></span></span>
+    </td>
+    
+    <% } %>
+    
+    <% if (percent==53) { %>
+         
+     
+        <td class="short">
+      <span class="bar"><span class="fiftythree"><p><%= percent%>% </p></span></span>
+    </td>
+    
+    <% } %>
+    
+    <% if (percent==55) { %>
+         
+     
+        <td class="short">
+      <span class="bar"><span class="fiftyfive"><p><%= percent%>% </p></span></span>
+    </td>
+    
+    <% } %>
+    
+    <% if (percent==58) { %>
+         
+     
+        <td class="short">
+      <span class="bar"><span class="fiftyeight"><p><%= percent%>% </p></span></span>
+    </td>
+    
+    <% } %>
+    
+    <% if (percent==60) { %>
+         
+     
+        <td class="short"><span class="bar"><span class="sixty"><p><%= percent%>% </p></span></span></td>
+       
+    
+    <% } %>
+
+    <% if (percent==63){ %>
+     
+      <td class="short">
+      <span class="bar"><span class="sixtythree"><p><%= percent%>% </p></span></span>
+    </td>
+      <% } %>
+      
+      <% if (percent==65) { %>
+        
+          <td class="short">
+      <span class="bar"><span class="sixtyfive"><p><%= percent%>% </p></span></span>
+    </td>
+        <% } %>
+      
+      <% if (percent==68) { %>
+           
+           
+              <td class="short">
+      <span class="bar"><span class="sixtyeight"><p><%= percent%>% </p></span></span>
+    </td>
+          
+      <% } %>
+      
+      <% if (percent==70) { %>
+           
+        
+          <td class="short">
+      <span class="bar"><span class="seventy"><p><%= percent%>% </p></span></span>
+    </td>
+      
+      <% } %>
+      
+      <% if (percent==73) { %>
+           
+        
+          <td class="short">
+      <span class="bar"><span class="seventythree"><p><%= percent%>% </p></span></span>
+    </td>
+      
+      <% } %>
+      
+      <% if (percent==75) { %>
+           
+        
+          <td class="short">
+      <span class="bar"><span class="seventyfive"><p><%= percent%>% </p></span></span>
+    </td>
+      
+      <% } %>
+      
+      <% if (percent==78) { %>
+           
+        
+          <td class="short">
+      <span class="bar"><span class="seventyeight"><p><%= percent%>% </p></span></span>
+    </td>
+      
+      <% } %>
+      
+      <% if (percent==80) { %>
+           
+        
+          <td class="short"><span class="bar"><span class="eighty"><p><%= percent%>% </p></span></span></td>
+          
+      
+      <% } %>
+
+      <% if (percent==83){ %>
+       
+        <td class="short">
+      <span class="bar"><span class="eightythree"><p><%= percent%>% </p></span></span>
+    </td>
+        <% } %>
+        
+        <% if (percent==85) { %>
+         
+            <td class="short">
+      <span class="bar"><span class="eightyfive"><p><%= percent%>% </p></span></span>
+    </td>
+          <% } %>
+        
+        <% if (percent==88) { %>
+             
+              
+                <td class="short">
+      <span class="bar"><span class="eightyeight"><p><%= percent%>% </p></span></span>
+    </td>
+            
+        <% } %>
+        
+        <% if (percent==90) { %>
+             
+         
+            <td class="short">
+      <span class="bar"><span class="ninety"><p><%= percent%>% </p></span></span>
+    </td>
+        
+        <% } %>
+        
+        <% if (percent==93) { %>
+             
+         
+            <td class="short">
+      <span class="bar"><span class="ninetythree"><p><%= percent%>% </p></span></span>
+    </td>
+        
+        <% } %>
+        
+        <% if (percent==95) { %>
+             
+         
+            <td class="short">
+      <span class="bar"><span class="ninetyfive"><p><%= percent%>% </p></span></span>
+    </td>
+        
+        <% } %>
+        
+        <% if (percent==98) { %>
+             
+         
+            <td class="short">
+      <span class="bar"><span class="ninetyeight"><p><%= percent%>% </p></span></span>
+    </td>
+    
+        
+        <% } %>
+        
+        <% if (percent>=100) { %>
+             
+         
+            <td class="short">
+      <span class="bar"><span class="hundred"><p>100% </p></span></span> 
+    </td>
+   
+        
+        <% } %>
+       
+        <td style="padding: 15px 8px 8px 8px; width:10%; "><button class="papar" title="Papar perincian bebanan" onclick="toggle_div_fun('<%= task.name %>');"><img style="height: 20px; width: 20px;" src="images/papar.jpg"></button>
+      
+        </td> </tr>
+
+<!-- <tr class="details" id="<%= task.name %>"><td colspan="3">
+  <div class="meet"><b>Mesyuarat</b>
+  <ol class="meeting" > 
+   <% for (var i=1; i<meeting.length;i++) { %>
+    
+      <li ><%= meeting[i]%></li>
+    
+    <%}%> </ol>
+    </div>
+    <div class="tas"><b>Tugasan</b>
+     
+       <ol class="hardtask">
+ <% for (var i=1; i<hard.length;i++) { %>
+
+        <li><%= hard[i]%></li>
+       <%}%>  </ol>
+    
+      
+        <ol class="mediumtask" style="list-style: none; text-align: center;  padding: 0px; ">
+       <% for (var i=1; i<medium.length;i++) { %>
+          <li ><%= medium[i]%></li>
+        
+       <%}%></ol>
+      
+        <ol class="easytask"style="list-style: none; text-align:center;  padding: 0px; ">
+      <% for (var i=1; i<easy.length;i++) { %>
+          <li ><%= easy[i]%></li>
+        
+       <%}%></ol>
+      </div>
+  </td></tr> -->  
+  
+  
+  
+  <div id="<%= task.name %>" class="overlay" >
+
+    <div class="popup">
+    <!-- <p style="font-size: 20px; margin-top:50px; text-align: left;" ><%= task.name %></p> -->
+    <a class="close" onclick="close('<%= task.name %>')" href="">&times;</a>
+   <div class="cont">
+    <div class="pricing-table group">
+      <div class="block profile fl" style="position:fixed; right: 730px;">
+        <!-- <h2 class="title">Tugasan tahap tinggi</h2> -->
+        <!-- CONTENT -->
+        <div class="content" >
+            <p class="price">
+                <!-- <sup>$</sup> -->
+               <span><%= task.name %></span>
+                <!-- <sub>/mo.</sub> -->
+            </p>
+            <!-- <p class="hint">Perfect for freelancers</p> -->
+        </div>
+
+    </div> 
+      <div class="block_m meetings fr">
+        <!-- <h2 class="title">Tugasan tahap tinggi</h2> -->
+        <!-- CONTENT -->
+        <div class="content">
+            <p class="price">
+                <!-- <sup>$</sup> -->
+               Mesyuarat
+                <!-- <sub>/mo.</sub> -->
+            </p>
+            <!-- <p class="hint">Perfect for freelancers</p> -->
+        </div>
+        <!-- /CONTENT -->
+        <!-- FEATURES -->
+        <ul class="features">
+             <% for (var i=1; i<meeting.length;i++) { %>
+              <% if(meeting[i]!==""){%>
+                 <li> <%= meeting[i]%></li><%}%> 
+ <%}%> 
+        </ul>
+    </div>
+
+
+    </div>
+   </div>
+   
+   
+   
+   
+    <div class="cont">
+    <div class="pricing-table group">
+             <!-- HARD -->
+             <div class="block personal fl">
+              <!-- <h2 class="title">Tugasan tahap tinggi</h2> -->
+              <!-- CONTENT -->
+              <div class="content">
+                  <p class="price">
+                      <!-- <sup>$</sup> -->
+                     Tugasan Tahap Tinggi
+                      <!-- <sub>/mo.</sub> -->
+                  </p>
+                  <!-- <p class="hint">Perfect for freelancers</p> -->
+              </div>
+              <!-- /CONTENT -->
+              <!-- FEATURES -->
+              <ul class="features">
+                   <% for (var i=1; i<hard.length;i++) { %>
+                    <% if(hard[i]!==""){%>
+                       <li> <%= hard[i]%></li>
+                       <%}%> 
+       <%}%> 
+              </ul>
+          </div>
+          <!-- /HARD-->
+
+            <!-- medium -->
+            <div class="block professional fl">
+            
+              <!-- CONTENT -->
+              <div class="content">
+                  <p class="price">
+                      Tugasan Tahap Sederhana
+                  </p>
+                 
+              </div>
+              <!-- /CONTENT -->
+              <!-- FEATURES -->
+              <ul class="features">
+                <% for (var i=1; i<medium.length;i++) { %>
+                 <% if(medium[i]!==""){%>
+                  <li> <%= medium[i]%></li>
+                  <%}%> 
+  <%}%> 
+              </ul>
+              <!-- /FEATURES -->
+              <!-- PT-FOOTER -->
+          
+              <!-- /PT-FOOTER -->
+          </div>
+          <!-- /medium -->
+
+           <!-- easy -->
+           <div class="block business fl">
+          
+            <!-- CONTENT -->
+            <div class="content">
+                <p class="price">
+                   Tugasan Tahap Rendah
+                </p>
+               
+            </div>
+            <!-- /CONTENT -->
+
+            <!-- FEATURES -->
+            <ul class="features">
+              <% for (var i=1; i<easy.length;i++) { %>
+                <% if(easy[i]!==""){%>
+                <li> <%= easy[i]%></li>   <%}%> 
+<%}%> 
+            </ul>
+            <!-- /FEATURES -->
+
+         
+        </div>
+        <!-- /easy -->
+  </div></div>
+  </div> </div>
+<% }) %>
+  </table></div>
+
+
+  
+
+  
+
+</div>
+
+</body>
+</html>

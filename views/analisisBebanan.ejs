@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="/styles.css" />
+<link rel="icon" type="image/png" href="images/skse.png"/>
+<title>Analisis Bebanan</title>
+
+<script>
+  
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "200px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+
+    var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+    function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active2", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active2";
+}
+    
+
+function tarikh(){
+var today = new Date();
+var day = today.getDate();
+var month = today.getMonth()+1;
+var d = JSON.stringify(day);
+var a = d.concat("_1")
+var b = d.concat("_2")
+var c = d.concat("_3")
+console.log(a);
+document.getElementById(a).style.backgroundColor='#708090';
+document.getElementById(b).style.backgroundColor='#708090';
+document.getElementById(c).style.backgroundColor='#708090';
+
+if(month==4||month==6||month==9||month==11){
+  document.getElementById("31_1").style.visibility='hidden';
+  document.getElementById("31_2").style.visibility='hidden';
+  document.getElementById("31_3").style.visibility='hidden';
+}
+if(month==2){
+  document.getElementById("31_1").style.visibility='hidden';
+  document.getElementById("31_2").style.visibility='hidden';
+  document.getElementById("31_3").style.visibility='hidden';
+  document.getElementById("30_1").style.visibility='hidden';
+  document.getElementById("30_2").style.visibility='hidden';
+  document.getElementById("30_3").style.visibility='hidden';
+  document.getElementById("29_1").style.visibility='hidden';
+  document.getElementById("29_2").style.visibility='hidden';
+  document.getElementById("29_3").style.visibility='hidden';
+}
+}
+
+   function filter(){
+    var today = new Date().toISOString().slice(0, 10);
+    console.log(today);
+    var rows = document.getElementsByTagName("tr");
+    //console.log(rows);
+    var count=0;
+    for(let row of rows){
+      let head = row.getElementsByTagName("th");
+      let cells = row.getElementsByTagName("td");
+      let name = cells[0]
+      let date = cells[1]
+      let type = cells[2]
+      //
+      
+      console.log(row);
+      console.log(count);
+    //   console.log(head);
+       console.log(cells);
+       console.log(date);
+       console.log(type);
+    //    console.log(name.textContent);
+    //    console.log(date.textContent);
+      
+     // console.log(head);
+
+    //   if( head  ){
+    //       row.style.display="";
+    //   }
+   // if(count==0){
+        if( !date || !type   ){
+       row.style.display="none";
+
+         console.log("here");
+          
+      }
+
+      // else if( date.textContent ===today && type.textContent==="OL" ){
+      //     console.log(date.textContent);
+      //  row.style.display="";
+
+      //    console.log("h");
+          
+      // }
+    //   else{
+    //     row.style.display="none";
+    //     console.log("here2");
+    //   }
+
+    // }
+    // else if(count>0){
+      //   else if(date.textContent!==today && (type.textContent!=="OL"||type.textContent!=="TLS")){
+      //  row.style.display="none";
+      //  console.log("he");
+      //  //console.log(date.textContent);
+
+      // }
+
+      // else if(date.textContent===today && (type.textContent!=="OL" || type.textContent!=="TLS")){
+      //  row.style.display="none";
+      //  console.log("hee");
+      //  //console.log(date.textContent);
+
+      // }
+      else if(date.textContent===today && type.textContent==="TLS"){
+       row.style.display="";
+       console.log("hee");
+       //console.log(date.textContent);
+
+      }
+
+
+      else if(date.textContent===today && type.textContent==="OL"){
+       row.style.display="";
+       console.log("hee");
+       //console.log(date.textContent);
+
+      }
+      else{
+        row.style.display="none";
+      }
+    //   else{
+    //     row.style.display="none";
+    //     console.log("here3");
+    //   }
+
+    // }
+
+    //    count = count+1;
+
+     
+    }
+
+
+
+   }
+    
+    </script>
+
+    
+<style>
+
+.chart {
+      display: grid;
+      /* border: 2px solid #000; */
+      position: relative;
+      overflow: auto;  
+      max-height: 310px;
+      width: 90%;
+      margin-left: 50px;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
+  .chart-row {
+    display: grid;      
+	  grid-template-columns: 20px 1fr;
+	  background-color:  #DFECFD;
+  }
+  .chart-row:nth-child(odd) {
+    background-color:  #DFECFD;
+  }
+  .chart-period {
+    color:  #fff;
+    background-color:  #0E4D92 !important;
+    /* border-bottom: 2px solid #000;  */
+    grid-template-columns: 20px repeat(31, 1fr);
+  }
+  .chart-lines {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    grid-template-columns: 20px repeat(31, 1fr);
+  }
+  .chart-period > span {    
+    text-align: center;
+		font-size: 13px;
+		align-self: center;
+		font-weight: bold;
+    padding: 15px 0;    
+  }
+  .chart-lines > span {
+    display: block;
+    /* border-right: 1px solid rgba(0, 0, 0, 0.3); */
+  }
+ 
+  .chart-row-item {
+    background-color:#DFECFD;
+    /* border: 1px solid  #000; */
+    border-top: 0;
+    border-left: 0;      
+    padding: 20px 0;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+ 
+  } 
+
+  .chart-row-bars {
+    list-style: none;
+		display: grid;
+		padding: 15px 0;
+		margin: 0;
+		grid-template-columns: repeat(31, 1fr);
+		grid-gap: 10px 0;
+    
+		/* border-bottom: 1px solid  #000; */
+  }
+ .chart li {
+    font-weight: 450;
+		text-align: left;
+		font-size: 15px;
+		min-height: 15px;
+		background-color: #708090;
+		padding: 5px 15px;
+		color: #fff;
+		overflow: hidden;
+		position: relative;
+		cursor: pointer;
+		border-radius: 15px;
+    box-shadow: 0 0 4px black;
+  }
+
+ul .red{
+  background: #ED213A;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+ul .orange{
+  background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+ul .green{
+  background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+}
+ul .yellow{
+  background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #ffffff, #fffc00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  color: black;
+}
+
+
+  ul .one {
+    grid-column: 1/2; 
+  }
+  ul .two {
+    grid-column: 1/3; 
+  }
+  ul .three {
+    grid-column: 1/4; 
+  }
+ ul .four {
+    grid-column: 1/5; 
+  }
+ ul .five {
+    grid-column: 1/6; 
+  }
+ ul .six {
+    grid-column: 1/7; 
+  }
+ ul .seven {
+    grid-column: 1/8; 
+  }
+ ul .eight {
+    grid-column: 1/9; 
+  }
+ ul .nine {
+    grid-column: 1/10; 
+  }
+ ul .ten {
+    grid-column: 1/11; 
+  }
+ ul .eleven {
+    grid-column: 1/12; 
+  }
+ ul .twelve {
+    grid-column: 1/13; 
+  }
+ ul .thirteen {
+    grid-column: 1/14; 
+  }
+ ul .fourteen {
+    grid-column: 1/15; 
+  }
+ ul .fifteen {
+    grid-column: 1/16; 
+  }
+ ul .sixteen {
+    grid-column: 1/17; 
+  }
+ ul .seventeen {
+    grid-column: 1/18; 
+  }
+ ul .eighteen {
+    grid-column: 1/19; 
+  }
+  ul .nineteen {
+    grid-column: 1/20; 
+  }
+
+ul .twenty {
+    grid-column: 1/21; 
+  }
+ ul .twentyone {
+    grid-column: 1/22; 
+  }
+ ul .twentytwo {
+    grid-column: 1/23; 
+  }
+ ul .twentythree {
+    grid-column: 1/24; 
+  }
+ ul .twentyfour {
+    grid-column: 1/25; 
+  }
+ ul .twentyfive {
+    grid-column: 1/26; 
+  }
+ ul .twentysix {
+    grid-column: 1/27; 
+  }
+ ul .twentyseven {
+    grid-column: 1/28; 
+  }
+ ul .twentyeight {
+    grid-column: 1/29; 
+  }
+ ul .twentynine {
+    grid-column: 1/30; 
+  }
+ ul .thirty {
+    grid-column: 1/31; 
+  }
+ ul .thirtyone {
+    grid-column: 1/32; 
+  }
+ 
+
+ 
+
+
+
+tr:not(:first-child){
+background-color: white; 
+width: auto; 
+border-radius: 50px;
+height: 60px;
+border-color: #707070;
+display: flex;
+flex-basis: 100%;
+/*padding: 10px 0;*/
+margin-top:  25px;
+margin-bottom: 25px;
+margin-right: 300px;
+margin-left: 300px;
+box-shadow: 0 0 5px #93B5EF;
+}
+.second{
+  background-color:  #ABCAFF;; 
+  border-radius: 50px;
+height: 60px;
+border-color: #707070;
+display: flex;
+flex-basis: 100%;
+/*padding-top:10px;
+padding-bottom: 20px;*/
+
+
+}
+.text{
+  font-size: 20px;
+          font-weight:lighter;
+          color:  #192A59;
+          text-align: center;
+          padding: 15px 8px 8px 8px;
+          width: 100%;
+}
+.first{
+
+  padding: 15px 8px 8px 8px;
+          text-align: center;
+          /*background:white;*/
+          background-size: 80% 80%;
+         
+         /* background-repeat: no-repeat;
+          background-position: center;*/
+          font-size: 20px;
+          font-weight:bold;
+          color:  #192A59;
+          border-radius: 6px;
+         overflow: hidden;
+         /*box-shadow: 0 0 5px #93B5EF;*/
+
+}
+
+td{
+
+flex-basis: 100%;
+}
+th{
+  flex-basis: 100%;
+}
+
+.slideshow-container {
+  /* max-width: 1000px; */
+  position: relative;
+  /* margin: auto;*/
+} 
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+.mySlides h3{
+ margin-left: 60px;
+
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  /* color: #ABCAFF; */
+  color: #0E4D92;
+  font-weight: bolder;
+  font-size: 30px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+   right: 35px; 
+  border-radius: 3px 0 0 3px;
+ 
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(141, 138, 138, 0.8);
+}
+
+/* Caption text 
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) 
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}*/
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active2, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+</style>
+</head>
+<body >
+  <div class="topHeader">
+    <img src="images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()">
+    <img src="images/skse.png" class = "imageL" alt="hide menu">
+    <img src="images/User.png" alt="Logout"  onclick="window.location.href = '/logout';"  class = "imageR">
+    <span style="float: right; line-height: 3; padding-right: 10px;"><%= name%></span>
+    </a>
+    </div>
+        <div id="mySidebar" class="sidebar">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+          <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+          <a href="/keberadaanHarian">E Kehadiran</a>
+        </div> 
+        <div id="main">
+          <div style="box-shadow: 0 8px 6px -6px black;">
+            <ul class="nav">
+                <li><a  href="/keseluruhanProgresTugasan">Utama</a></li> 
+                <li ><a href="/admin_ketersediaanKakitangan">Ketersediaan</a></li>
+               
+            </ul>
+            <div class="dropdown">
+              <button class="dropbtn">Tugasan</button>
+              <div class="dropdown-content">
+                      <a href="/admin_aturTugasan">Atur Tugasan</a>
+                      <a href="/admin_pengurusanTugas">Pengurusan Tugas</a>
+                      <a href="/kemaskiniProgresTugasan">Kemas Kini Perkembangan Tugasan</a>
+                  </div>  
+                  </div>
+            
+            <div class="dropdown">
+              <button class="dropbtn">Mesyuarat</button>
+              <div class="dropdown-content">
+                      <a href="/admin_aturanJemputanMesyuarat">Atur Jemputan</a>
+                      <a href="/senaraiJemputanProgram">Senarai Minit Mesyuarat</a>
+                  </div>  
+                  </div>
+            </div>
+          
+
+          
+
+
+<%let today = new Date()%>
+<% var month = new Array(12)%>
+<%month[0]= "Januari"%>
+<%month[1]= "Februari"%>
+<%month[2]= "Mac"%>
+<%month[3]= "April"%>
+<%month[4]= "Mei"%>
+<%month[5]= "Jun"%>
+<%month[6]= "Julai"%>
+<%month[7]= "Ogos"%>
+<%month[8]= "September"%>
+<%month[9]= "Oktober"%>
+<%month[10]= "November"%>
+<%month[11]= "Disember"%>
+<%var bulan = month[today.getMonth()]%>
+<h2 style="display: inline-block;">Analisis Bebanan Keseluruhan</h2>
+<h2 style="display: inline; margin-left: 725px;"><%=bulan%> <%=today.getFullYear()%></h2>
+
+
+<!-- Slideshow container -->
+<div class="slideshow-container">
+<div class="mySlides fade">
+
+  <h3><img src="images/guru.png" style="width: 65px; height: 41px; vertical-align: middle;">Guru Sesi Pagi</h3>
+ 
+  <div class="chart">
+    <div class="chart-row chart-period">
+        <div class="chart-row-item" style=" background-color:  #0E4D92"></div>
+        <span id="1_1">1</span><span id="2_1">2</span><span id="3_1">3</span>
+        <span id="4_1">4</span><span id="5_1">5</span><span id="6_1">6</span>
+        <span id="7_1">7</span><span id="8_1">8</span><span id="9_1">9</span>
+        <span id="10_1">10</span><span id="11_1">11</span><span id="12_1">12</span><span id="13_1">13</span><span id="14_1">14</span><span id="15_1">15</span> <span id="16_1">16</span><span id="17_1">17</span><span id="18_1">18</span><span id="19_1">19</span>
+        <span id="20_1">20</span><span id="21_1">21</span><span id="22_1">22</span><span id="23_1">23</span><span id="24_1">24</span><span id="25_1">25</span><span id="26_1">26</span><span id="27_1">27</span><span id="28_1">28</span><span id="29_1">29</span><span id="30_1">30</span><span id="31_1"> 31</span>
+    </div>
+    <div class="chart-row chart-lines">
+      <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+    </div>
+
+    <% sesipagi.forEach(function(a) { %>
+        <% var p = a.pinperatus.split(",") %> 
+      
+       
+           <% var d = a.pindate.split(",");%>
+            <%var date =parseInt(d[d.length-1]) ;%>
+         <%   var s = "1/";%>
+           <% var grid = s.concat(date);%>
+    
+ 
+        
+
+        <% var percent = Math.round(p[p.length-1]/40*100) %>
+
+        <% if(percent<30){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="red one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="red two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="red three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="red four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="red five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="red six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="red seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="red eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="red nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="red ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="red eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="red twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="red thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="red fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="red fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="red sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="red seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="red eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="red nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="red twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="red twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="red twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="red twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="red twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="red twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="red twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="red twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="red twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="red twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="red thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="red thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+                     
+        <%  }%> 
+        <% if(percent>=30 && percent<50){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="orange one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="orange two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="orange three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="orange four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="orange five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="orange six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="orange seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="orange eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="orange nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="orange ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="orange eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="orange twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="orange thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="orange fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="orange fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="orange sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="orange seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="orange eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="orange nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="orange twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="orange twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="orange twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="orange twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="orange twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="orange twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="orange twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="orange twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="orange twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="orange twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="orange thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="orange thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+
+        <%  }%> 
+        <% if(percent>=50 && percent<70){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="green one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="green two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="green three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="green four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="green five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="green six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="green seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="green eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="green nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="green ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="green eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="green twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="green thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="green fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="green fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="green sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="green seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="green eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="green nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="green twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="green twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="green twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="green twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="green twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="green twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="green twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="green twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="green twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="green twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="green thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="green thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+
+        <%  }%> 
+        <% if(percent>=70 && percent<=100){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="yellow one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="yellow two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="yellow three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="yellow four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="yellow five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="yellow six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="yellow seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="yellow eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="yellow nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="yellow ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="yellow eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="yellow twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="yellow thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="yellow fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="yellow fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="yellow sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="yellow seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="yellow eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="yellow nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="yellow twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="yellow twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="yellow twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="yellow twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="yellow twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="yellow twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="yellow twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="yellow twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="yellow twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="yellow twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="yellow thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="yellow thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+
+        <%  }%> 
+
+  <%})%>
+    <!-- <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+        <li class="chart-li-two-a">Meeting</li>
+        <li class="chart-li-two-b">Analysis</li>          
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-three">Design</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-four">Development</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-five">Testing</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-six">Maintenance</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-seven">Meeting</li>
+              </ul>
+    </div> -->
+
+  </div>
+
+
+  
+</div>
+
+
+<div class="mySlides fade">
+
+  <h3><img src="images/guru.png" style="width: 65px; height: 41px; vertical-align: middle;">Guru Sesi Petang</h3>
+ 
+  <div class="chart">
+    <div class="chart-row chart-period">
+        <div class="chart-row-item" style=" background-color:  #0E4D92"></div>
+        <span id="1_2">1</span><span id="2_2">2</span><span id="3_2">3</span>
+        <span id="4_2">4</span><span id="5_2">5</span><span id="6_2">6</span>
+        <span id="7_2">7</span><span id="8_2">8</span><span id="9_2">9</span>
+        <span id="10_2">10</span><span id="11_2">11</span><span id="12_2">12</span><span id="13_2">13</span><span id="14_2">14</span><span id="15_2">15</span ><span id="16_2">16</span><span id="17_2">17</span><span id="18_2">18</span><span id="19_2">19</span>
+        <span id="20_2">20</span><span id="21_2">21</span><span id="22_2">22</span><span id="23_2">23</span><span id="24_2">24</span><span id="25_2">25</span><span id="26_2">26</span><span id="27_2">27</span><span id="28_2">28</span><span id="29_2">29</span><span id="30_2">30</span><span id="31_2"> 31</span>
+    </div>
+    <div class="chart-row chart-lines">
+      <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+    </div>
+
+    <% sesipetang.forEach(function(a) { %>
+        <% var p = a.pinperatus.split(",") %> 
+      
+       
+           <% var d = a.pindate.split(",");%>
+            <%var date =parseInt(d[d.length-1]) ;%>
+         <%   var s = "1/";%>
+           <% var grid = s.concat(date);%>
+    
+ 
+        
+
+        <% var percent = Math.round(p[p.length-1]/40*100) %>
+
+        <% if(percent<30){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="red one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="red two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="red three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="red four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="red five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="red six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="red seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="red eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="red nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="red ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="red eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="red twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="red thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="red fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="red fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="red sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="red seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="red eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="red nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="red twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="red twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="red twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="red twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="red twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="red twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="red twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="red twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="red twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="red twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="red thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="red thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+                     
+        <%  }%> 
+        <% if(percent>=30 && percent<50){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="orange one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="orange two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="orange three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="orange four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="orange five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="orange six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="orange seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="orange eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="orange nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="orange ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="orange eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="orange twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="orange thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="orange fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="orange fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="orange sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="orange seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="orange eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="orange nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="orange twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="orange twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="orange twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="orange twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="orange twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="orange twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="orange twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="orange twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="orange twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="orange twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="orange thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="orange thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+
+        <%  }%> 
+        <% if(percent>=50 && percent<70){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="green one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="green two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="green three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="green four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="green five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="green six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="green seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="green eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="green nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="green ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="green eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="green twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="green thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="green fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="green fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="green sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="green seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="green eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="green nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="green twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="green twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="green twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="green twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="green twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="green twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="green twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="green twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="green twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="green twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="green thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="green thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+
+        <%  }%> 
+        <% if(percent>=70 && percent<=100){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="yellow one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="yellow two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="yellow three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="yellow four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="yellow five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="yellow six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="yellow seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="yellow eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="yellow nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="yellow ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="yellow eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="yellow twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="yellow thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="yellow fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="yellow fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="yellow sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="yellow seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="yellow eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="yellow nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="yellow twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="yellow twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="yellow twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="yellow twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="yellow twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="yellow twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="yellow twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="yellow twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="yellow twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="yellow twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="yellow thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="yellow thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+
+        <%  }%> 
+
+  <%})%>
+    <!-- <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+        <li class="chart-li-two-a">Meeting</li>
+        <li class="chart-li-two-b">Analysis</li>          
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-three">Design</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-four">Development</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-five">Testing</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-six">Maintenance</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-seven">Meeting</li>
+              </ul>
+    </div> -->
+
+  </div>
+
+
+  
+</div>
+
+<div class="mySlides fade">
+
+  <h3><img src="images/staf.png" style="width: 60px; height: 36px; vertical-align: middle;"> Kakitangan</h3>
+ 
+  <div class="chart">
+    <div class="chart-row chart-period">
+        <div class="chart-row-item" style=" background-color:  #0E4D92"></div>
+        <span id="1_3">1</span><span id="2_3">2</span><span id="3_3">3</span>
+        <span id="4_3">4</span><span id="5_3">5</span><span id="6_3">6</span>
+        <span id="7_3">7</span><span id="8_3">8</span><span id="9_3">9</span>
+        <span id="10_3">10</span><span id="11_3">11</span><span id="12_3">12</span><span id="13_3">13</span><span id="14_3">14</span><span id="15_3">15</span ><span id="16_3">16</span><span id="17_3">17</span><span id="18_3">18</span><span id="19_3">19</span>
+        <span id="20_3">20</span><span id="21_3">21</span><span id="22_3">22</span><span id="23_3">23</span><span id="24_3">24</span><span id="25_3">25</span><span id="26_3">26</span><span id="27_3">27</span><span id="28_3">28</span><span id="29_3">29</span><span id="30_3">30</span><span id="31_3"> 31</span>
+    </div>
+    <div class="chart-row chart-lines">
+      <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+    </div>
+
+    <% kakitangan.forEach(function(a) { %>
+        <% var p = a.pinperatus.split(",") %> 
+      
+       
+           <% var d = a.pindate.split(",");%>
+            <%var date =parseInt(d[d.length-1]) ;%>
+         <%   var s = "1/";%>
+           <% var grid = s.concat(date);%>
+    
+ 
+        
+
+        <% var percent = Math.round(p[p.length-1]/40*100) %>
+
+        <% if(percent<30){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="red one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="red two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="red three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="red four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="red five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="red six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="red seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="red eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="red nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="red ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="red eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="red twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="red thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="red fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="red fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="red sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="red seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="red eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="red nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="red twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="red twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="red twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="red twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="red twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="red twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="red twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="red twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="red twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="red twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="red thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="red thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+                     
+        <%  }%> 
+        <% if(percent>=30 && percent<50){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="orange one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="orange two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="orange three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="orange four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="orange five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="orange six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="orange seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="orange eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="orange nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="orange ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="orange eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="orange twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="orange thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="orange fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="orange fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="orange sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="orange seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="orange eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="orange nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="orange twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="orange twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="orange twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="orange twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="orange twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="orange twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="orange twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="orange twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="orange twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="orange twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="orange thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="orange thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+
+        <%  }%> 
+        <% if(percent>=50 && percent<70){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="green one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="green two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="green three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="green four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="green five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="green six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="green seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="green eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="green nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="green ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="green eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="green twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="green thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="green fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="green fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="green sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="green seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="green eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="green nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="green twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="green twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="green twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="green twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="green twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="green twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="green twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="green twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="green twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="green twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="green thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="green thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+
+        <%  }%> 
+        <% if(percent>=70 && percent<=100){ %> 
+
+            <div class="chart-row">
+                <div class="chart-row-item"></div>
+                <ul class="chart-row-bars">
+                  <% if(date==1) {%> 
+                    <li class="yellow one"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==2) {%> 
+                    <li class="yellow two"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==3) {%> 
+                    <li class="yellow three"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==4) {%> 
+                    <li class="yellow four"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==5) {%> 
+                    <li class="yellow five"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==6) {%> 
+                    <li class="yellow six"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==7) {%> 
+                    <li class="yellow seven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==8) {%> 
+                    <li class="yellow eight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==9) {%> 
+                    <li class="yellow nine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==10) {%> 
+                    <li class="yellow ten"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==11) {%> 
+                    <li class="yellow eleven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==12) {%> 
+                    <li class="yellow twelve"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==13) {%> 
+                    <li class="yellow thirteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==14) {%> 
+                    <li class="yellow fourteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==15) {%> 
+                    <li class="yellow fifteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==16) {%> 
+                    <li class="yellow sixteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==17) {%> 
+                    <li class="yellow seventeen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==18) {%> 
+                    <li class="yellow eighteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==19) {%> 
+                    <li class="yellow nineteen"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==20) {%> 
+                    <li class="yellow twenty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==21) {%> 
+                    <li class="yellow twentyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==22) {%> 
+                    <li class="yellow twentytwo"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==23) {%> 
+                    <li class="yellow twentythree"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==24) {%> 
+                    <li class="yellow twentyfour"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==25) {%> 
+                    <li class="yellow twentyfive"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==26) {%> 
+                    <li class="yellow twentysix"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==27) {%> 
+                    <li class="yellow twentyseven"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==28) {%> 
+                    <li class="yellow twentyeight"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==29) {%> 
+                    <li class="yellow twentynine"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==30) {%> 
+                    <li class="yellow thirty"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+<% if(date==31) {%> 
+                    <li class="yellow thirtyone"><%=a.name%> &nbsp; <span style="float: right;"><%=percent %>%</span>  </li>
+                    <%  }%> 
+
+
+                        </ul>
+              </div>
+
+        <%  }%> 
+
+  <%})%>
+    <!-- <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+        <li class="chart-li-two-a">Meeting</li>
+        <li class="chart-li-two-b">Analysis</li>          
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-three">Design</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-four">Development</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-five">Testing</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-six">Maintenance</li>
+              </ul>
+    </div>
+    <div class="chart-row">
+      <div class="chart-row-item"></div>
+      <ul class="chart-row-bars">
+                  <li class="chart-li-seven">Meeting</li>
+              </ul>
+    </div> -->
+
+  </div>
+
+
+  
+</div>
+
+<!-- <div class="mySlides fade">
+  <h3><img src="images/staf.png" style="width: 60px; height: 36px; vertical-align: middle;"> Kakitangan</h3>
+  <div style="overflow: auto; max-height: 600px;">
+  <table style="border-collapse: separate; background: #e5e5e5; width: 90%; margin-left: 50px;">
+  <tr style="display: none; ">
+  <th>Nama Tidak Hadir</th>
+  <th id="type" style="display: none;">Tarikh</th>
+  <th style="display: none;">Type</th>
+  <th>Sebab</th>
+  <!--th>Kategori</th
+  </tr>
+  <% //kakitangan.forEach(function(a) { %>
+  <tr>
+  <td class="first"><%//=a.name%></td>
+  <td style="display: none;"><//%=a.date%></td>
+  <td style="display: none;"><//%=a.type%></td>
+  <td class="second"> <span class="text"><%//=a.act_1 %></span></td>
+  
+  </tr>
+  <%//})%>
+  </table></div>
+  </div> -->
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+<br>
+
+<!-- The dots/circles -->
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+
+
+</div>
+<script>
+
+    window.onload=currentSlide(1);
+    window.onload=tarikh();
+</script>
+
+</body>
+
+</html>

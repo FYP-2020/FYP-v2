@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/styles.css" />
+<link rel="icon" type="image/png" href="/images/skse.png"/>
+<title>Permohonan Keluar</title>
+<script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "200px";
+     
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+    
+    function endTime(){
+
+    
+
+      var time = document.getElementById('starttime');
+     console.log(time);  
+     var timevalue = time.value;
+     
+      var start_ar = ["7:30","8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", 
+     "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"];
+     
+     for(var i=0; i<start_ar.length; i++){
+       if(timevalue===start_ar[i]){
+        //var s = "'"
+        for(var j=i+1;j<=21;j++){
+        // var ss = s.concat(j).concat("'");
+        //  console.log("ss:"+ss)
+         var time2 = document.getElementById(j.toString());
+         time2.style.display='';
+         
+        }
+  for(var k=i; k>0; k--){
+    var time3 = document.getElementById(k.toString());
+         time3.style.display='none';
+
+  }
+
+       }
+
+     }
+
+
+
+
+    }
+   
+    
+    </script>
+    <style>
+      form{
+max-width: 1200px;
+
+font-weight: bold;
+      color: #192A59;
+      margin-left: 60px;
+}
+form ul{
+
+  padding:0;
+	margin:0;
+	list-style:none;
+}
+
+form ul li{
+	display: block;
+	margin-bottom: 10px;
+	min-height: 35px;
+}
+
+form ul li .field-split{
+	width: 40%;
+}
+
+form ul li .field-style{
+
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  outline: none;
+}
+form ul li .field-full{
+	width: 100%;
+}
+form ul li .align-left{
+	float:left;
+}
+form ul li .align-right{
+	float:right;
+}
+
+ .overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  opacity: 0;
+  visibility: hidden;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 35%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color:  #ABCAFF;
+}
+.popup .content {
+  /*max-height: 30%;*/
+  overflow: auto;
+}
+
+
+    </style>
+</head>
+<body>
+  <div class="topHeader">
+    <img src="images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()">
+    <img src="images/skse.png" class = "imageL" alt="hide menu">
+    <img src="images/User.png" alt="Logout"  onclick="window.location.href = '/logout';"  class = "imageR">
+    <span style="float: right; line-height: 3; padding-right: 10px;"><%= name%></span>
+    </a>
+    </div>
+
+        <div id="main">
+
+          <div style="box-shadow: 0 8px 6px -6px black;">
+          
+            <ul class="nav">
+            <li><a  href="/keberadaanHarian">Utama</a></li>
+            <li><a  class="active"href="/permohonanKeluar">Permohonan</a></li></ul>
+            <div class="dropdown">
+              <button class="dropbtn">Pemakluman</button>
+              <div class="dropdown-content">
+                      <a href="/maklumPermohonanCuti">Maklum Permohonan Cuti</a>
+                      <a href="/maklumPenglibatan">Maklum Penglibatan Aktiviti Luar</a>
+                  </div>  
+                  </div>
+                
+          </div>
+          
+            
+          
+          <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+            <a href="/attendance">E Kehadiran</a>
+          </div> 
+
+        
+        
+
+
+<%let today = new Date()%>
+<% var month = new Array(12)%>
+<%month[0]= "Januari"%>
+<%month[1]= "Februari"%>
+<%month[2]= "Mac"%>
+<%month[3]= "April"%>
+<%month[4]= "Mei"%>
+<%month[5]= "Jun"%>
+<%month[6]= "Julai"%>
+<%month[7]= "Ogos"%>
+<%month[8]= "September"%>
+<%month[9]= "Oktober"%>
+<%month[10]= "November"%>
+<%month[11]= "Disember"%>
+<%var bulan = month[today.getMonth()]%>
+<h2 style="display: inline-block;">Permohonan Keluar</h2>
+<h2 style="display: inline; margin-left: 800px; position: fixed;"><%=today.getDate()%> <%=bulan%> <%=today.getFullYear()%></h2>
+
+
+
+<form action="/hourlyleave" method="POST">
+ <% var date = new Date().toISOString().slice(0, 10);%>
+
+ <ul>
+
+  <li>
+<input class="tt" type="hidden" placeholder="" name="applydate" value="<%=date%>" required oninvalid="this.setCustomValidity('Sila isi ruangan ini ')" oninput="setCustomValidity('')"> 
+<label  class=" field-split align-left" style="font-size: 15px; position: fixed;">Nama: <%= name %> </label>
+</li>
+
+<input type="hidden"class="name" name="name"  value="<%= name %>"  required oninvalid="this.setCustomValidity('Sila isi ruangan ini ')" oninput="setCustomValidity('')"   > 
+<input type="hidden"class="name" name="user_email"  value="<%= email %>">
+<input type="hidden"class="name" name="head_email"  value="<%= userprofile[0].email %>">
+<li>
+
+
+<p class="field-split align-left" style="font-size: 15px;">Masa Keluar</p> <p class="field-split align-right" style="font-size: 15px;">Masa Masuk</p><br>
+</li>
+
+<li>
+<select class="field-style field-split align-left" id="starttime" name="leavetime" onchange="endTime()" required  oninvalid="this.setCustomValidity('Sila pilih masa keluar')" oninput="setCustomValidity('')"> 
+  <option value="">Sila Pilih</option>
+  <option value="7:30">7:30</option> <!--slot 1 -->
+  <option value="8:00">8:00</option>
+  <option value="8:30">8:30</option>
+  <option value="9:00">9:00</option>
+  <option value="9:30">9:30</option>
+  <option value="10:00">10:00</option>
+  <option value="10:30">10:30</option>
+  <option value="11:00">11:00</option>
+  <option value="11:30">11:30</option>
+  <option value="12:00">12:00</option>
+  <option value="12:30">12:30</option>
+  <option value="13:00">13:00</option>
+  <option value="13:30">13:30</option>
+  <option value="14:00">14:00</option>
+  <option value="14:30">14:30</option>
+  <option value="15:00">15:00</option>
+  <option value="15:30">15:30</option>
+  <option value="16:00">16:00</option>
+  <option value="16:30">16:30</option>
+  <option value="17:00">17:00</option>
+  <option value="17:30">17:30</option>
+  <option value="18:00">18:00</option> 
+</select>
+
+
+<select class="field-style field-split align-right" name="entertime" required  oninvalid="this.setCustomValidity('Sila pilih masa masuk')" oninput="setCustomValidity('')">
+ <option value="">Sila Pilih</option>
+  <option value="8:00" id="1" style="display: none;">8:00</option>
+  <option value="8:30" id="2" style="display: none;">8:30</option>
+  <option value="9:00" id="3" style="display: none;">9:00</option>
+  <option value="9:30"id="4" style="display: none;">9:30</option>
+  <option value="10:00"id="5" style="display: none;">10:00</option>
+  <option  value="10:30"id="6" style="display: none;">10:30</option>
+  <option value="11:00" id="7" style="display: none;">11:00</option>
+  <option value="11:30" id="8" style="display: none;">11:30</option>
+  <option value="12:00"id="9" style="display: none;">12:00</option>
+  <option value="12:30" id="10" style="display: none;">12:30</option>
+  <option value="13:00" id="11" style="display: none;">13:00</option>
+  <option value="13:30"id="12" style="display: none;">13:30</option>
+  <option value="14:00" id="13" style="display: none;">14:00</option>
+  <option value="14:30" id="14" style="display: none;">14:30</option>
+  <option value="15:00"id="15" style="display: none;">15:00</option>
+  <option value="15:30"id="16" style="display: none;">15:30</option>
+  <option value="16:00"id="17" style="display: none;">16:00</option>
+  <option value="16:30"id="18" style="display: none;">16:30</option>
+  <option  value="17:00"id="19" style="display: none;">17:00</option>
+  <option value="17:30" id="20" style="display: none;">17:30</option>
+  <option value="18:00" id="21" style="display: none;">18:00</option> 
+</select>
+</li>
+
+<br>
+<li>
+<p class="perkara" style="font-size: 15px;">Perkara</p>
+<textarea name="reason" style="outline: none; font-size: 15px;font-family: sans-serif;" required oninvalid="this.setCustomValidity('Sila isi ruangan ini ')" oninput="setCustomValidity('')" ></textarea>
+</li><br>
+<li>
+<button type="submit"  class="hantar">Hantar</button>
+</li>
+</ul>
+
+<div id="berjaya" class="overlay" >
+
+  <div class="popup">
+  <p style="font-size: 20px; margin-top:50px; text-align: center;" >Permohonan keluar anda berjaya dihantar.</p><br><br>
+  <a class="close" href="#">&times;</a>
+  <div class="content">
+         
+</div>
+</div> </div>
+</form> 
+
+
+</div>
+
+</body>
+
+</html>

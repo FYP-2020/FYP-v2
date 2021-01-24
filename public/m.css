@@ -1,0 +1,578 @@
+/*-----------------------------Aturan Tugas--------------------------*/
+
+html {
+
+  font-family: 'Open-Sans-Regular';
+
+  font-size: 15px;
+
+  line-height: 1.4;
+
+  color: #444;
+
+}
+
+h2{
+  color: #122d54;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  background-color: white;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #5E6988;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.current) {
+  background-color: #DFECFD;
+}
+
+.current {
+  background-color: #DFECFD;
+}
+
+body {
+  font-family: "Avenir", sans-serif;
+  color: #122d54;
+}
+
+/* ------------------------------------ */
+a {
+  margin: 0px;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+
+a:focus {
+  outline: none !important;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/*------------------------------------------------Sidebar---------------------------------------*/
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 20;
+  left: 0;
+  background-color: #E8E8E8;
+  border: #707070;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  margin-left: 8.4px;
+}
+
+.sidebar a {
+  padding: 10px 2px 8px 20px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #5E6988;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover:not(.current)  {
+  background-color : #D8D8D8;
+  border: #707070;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  font-size: 36px;
+  margin-left: 40px;
+}
+
+/*-------------------------------------------------Top header---------------------------------------*/
+.topHeader {
+  /*font-size: 20px;*/
+  height: 20px;
+  padding: 25px 15px;
+  background-color: #93B5EF;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 0px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+.imageR{
+height: 37px;
+width: 37px; 
+background-repeat:no-repeat;
+float:right;
+padding-top: 5px;
+cursor: pointer;
+padding-right: 10px;
+}
+
+.imageL{
+height: 37px;
+width: 37px; 
+background-repeat:no-repeat;
+float:left;
+padding-top: 5px;
+cursor: pointer;
+}
+
+.imageCenter{
+height: 37px;
+width: 37px; 
+background-repeat:no-repeat;
+/*float:left;*/
+padding-top: 5px;
+cursor: pointer;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+.imageL:hover {
+  background-color: #444;
+}
+
+.imageLDate{
+height: 37px;
+width: 37px; 
+background-repeat:no-repeat;
+float:left;
+padding-top: 5px;
+cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: 0px;
+  right: 110px;
+  padding: 5px 10px;
+  border-radius: 100%;
+  background-color: red;
+  color: white;
+  font-size: 10px;
+  width: 0px;
+}
+
+.dropbtn {
+  color: #5E6988;
+  background-color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #5E6988;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #DFECFD;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover  .dropbtn:hover {
+  background-color: #DFECFD;
+}
+
+/*---------------------------------------Form---------------------------------------*/
+.container {
+  border-radius: 5px;
+  /*background-color: #f2f2f2;*/
+  padding: 20px;
+}
+
+input[type=text]{
+  width: 77%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+input[type=date] {
+  width: 37%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+input[type=time] {
+  width: 37%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+select{
+  width: 80%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+  color: #122d54;
+  font-weight: bold;
+}
+
+textarea{
+  width: 77%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #93B5EF;
+  color: #122d54;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #d5deeb;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+
+/*----------------------------------------Table--------------------------------------*/
+table {
+  font-family: avenir, sans-serif;
+  border-collapse: collapse;
+  width: 85%;
+}
+
+td {
+  border-bottom: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  text-align: left;
+  padding: 8px;
+}
+
+/*-----------------------------------------Pengurusan Tugasan-------------------------------------------------*/
+.mySlides {display: none}
+/*img {vertical-align: middle;}*/
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: auto;
+  margin-left: 20px;
+  font-size: 13px;
+  /*position: relative;*/
+  /*margin: auto;*/
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 20px;
+  width: 60px;
+  margin: 20px;
+  background-color: none;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+  text-align: center;
+}
+
+.active, .dot:hover {
+ color: #717171;
+border-bottom: 2px solid;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/*-------------------icon remove + edit----------------*/
+.iconCrud {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  /*border-radius: 50%;*/
+  display: inline-block;
+  opacity: 50%;
+}
+
+.iconCrud:hover {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  /*border-radius: 50%;*/
+  display: inline-block;
+  opacity: 100%;
+}
+
+/*-------------------pop up form-------------------------------*/
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+.atable{
+
+  background-color: #E5E5E5;
+  margin-left: 20px;
+  width: 90%;
+  /*height: 600px;*/
+  border-radius: 9px;
+}
+
+.long{
+  /*padding: 20px;
+  text-align: center;
+  background-image: url("images/box.png");
+  background-size: 80% 80%;
+ 
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 25px;
+  font-weight: bold;
+  color:  #192A59;
+  border-bottom: none; */
+  background: white;
+  background-size: 80% 80%;
+   /*background-size: 20% 60%;*/
+   font-size: 20px;
+   border-radius: 3px;
+   overflow: hidden;
+   box-shadow: 0 0 5px #93B5EF;
+  text-align: center;
+  border-bottom: none;
+  /*margin-left: 100px;*/
+  /*font-weight: bold;*/
+  width:50%;
+
+}
+
+.short{
+  border-bottom: none;
+  margin-left: auto;
+  margin-right: auto;
+ width: 20%;
+}
+
+.tb{
+  
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 15px;
+  border-collapse: separate;
+ 
+}
+
+.cont { 
+  width:800px; 
+  height:200px; 
+  background-color:lightblue; 
+  padding-top:20px; 
+  padding-left:10px; 
+  padding-right:10px; 
+  border-radius: 5px;
+  display: none;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+} 
+.meet { 
+  float:left; 
+  width:250px; 
+  height:180px; 
+  background-color:white; 
+  border-radius: 3px;
+  text-align: center;
+  font-size: 18px;
+  padding-top: 5px;
+} 
+.out { 
+  float:left; 
+  width: 250px;
+  height:180px; 
+  background-color:white;  
+  border-radius: 3px;
+  margin-left:25px;
+  font-size: 18px;
+  padding-top: 5px;
+} 
+.tas { 
+  float:right; 
+  width:250px; 
+  height:180px; 
+  background-color:white; 
+  border-radius: 3px;
+  font-size: 18px;
+  padding-top: 5px;
+}
+
+
+
+
+
+

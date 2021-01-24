@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>Senarai Jemputan Mesyuarat</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+<!--===============================================================================================-->
+<link rel="icon" type="image/png" href="images/skse.png"/>
+<!--===============================================================================================-->
+  <!-- <link rel="stylesheet" type="text/css" href="vendor-table/bootstrap/css/bootstrap.min.css"> -->
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="fonts-table/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor-table/animate/animate.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor-table/select2/select2.min.css">
+<!--===============================================================================================-->
+  <!-- <link rel="stylesheet" type="text/css" href="vendor-table/perfect-scrollbar/perfect-scrollbar.css"> -->
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="css-table/util.css">
+  <link rel="stylesheet" type="text/css" href="css-table/main.css">
+<!--===============================================================================================-->
+
+<!-- JavaScript -->
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "200px";
+  document.getElementById("main").style.marginLeft = "200px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+</head>
+<body>
+
+<div class="topHeader">
+<img src="images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()"   />
+<img src="images/skse.png" class = "imageL" alt="hide menu">
+<img src="images/User.png" alt="Logout" onclick="window.location.href = '/logout';" class = "imageR" title="Logout">
+<span style="float: right; line-height: 3; padding-right: 10px;"><%= owner_name%></span>
+</div>
+
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+ <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+ <a href="/keberadaanHarian">E Kehadiran</a>
+</div>       
+
+<div id="main" data-position="header">
+
+<!---------------------------------------- Second top navigation bar--------------------------------------------- -->
+<div style="box-shadow: 0 8px 6px -6px black;">
+<ul>
+    <li><a href="/keseluruhanProgresTugasan">Utama</a></li>
+    <li><a href="/admin_ketersediaanKakitangan">Ketersediaan</a></li>
+</ul>
+
+<div class="dropdown">
+  <button class="dropbtn">Tugasan</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturTugasan">Atur Tugasan</a>
+          <a href="/admin_pengurusanTugas">Pengurusan Tugas</a>
+          <a href="/kemaskiniProgresTugasan">Kemas Kini Perkembangan Tugasan</a>
+      </div>  
+      </div>
+<div class="dropdown">
+  <button class="dropbtn">Mesyuarat</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturanJemputanMesyuarat">Atur Jemputan</a>
+          <a class="current" href="/senaraiJemputanProgram">Senarai Jemputan Mesyuarat</a>
+      </div>  
+      </div>
+</div>
+
+<body>
+   <div class="container"> <!-- Form -->
+    
+  <h2><b>Jemputan Mesyuarat</b></h2>
+
+  <div class="limiter" action="/senaraiJemputanProgram" method = "GET">
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table100">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">Tajuk</th>
+                <th class="column1">Masa</th>
+                <th class="column1">Tarikh</th>
+                <th class="column1">Lokasi</th>
+                <th class="column1">Penganjur</th>
+                <th class="column1">Peranan</th>
+                <th class="column1">Agenda</th>
+                <th colspan="3" class="column1">Tindakan</th>
+              </tr>
+            </thead>
+            <tbody>
+
+                <%var nodisplay = []%>
+                <% for(var i=0 ; i < meetingInvitation.length ; i++) {%>                                     
+                <!-- the owner of meeting is the user login -->
+                    <%if(meetingInvitation[i].owner_name == owner_name){%>
+                    
+                      <%if (nodisplay.length > 0){%>
+                        <%var x = 0%>
+                          <%for (var check = 0; check < nodisplay.length; check++){%>
+                            <%if(nodisplay[check] == meetingInvitation[i].uniqueID){%>
+                                <%x = 1%>
+                            <%}%>                          
+                          <%}%>
+
+                            <%if (x == 0){%>
+                              <%nodisplay.push(meetingInvitation[i].uniqueID)%>
+                              <tr>   
+                                  <td class="column1"><%= meetingInvitation[i].title %></td>
+                                  <td class="column1"><%= meetingInvitation[i].timeFrom %> - <%= meetingInvitation[i].timeTo %></td>
+                                  <td class="column1"><%= meetingInvitation[i].date %></td>
+                                  <td class="column1"><%= meetingInvitation[i].location %></td>
+                                  <td class="column1"><%= meetingInvitation[i].owner_name %></td>
+                                  <td class="column1"><%= meetingInvitation[i].owner_role %></td><!--Nanti Tukar!!! -->
+                                  <td class="column1"><%= meetingInvitation[i].agenda %></td>
+                              <%if(meetingInvitation[i].owner_role == "Pencatat Minit Mesyuarat" || meetingInvitation[i].owner_name == owner_name){%>
+                                  <td class="column1">
+                                    <span><button><a onclick="return confirm('Anda pasti?')" href="/edit_admin_aturMinitMesyuarat/<%=meetingInvitation[i].uniqueID%>"><img src="images/add.png" class="iconCrud"></a></button>MM</span>
+                                  </td>
+                                  <td class="column1">
+                                    <span><button><a onclick="return confirm('Anda pasti?')" href="/edit_admin_meetingInvitation/<%=meetingInvitation[i].uniqueID%>"><img src="images/edit.png" class="iconCrud"></a></button></span>                  
+                                  </td>
+                                  <%var samename = []%>
+                                  <%for(var a = 0; a < meetingInvitation.length; a++){%>
+                                    <%if(meetingInvitation[i].uniqueID == meetingInvitation[a].uniqueID){%>
+                                        <%samename.push(meetingInvitation[a].name)%>
+                                    <%}%>
+                                  <%}%>
+                                  <%samename.push(owner_name)%>
+                                   <td class="column1">
+                                    <span><button id="delete-button"><a onclick="return confirm('Anda pasti?')" href="/delete_meetingInvitation/<%=meetingInvitation[i].uniqueID%>_<%=meetingInvitation[i].date%>_<%= meetingInvitation[i].timeFrom%>_<%= meetingInvitation[i].timeTo%>_<%= samename%>_<%= meetingInvitation[i].title %>"><img src="images/delete.png" class="iconCrud"></a></button></span>
+                                  </td>
+                              <%}%>
+
+                              
+                            </tr>
+                                    <%}%>
+                              <%}%>                     
+
+                      <%if (nodisplay.length == 0){%>
+                      <%nodisplay.push(meetingInvitation[i].uniqueID)%>
+                        <tr>
+                        <td class="column1"><%= meetingInvitation[i].title %></td>
+                        <td class="column1"><%= meetingInvitation[i].timeFrom %> - <%= meetingInvitation[i].timeTo %></td>
+                        <td class="column1"><%= meetingInvitation[i].date %></td>
+                        <td class="column1"><%= meetingInvitation[i].location %></td>
+                        <td class="column1"><%= meetingInvitation[i].owner_name %></td>
+                        <td class="column1"><%= meetingInvitation[i].owner_role %></td><!--Nanti Tukar!!! -->
+                        <td class="column1"><%= meetingInvitation[i].agenda %></td>
+                        <%if(meetingInvitation[i].owner_role == "Pencatat Minit Mesyuarat"|| meetingInvitation[i].owner_name == owner_name){%>
+                      <td class="column1">
+                        <span><button><a onclick="return confirm('Anda pasti?')" href="/edit_admin_aturMinitMesyuarat/<%=meetingInvitation[i].uniqueID%>"><img src="images/add.png" class="iconCrud"></a></button>MM</span>
+                      </td>
+                      <td class="column1">
+                        <span><button><a onclick="return confirm('Anda pasti?')" href="/edit_admin_meetingInvitation/<%=meetingInvitation[i].uniqueID%>"><img src="images/edit.png" class="iconCrud"></a></button></span>                  
+                      </td>
+                      <%var samename = []%>
+                      <%for(var a = 0; a < meetingInvitation.length; a++){%>
+                        <%if(meetingInvitation[i].uniqueID == meetingInvitation[a].uniqueID){%>
+                            <%samename.push(meetingInvitation[a].name)%>
+                        <%}%>
+                      <%}%>
+                      <%samename.push(owner_name)%>
+                       <td class="column1">
+                        <span><button id="delete-button"><a onclick="return confirm('Anda pasti?')" href="/delete_meetingInvitation/<%=meetingInvitation[i].uniqueID%>_<%=meetingInvitation[i].date%>_<%= meetingInvitation[i].timeFrom%>_<%= meetingInvitation[i].timeTo%>_<%= samename%>_<%= meetingInvitation[i].title %>"><img src="images/delete.png" class="iconCrud"></a></button></span>
+                      </td>
+                      <%}%>
+                      </tr>
+                      <%}%>
+                      
+                    <%}%>
+
+                    <!-- The owner of login name is in invitees name -->
+                    <%if(meetingInvitation[i].name == owner_name){%> 
+                    <tr>
+                    <td class="column1"><%= meetingInvitation[i].title %></td>
+                    <td class="column1"><%= meetingInvitation[i].timeFrom %> - <%= meetingInvitation[i].timeTo %></td>
+                    <td class="column1"><%= meetingInvitation[i].date %></td>
+                    <td class="column1"><%= meetingInvitation[i].location %></td>
+                    <td class="column1"><%= meetingInvitation[i].owner_name %></td>
+                    <td class="column1"><%= meetingInvitation[i].attendee_role %></td><!--Nanti Tukar!!! -->
+                    <td class="column1"><%= meetingInvitation[i].agenda %></td>
+                      <%if(meetingInvitation[i].attendee_role == "Pencatat Minit Mesyuarat" && meetingInvitation[i].name == owner_name && meetingInvitation[i].confirmation_status == "Accept"){%>
+                    <td class="column1">
+                      <span><button><a onclick="return confirm('Anda pasti?')" href="/edit_admin_aturMinitMesyuarat/<%=meetingInvitation[i].uniqueID%>"><img src="images/add.png" class="iconCrud"></a></button>MM</span>
+                    </td>
+                    <td class="column1">
+                      <span><button><a onclick="return confirm('Anda pasti?')" href="/edit_admin_meetingInvitation/<%=meetingInvitation[i].uniqueID%>"><img src="images/edit.png" class="iconCrud"></a></button></span>                  
+                    </td>
+
+                    <%var samename = []%>
+                    <%for(var a = 0; a < meetingInvitation.length; a++){%>
+                      <%if(meetingInvitation[i].uniqueID == meetingInvitation[a].uniqueID){%>
+                          <%samename.push(meetingInvitation[a].name)%>
+                      <%}%>
+                    <%}%>
+                    <%samename.push(owner_name)%>
+                     <td class="column1">
+                      <span><button id="delete-button"><a onclick="return confirm('Anda pasti?')" href="/delete_meetingInvitation/<%=meetingInvitation[i].uniqueID%>_<%=meetingInvitation[i].date%>_<%= meetingInvitation[i].timeFrom%>_<%= meetingInvitation[i].timeTo%>_<%= samename%>_<%= meetingInvitation[i].title %>"><img src="images/delete.png" class="iconCrud"></a></button></span>
+                    </td>
+                    <%}%>
+
+                      <%if(meetingInvitation[i].attendee_role == "Pencatat Minit Mesyuarat" && meetingInvitation[i].name == owner_name && meetingInvitation[i].confirmation_status == "Unconfirmed"){%>
+                    <td class="column1">
+                        <span><button><a onclick="return confirm('Anda pasti?')" href="/acceptMeeting/<%= meetingInvitation[i].meeting_id%>_<%= meetingInvitation[i].title%>_<%= meetingInvitation[i].date%>_<%= meetingInvitation[i].timeFrom%>_<%= meetingInvitation[i].timeTo%>_<%= meetingInvitation[i].uniqueID%>"><img src="images/tick.png" class="iconCrud"></a></button></span>
+                      </td>
+                      <td class="column1">
+                        <span><button><a onclick="return confirm('Anda pasti?')" href="/rejectMeeting/<%= meetingInvitation[i].meeting_id%>"><img src="images/cross.png" class="iconCrud"></a></button></span>                  
+                      </td>
+                      <td class="column1"></td>
+                    <%}%>
+
+                     <%if(meetingInvitation[i].attendee_role == "Pencatat Minit Mesyuarat" && meetingInvitation[i].name == owner_name && meetingInvitation[i].confirmation_status == "Reject"){%>
+                    <td class="column1">
+                        <span><button></button></span>
+                      </td>
+                      <td class="column1">
+                        <span><button><img src="images/cross.png" class="iconCrud"></a></button></span>                  
+                      </td>
+                      <td class="column1"></td>
+                    <%}%>
+
+                    <%if(meetingInvitation[i].attendee_role !== "Pencatat Minit Mesyuarat" && meetingInvitation[i].name == owner_name){%>
+                    
+                      <%if(meetingInvitation[i].confirmation_status == "Unconfirmed"){%>
+                       <td class="column1">
+                        <span><button><a onclick="return confirm('Anda pasti?')" href="/acceptMeeting/<%= meetingInvitation[i].meeting_id%>_<%= meetingInvitation[i].title%>_<%= meetingInvitation[i].date%>_<%= meetingInvitation[i].timeFrom%>_<%= meetingInvitation[i].timeTo%>_<%= meetingInvitation[i].uniqueID%>"><img src="images/tick.png" class="iconCrud"></a></button></span>
+                      </td>
+                      <td class="column1">
+                        <span><button><a onclick="return confirm('Anda pasti?')" href="/rejectMeeting/<%= meetingInvitation[i].meeting_id%>"><img src="images/cross.png" class="iconCrud"></a></button></span>                  
+                      </td>
+                      <td class="column1"></td>
+                      <%}%>
+
+                      <%if(meetingInvitation[i].confirmation_status == "Accept"){%>
+                       <td class="column1">
+                        <span><button><img src="images/tick.png" class="iconCrud"></a></button></span>
+                      </td>
+                      <td class="column1">
+                        <span><button></button></span>                  
+                      </td>
+                      <td class="column1"></td>
+                      <%}%>
+
+                      <%if(meetingInvitation[i].confirmation_status == "Reject"){%>
+                       <td class="column1">
+                        <span><button></button></span>
+                      </td>
+                      <td class="column1">
+                        <span><button><img src="images/cross.png" class="iconCrud"></a></button></span>                  
+                      </td>
+                      <td class="column1"></td>
+                      <%}%>
+
+                    <%}%>   
+                    </tr>                 
+
+                    <%}%>
+
+                <% } %>    
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  
+
+<!--===============================================================================================-->  
+  <script src="vendor-table/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<!--   <script src="vendor-table/bootstrap/js/popper.js"></script> -->  
+<!-- <script src="vendor-table/bootstrap/js/bootstrap.min.js"></script> -->
+<!--===============================================================================================-->
+  <script src="vendor-table/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+  <script src="js-table/main.js"></script>
+
+</body>
+
+</body>
+</html>

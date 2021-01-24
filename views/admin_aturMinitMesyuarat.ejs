@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<title>Info Mesyuarat</title>
+<link rel="stylesheet" type="text/css" href="/main.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/css-table/util.css">
+  <link rel="stylesheet" type="text/css" href="/css-table/main.css">
+<!--===============================================================================================-->
+<link rel="icon" type="image/png" href="/images/skse.png"/>
+<!-- JavaScript -->
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "200px";
+  document.getElementById("main").style.marginLeft = "200px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+
+</script>
+<style type="text/css">
+  
+.dot1 {
+height: 50px;
+width: 50px;
+word-wrap: break-word;
+border-radius: 100%;
+display: inline-block;
+text-align:center;
+line-height:50px;
+/*margin: 0 10px;*/
+padding: 0;
+background: #C9D6FF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+position: static;
+}
+
+.unconfirmed{
+background: #000000;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+color: white;
+/*opacity: 0.5;*/
+}
+
+.reject{
+color: white;
+background: #ED213A;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor:default;
+  /*border-bottom: 1px dot1ted black;*/
+}
+
+.tooltip .tooltiptext {
+  cursor:default;
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 70%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: red;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+.short1{
+  border: none;
+  margin-left: 18px;
+  margin-right: 22%;
+  width: 20%;
+  background-color: white;
+  vertical-align:center;
+}
+
+.tb1{
+  
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 15px;
+  border-collapse: separate;
+  /*background-color: white; */
+  background-color: #E5E5E5;
+  border: none;
+  vertical-align:center
+}
+
+.bar{
+   background: #E5E5E5;
+   display: block;
+   height: 30px;
+   overflow: hidden;
+   border-color: #707070;
+   width: 550px;
+   border:none;
+   /*margin-bottom: 10px;*/
+   vertical-align:center
+}
+.bar p{
+  font-weight: bold;
+  text-align: right;
+  position:static;
+  margin: 0;
+  line-height: 30px;
+  vertical-align:center
+}
+
+.papar{
+  font-size: 8px;
+      padding:5px;
+      background-color: white;
+      border-radius: 10px;
+      cursor: pointer;
+}
+.zero{
+  width:0%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.one{
+  width:1%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.two{
+  width:2%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.three{
+  width:3%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.four{
+  width:4%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.five{
+  width:5%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.six{
+  width:6%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seven{
+  width:7%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.eight{
+  width:8%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.nine{
+  width:9%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.ten{
+  width:10%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.eleven{
+  width:11%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.twelve{
+  width:12%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.thirteen{
+  width:13%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.forteen{
+  width:14%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fifteen{
+  width:15%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.sixteen{
+  width:16%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seventeen{
+  width:17%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.eighteen{
+  width:18%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.nineteen{
+  width:19%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.twenty{
+  width:20%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.twentyone{
+  width:21%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.twentytwo{
+  width:22%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.twentythree{
+  width:23%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.twentyfour{
+  width:24%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.twentyfive{
+  width:25%; animation: ten 2s; height: 30px; float:left; background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.twentysix{
+  width:26%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.twentyseven{
+  width:27%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.twentyeight{
+  width:28%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.twentynine{
+  width:29%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+.thirty{
+  width:30%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.thirtyone{
+  width:31%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.thirtytwo{
+  width:32%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.thirtythree{
+  width:33%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.thirtyfour{
+  width:34%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.thirtyfive{
+  width:35%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.thirtysix{
+  width:36%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.thirtyseven{
+  width:37%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.thirtyeight{
+  width:38%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.thirtynine{
+  width:39%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.forty{
+  width: 40%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fortyone{
+  width: 41%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fortytwo{
+  width:42%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fortythree{
+  width: 43%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fortyfour{
+  width:44%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fortyfive{
+  width: 45%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fortysix{
+  width:46%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fortyseven{
+  width: 47%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fortyeight{
+  width:48%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fortynine{
+  width: 49%; animation: ten 2s; height: 30px; float:left; background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fifty{
+  width: 50%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fiftyone{
+  width: 51%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fiftytwo{
+  width: 52%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fiftythree{
+  width: 53%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fiftyfour{
+  width: 54%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fiftyfive{
+  width: 55%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fiftysix{
+  width: 56%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fiftyseven{
+  width: 57%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fiftyeight{
+  width: 58%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.fiftynine{
+  width: 59%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.sixty{
+  width: 60%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.sixtyone{
+  width: 61%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.sixtytwo{
+  width: 62%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.sixtythree{
+  width: 63%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.sixtyfour{
+  width: 64%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.sixtyfive{
+  width: 65%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.sixtysix{
+  width: 66%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.sixtyseven{
+  width: 67%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.sixtyeight{
+  width: 68%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.sixtynine{
+  width: 69%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seventy{
+  width: 70%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seventyone{
+  width: 71%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seventytwo{
+  width: 72%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seventythree{
+  width: 73%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seventyfour{
+  width: 74%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seventyfive{
+  width: 75%; animation: ten 2s; height: 30px; float:left; background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seventysix{
+  width: 76%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seventyseven{
+  width: 77%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seventyeight{
+  width: 78%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.seventynine{
+  width: 79%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.eighty{
+  width: 80%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.eightyone{
+  width: 81%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.eightytwo{
+  width: 82%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.eightythree{
+  width: 83%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.eightyfour{
+  width: 84%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.eightyfive{
+  width: 85%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.eightysix{
+  width: 86%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.eightyseven{
+  width: 87%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.eightyeight{
+  width: 88%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.eightynine{
+  width: 89%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.ninety{
+  width: 90%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.ninetyone{
+  width: 91%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.ninetytwo{
+  width: 92%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.ninetythree{
+  width: 93%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.ninetyfour{
+  width: 94%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.ninetyfive{
+  width: 95%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.ninetysix{
+  width: 96%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.ninetyseven{
+  width: 97%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.ninetyeight{
+  width: 98%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.ninetynine{
+  width: 99%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.hundred{
+  width: 100%; animation: ten 2s; height: 30px; float:left; background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+@keyframes ten{
+  0%{
+    width:0%;
+  }
+}
+
+.column1 {
+  width: 1200px;
+  padding-left: 10px;
+  position: static;
+}
+
+.column2 {
+  width: 500px;
+  padding-left: 10px;
+  position: static;
+}
+
+tbody tr:hover {
+  color: #192A59;
+  background-color: white;
+  cursor: pointer;
+}
+
+tbody tr:nth-child(even) {
+  background-color: white;
+}
+
+input {
+     display: inline; 
+    outline: none;
+    border: none !important;
+}
+
+.minutes tr td{
+	 font-size: 15px;
+}
+</style>
+</head>
+<body>
+<!-- top navigation -->
+<div class="topHeader">
+<img src="/images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()">
+<img src="/images/skse.png" class = "imageL" alt="hide menu">
+<img src="/images/User.png" alt="Logout" onclick="window.location.href = '/logout';"  class = "imageR" title="Logout">
+<span style="float: right; line-height: 3; padding-right: 10px;"><%= owner_name%></span>
+
+</div>
+<!-- Sidebar -->
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+  <a href="/keberadaanHarian">E Kehadiran</a>
+</div>       
+
+
+<div id="main">
+
+<div style="box-shadow: 0 8px 6px -6px black;">
+<ul>
+    <li><a href="/keseluruhanProgresTugasan">Utama</a></li>
+    <li><a href="/admin_ketersediaanKakitangan">Ketersediaan</a></li>
+</ul>
+
+<div class="dropdown">
+  <button class="dropbtn">Tugasan</button>
+  <div class="dropdown-content">
+  		  <a  href="/admin_aturTugasan">Atur Tugasan</a>
+          <a href="/admin_pengurusanTugas">Pengurusan Tugas</a>
+          <a href="/kemaskiniProgresTugasan">Kemas Kini Perkembangan Tugasan</a>
+      </div>  
+      </div>
+<div class="dropdown">
+  <button class="dropbtn">Mesyuarat</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturanJemputanMesyuarat">Atur Jemputan</a>
+          <a href="/senaraiJemputanProgram">Senarai Jemputan Mesyuarat</a>
+      </div>  
+      </div>
+</div>
+
+
+<div class="container"> <!-- Form -->
+
+<h2><b>Minit Mesyuarat > <%= meetingInvitation[0].title%></b></h2>
+
+<% var aftersplit = meetingInvitation[0].date.split("-")%>
+<% var year = aftersplit[0]%>
+<% var month = aftersplit[1]%>
+<% var day = aftersplit[2]%>
+<% var monthString%>
+
+  <%if(month == "01"){%>
+  <%  monthString = "Januari"%>
+  <%}%>
+
+  <%if(month == "02"){%>
+  <%  monthString = "Febuari"%>
+  <%}%>
+
+  <%if(month == "03"){%>
+  <%  monthString = "Mac"%>
+  <%}%>
+
+  <%if(month == "04"){%>
+  <%  monthString = "April"%>
+  <%}%>
+
+  <%if(month == "05"){%>
+  <%  monthString = "Mei"%>
+  <%}%>
+
+  <%if(month == "06"){%>
+  <%  monthString = "Jun"%>
+  <%}%>
+
+  <%if(month == "07"){%>
+  <%  monthString = "Julai"%>
+  <%}%>
+
+  <%if(month == "08"){%>
+  <%  monthString = "Ogos"%>
+  <%}%>
+
+  <%if(month == "09"){%>
+  <%  monthString = "September"%>
+  <%}%>
+
+  <%if(month == "10"){%>
+  <%  monthString = "Oktober"%>
+  <%}%>
+
+  <%if(month == "11"){%>
+  <%  monthString = "November"%>
+  <%}%>
+
+  <%if(month == "12"){%>
+  <%  monthString = "Disember"%>
+  <%}%>
+
+  	<% var name1 %>
+	<% var name2 %>
+	<% var name3  %>
+	<% var search %>
+	<% var replaceWith %>
+	<% var name4 %>
+	<%var collaboratorsArr = []%>
+
+	<%for(var i = 0; i< meetingInvitation.length; i++){%>
+
+	<% if(meetingInvitation[i].task_owner != null){%>
+	  <% name1 = meetingInvitation[i].task_owner %>
+	  <% name2 = name1.replace("[","") %>
+	  <% name3 = name2.replace("]","") %>
+	  <% search = '"' %>
+	  <% replaceWith = '' %>
+	  <% name4 = name3.split(search).join(replaceWith)%>
+	  <% collaboratorsArr.push(name4.split(","))%>
+	  <%}%>
+
+	  <%if(meetingInvitation[i].task_owner == null){%>
+	  	<% collaboratorsArr.push("")%>
+	  <%}%>
+	<%}%>
+
+<table class="minutes" style="margin-top: 2.5%;  overflow: visible;">
+  <tr>
+    <td style="font-weight: bolder; color: #192A59;">Lokasi</td>
+    <td style="color: #192A59;"><%= meetingInvitation[0].location%></td>
+  </tr>
+
+  <tr>
+    <td style="font-weight: bolder; color: #192A59;">Tarikh & Masa</td>
+    <td style="color: #192A59;"><%= day%> <%= monthString%> <%= year%> pada jam <%= meetingInvitation[0].timeFrom%>  -  <%= meetingInvitation[0].timeTo%></td>
+  </tr>
+
+  <tr>
+    <td style="font-weight: bolder; color: #192A59;">Agenda</td>
+    <td style="color: #192A59;"><%= meetingInvitation[0].agenda%> </td>
+  </tr>
+
+	<tr>
+	   <td style="font-weight: bolder; color: #192A59;">Kehadiran</td>
+	   	<%var duplicate = []%>
+	   <td>       <%for(var i = 0; i< meetingInvitation.length; i++){%>
+	   				<%if (duplicate.length > 0){%>
+		                <%var x = 0%>
+		                  <%for (var check = 0; check < duplicate.length; check++){%>
+		                    <%if(duplicate[check] == meetingInvitation[i].meetingNumber){%>
+		                        <%x = 1%>
+		                    <%}%>                          
+		                  <%}%>
+		            <%}%>
+
+	                <%if (x == 0 || duplicate.length == 0){%>
+	                <%duplicate.push(meetingInvitation[i].meetingNumber)%>
+	                <%var names = meetingInvitation[i].name.split(" ")%>
+	                <%if(meetingInvitation[i].confirmation_status == "Unconfirmed"){%>
+	                    <div class="tooltip">
+	                    <span class="dot1 unconfirmed"><span class="tooltiptext"><%= meetingInvitation[i].name%><br>[belum disahkan]</span>
+	                    <%for(var p = 0; p< names.length; p++){%>
+	                      <%= names[p].charAt(0)%>
+	                    <%}%>
+	                    </span>
+	                    </div>
+	                    <%}%>
+
+	                <%if(meetingInvitation[i].confirmation_status == "Accept"){%>
+	                    <div class="tooltip">
+	                    <span class="dot1"><span class="tooltiptext"><%= meetingInvitation[i].name%> <br>[Terima]</span>
+	                    <%for(var p = 0; p< names.length; p++){%>
+	                      <%= names[p].charAt(0)%>
+	                    <%}%>
+	                    </span>
+	                    </div>
+	                    <%}%>
+
+	                <%if(meetingInvitation[i].confirmation_status == "Reject"){%>
+	                    <div class="tooltip">
+	                    <span class="dot1 reject"><span class="tooltiptext"><%= meetingInvitation[i].name%><br>[Tolak]</span>
+	                    <%for(var p = 0; p< names.length; p++){%>
+	                      <%= names[p].charAt(0)%>
+	                    <%}%>
+	                    </span>
+	                    </div>
+	                    <%}%>
+	                  <%}%>
+	              <%}%></td>
+	</tr>
+
+</table>
+
+<form action="/insert_admin_meetingInfo/<%= meetingInvitation[0].uniqueID%>" method="POST" id="usrform" name = "usrform">
+      <div class="limiter" style="margin-top: 5%; width: auto;">
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table100">
+          <table>
+            <thead>
+              <tr class="table100-head">
+		          <th>Item</th>
+		          <th style="width: 20%; padding-right: 0; margin-right: 0;">Nota</th>
+		          <th>Jenis</th>
+		          <th>Tahap Kesukaran</th>
+		          <th>Tarikh Akhir</th>
+		          <th>Pemilik</th>
+        	 </tr>
+        	</thead>
+         <tbody>
+        <tr>                                                                         
+
+          <td style="display: none;" class="column1"><input type="text" name="title" value="<%= meetingInvitation[0].title%>"></td>
+
+           <td style="display: none;" class="column1"><input type="text" name="uniqueID" value="<%= meetingInvitation[0].uniqueID%>"></td>
+
+          <td class="column1"><select id="item" name="item" required style="width: 100%;" oninvalid="this.setCustomValidity('Sila pilih satu item')" oninput="setCustomValidity('')">
+              <option value="" disabled selected hidden>Info/Keputusan/Tugas</option>
+              <option value="Info">Info</option>
+              <option value="Keputusan">Keputusan</option>
+              <option value="Tugas">Tugas</option>
+              </select>
+          </td>
+
+          <td style="width: 20%; padding-right: 0; margin-right: 0; padding-top: 0px;" class="column1">
+            <div class="col-75">
+            <textarea rows="4" cols="50" name="nota" form="usrform" placeholder="Nota" id="nota" style="height: 16px; margin-right: 0; width: 110%; font-family: 'Avenir', sans-serif;" required oninvalid="this.setCustomValidity('Sila nyatakan huraian info/keputusan/tugas')" oninput="setCustomValidity('')"></textarea>
+          </div></td>
+
+          <td class="column1">
+            <div style="width: 130%;">
+              <select id="jenis" name="jenis" required oninvalid="this.setCustomValidity('Sila pilih satu jenis')" oninput="setCustomValidity('')">
+              <option value="" disabled selected hidden>Info/Untuk dilakukan/Selesai</option>
+              <option value="Info">Info</option>
+              <option value="Untuk dilakukan">Untuk dilakukan</option>
+              <option value="Selesai">Selesai</option>
+            </select>
+          </div>
+          </td>
+
+          <td class="column2"><select id="tahap" name="tahap" style="width: 155px;" required>
+              <option value="" disabled selected hidden>Tahap Kesukaran</option>
+              <option value="Tinggi">Tinggi</option>
+              <option value="Sederhana">Sederhana</option>
+              <option value="Rendah">Rendah</option>
+              <option value="">Tiada</option>
+              </select>
+          </td>
+          <td class="column2"><input type="date" id="tarikhakhir" name="tarikhakhir" style="width: 150px;"></td>
+
+          <td style="padding-left: 30px;" class="column2">
+             
+             <div class="box">
+				<a class="button" href="#popup1"><img src="/images/add.png" class="iconCrud"></a>
+			</div>
+			<div id="popup1" class="overlay">
+				<div class="popup">
+					<h2>Senarai Nama</h2>
+					<a class="close" href="#">&times;</a>
+					<div class="content">
+						<table>
+							<tr>
+								<th style="color: #192A59;">Nama</th>
+								<th style="color: #192A59;">Bebanan</th>
+								<th style="color: #192A59;">Kehadiran</th>
+							</tr>
+
+								<%var unique = []%>
+									<%for(var i = 0; i< meetingInvitation.length; i++){%>
+										<%if (unique.length > 0){%>
+						                <%var x = 0%>
+							                  <%for (var check = 0; check < unique.length; check++){%>
+							                    <%if(unique[check] == meetingInvitation[i].meetingNumber){%>
+							                        <%x = 1%>
+							                    <%}%>                          
+							                  <%}%>
+					            		<%}%>
+
+						                <%if (x == 0 || unique.length == 0){%>
+						                	<%unique.push(meetingInvitation[i].meetingNumber)%>
+						        		<tr>
+						                	<td style="border-bottom: none; color: #192A59;" class="column1">												
+												<input type="checkbox" name="task_owner" value="<%= meetingInvitation[i].name%>"><%= meetingInvitation[i].name%>
+											</td>
+
+												 <%var today = new Date()%>
+												 <%var month = today.getMonth()%>
+												 <%var percentage = 0%>
+
+													 <%if(month == 0){%>
+													 	<%percentage = meetingInvitation[i].JanuaryPoint%>
+													 <%}%>
+
+													 <%if(month == 1){%>
+													 	<%percentage = meetingInvitation[i].FebruaryPoint%>
+													 <%}%>
+
+													 <%if(month == 2){%>
+													 	<%percentage = meetingInvitation[i].MarchPoint%>
+													 <%}%>
+
+													 <%if(month == 3){%>
+													 	<%percentage = meetingInvitation[i].AprilPoint%>
+													 <%}%>
+
+													 <%if(month == 4){%>
+													 	<%percentage = meetingInvitation[i].MayPoint%>
+													 <%}%>
+
+													 <%if(month == 5){%>
+													 	<%percentage = meetingInvitation[i].JunePoint%>
+													 <%}%>
+
+													 <%if(month == 6){%>
+													 	<%percentage = meetingInvitation[i].JulyPoint%>
+													 <%}%>
+
+													 <%if(month == 7){%>
+													 	<%percentage = meetingInvitation[i].AugustPoint%>
+													 <%}%>
+
+													 <%if(month == 8){%>
+													 	<%percentage = meetingInvitation[i].SeptemberPoint%>
+													 <%}%>
+
+													 <%if(month == 9){%>
+													 	<%percentage = meetingInvitation[i].OctoberPoint%>
+													 <%}%>
+
+													 <%if(month == 10){%>
+													 	<%percentage = meetingInvitation[i].NovemberPoint%>
+													 <%}%>
+
+													 <%if(month == 11){%>
+													 	<%percentage = meetingInvitation[i].DecemberPoint%>
+													 <%}%>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+													<%if(percentage == 0){%>
+														<td class="short1 column1">
+													      <span class="bar" class="zero">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td> 	
+													 <%}%>
+
+													<%if(percentage == 1){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="one">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 <%}%>	
+
+													<%if(percentage == 2){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="two">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>													 	
+													<%}%>	
+
+													<%if(percentage == 3){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="three">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>													 	
+													<%}%>
+
+													<%if(percentage == 4){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="four">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>													 	
+													<%}%>
+
+													<%if(percentage == 5){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="five">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>													 	
+													 <%}%>
+
+													<%if(percentage == 6){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="six">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>													 	
+													 <%}%>	
+
+													<%if(percentage == 7){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seven">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 8){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eight">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 9){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="nine">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 10){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="ten">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 11){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eleven">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 12){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="twelve">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 13){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="thirteen">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 14){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="forteen">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+
+													<%if(percentage == 15){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fifteen">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 16){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="sixteen">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 17){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seventeen">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 18){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eighteen">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 19){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="nineteen">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 20){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="twenty">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 21){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="twentyone">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 22){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="twentytwo">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 23){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="twentythree">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 24){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="twentyfour">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 25){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="twentyfive">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 26){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="twentysix">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 27){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="twentyseven">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 28){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="twentyeight">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 29){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="twentynine">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 30){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="thirty">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 31){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="thirtyone">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 32){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="thirtytwo">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 33){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="thirtythree">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 34){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="thirtyfour">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 35){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="thirtyfive">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 36){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="thirtysix">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 37){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="thirtyseven">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 38){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="thirtyeight">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+
+													<%if(percentage == 39){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="thirtynine">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 40){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="forty">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 41){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fortyone">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 42){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fortytwo">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 43){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fortythree">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 44){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fortyfour">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 45){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fortyfive">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 46){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fortysix">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 47){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fortyseven">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 48){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fortyeight">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 49){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fortynine">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 50){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fifty">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 51){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fiftyone">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 52){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fiftytwo">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 53){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fiftythree">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 54){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fiftyfour">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 55){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fiftyfive">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 56){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fiftysix">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 57){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fiftyseven">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 58){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fiftyeight">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 59){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="fiftynine">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 60){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="sixty">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 61){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="sixtyone">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 62){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="sixtytwo">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 63){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="sixtythree">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 64){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="sixtyfour">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 65){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="sixtyfive">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 66){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="sixtysix">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 67){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="sixtyseven">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 68){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="sixtyeight">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 69){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="sixtynine">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 70){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seventy">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 71){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seventyone">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 72){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seventytwo">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 73){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seventythree">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 74){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seventyfour">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 75){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seventyfive">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 76){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seventysix">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 77){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seventyseven">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 78){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seventyeight">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 79){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="seventynine">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 80){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eighty">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 81){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eightyone">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 82){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eightytwo">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 83){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eightythree">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 84){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eightyfour">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 85){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eightyfive">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 86){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eightysix">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 87){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eightyseven">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 88){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eightyeight">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 89){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="eightynine">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 90){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="ninety">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 91){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="ninetyone">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 92){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="ninetytwo">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 93){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="ninetythree">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 94){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="ninetyfour">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 95){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="ninetyfive">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+													<%if(percentage == 96){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="ninetysix">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>		
+
+													<%if(percentage == 97){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="ninetyseven">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>
+
+													<%if(percentage == 98){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="ninetyeight">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													 <%}%>	
+
+													<%if(percentage == 99){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="ninetynine">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>	
+
+													<%if(percentage == 100){%>
+													 	<td class="short1">
+													      <span class="bar"><span class="hundred">
+													        <p style="float: left; color:#192A59; ">&nbsp;<%= percentage%>%</p></span>
+														</td>
+													 	
+													<%}%>
+
+												<td style="border-bottom: none;" class="column1">
+												<%if(meetingInvitation[i].confirmation_status == "Accept"){%>
+								  						<label style="font-weight: normal;">Hadir</label><br>
+							                    <%}%>
+
+							                	<%if(meetingInvitation[i].confirmation_status == "Reject"){%>
+								  						<label style="font-weight: normal; color:#FB2C2C;">Tolak</label><br>	                    
+							                    <%}%>	
+
+							                    <%if(meetingInvitation[i].confirmation_status == "Unconfirmed"){%>
+								  						<label style="font-weight: normal; color:#FB2C2C;">Belum Disahkan</label><br>	                    
+							                    <%}%>									
+											</td>
+
+													
+										</tr>
+				  						<%}%>
+			  						<%}%>	
+						</table>				
+					</div>
+				</div>
+			</div>
+          </td>
+
+        </tr>
+			</tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+           <div class="sendInfo">
+           	<input type="button" value="Batal" style="width: 7%;" onclick="window.location.href = '/senaraiJemputanProgram';">
+            <input type="submit" value="Hantar" style="width: 7%;"></div>
+</form>  
+
+<div class="limiter" style="margin-top: 8%; width: auto;">
+    <div class="container-table100">
+      <div class="wrap-table100">
+          <table style="position: static;  overflow: visible;">
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">Item</th>
+                <th class="column1">Nota</th>
+                <th class="column1">Jenis</th>
+                <th class="column1">Pemilik</th>
+                <th class="column1">Tahap Kesukaran</th>
+                <th class="column1">Tarikh Akhir</th>
+                <th colspan="2" class="column2">Tindakan</th>
+              </tr>
+            </thead>
+            <tbody>
+			 	
+				<%for(var i = 0; i< meetingInvitation.length && meetingInvitation[i].meetingNumber == meetingInvitation[0].meetingNumber; i++){%>
+				 <%if(meetingInvitation[i].item != null){%>
+		        <tr>                                                                                      
+		       
+		          <td class="column1">
+		            <%=meetingInvitation[i].item%>
+		          </td>
+
+		          <td class="column1">
+		             <%=meetingInvitation[i].nota%>
+		          </td>
+
+		          <td class="column1">
+		            <%=meetingInvitation[i].jenis%>
+		          </td>
+
+		          <td class="column1">
+		              <%for(var j = 0; j< collaboratorsArr[i].length; j++) { %>
+					        <%var names = collaboratorsArr[i][j].split(" ")%>
+					        <div class="tooltip">
+					        <span class="dot1"><span class="tooltiptext"><%= collaboratorsArr[i][j]%></span>
+					        <%for(var p = 0; p< names.length; p++){%>
+					          <%= names[p].charAt(0)%>
+					        <%}%>
+					        </span>
+					        </div>
+					      <% } %>
+		          </td>
+
+		          <td class="column1">
+		             <%=meetingInvitation[i].tahap%>
+		          </td>
+
+		          <td class="column1">
+		             <%=meetingInvitation[i].tarikhakhir%>
+		          </td>
+
+		          <td class="column2">
+		            <span><button><a onclick="return confirm('Anda pasti?')" href="/edit_meetingInfo/<%=meetingInvitation[i].itemNumber%>_<%=meetingInvitation[0].uniqueID%>"><img src="/images/edit.png" class="iconCrud"></a></button></span>                  
+		          </td>
+		           <td class="column2">
+		            <span><button><a onclick="return confirm('Anda pasti?')" href="/delete_meetingInfo/<%=meetingInvitation[i].itemNumber%>_<%=meetingInvitation[0].uniqueID%>_<%=meetingInvitation[i].item%>_<%=meetingInvitation[i].nota%>_<%=meetingInvitation[i].jenis%>_<%=meetingInvitation[i].task_owner%>_<%=meetingInvitation[i].tahap%>_<%=meetingInvitation[i].tarikhakhir%>"><img src="/images/delete.png" class="iconCrud"></a></button></span>
+		          </td>
+
+		        </tr>
+		        <%}%>
+		        <%}%>
+
+			</tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+</body>
+</html>

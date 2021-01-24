@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/main.css">
+<link rel="icon" type="image/png" href="/images/skse.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Kemas Kini Jemputan Mesyuarat</title>
+<!-- JavaScript -->
+<script type="text/javascript">
+
+//----------------------------Hide / Unhide Side Nav Bar---------------------------------
+function openNav() {
+  document.getElementById("mySidebar").style.width = "200px";
+  document.getElementById("main").style.marginLeft = "200px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+
+// ---------------------------Hide/Unhide dropdown content------------------------------
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+</script>
+
+<style type="text/css">
+
+.dot1 {
+height: 50px;
+width: 50px;
+word-wrap: break-word;
+border-radius: 100%;
+display: inline-block;
+text-align:center;
+line-height:50px;
+margin: 0 10px;
+padding: 0;
+background: #C9D6FF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor:default;
+  /*border-bottom: 1px dot1ted black;*/
+}
+
+.tooltip .tooltiptext {
+  cursor:default;
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+</style>
+</head>
+
+<body>
+
+<!------------------------------------------- top navigation ------------------------------------------------------->
+<div class="topHeader">
+<img src="/images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()">
+<img src="/images/skse.png" class = "imageL" alt="hide menu">
+<img src="/images/User.png" alt="Logout" onclick="window.location.href = '/logout';"  class = "imageR" title="Logout">
+<span style="float: right; line-height: 3; padding-right: 10px;"><%= name%></span>
+</div>
+<!------------------------------------------ Sidebar navigation bar---------------------------------------------- -->
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+  <a href="/keberadaanHarian">E Kehadiran</a>
+</div>       
+
+
+<!-- <div id="main"> -->
+<!---------------------------------------- Second top navigation bar--------------------------------------------- -->
+<div style="box-shadow: 0 8px 6px -6px black;">
+<ul>
+    <li><a href="/keseluruhanProgresTugasan">Utama</a></li>
+    <li><a href="/admin_ketersediaanKakitangan">Ketersediaan</a></li>
+</ul>
+
+<div class="dropdown">
+  <button class="dropbtn">Tugasan</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturTugasan">Atur Tugasan</a>
+          <a href="/admin_pengurusanTugas">Pengurusan Tugas</a>
+          <a href="/kemaskiniProgresTugasan">Kemas Kini Perkembangan Tugasan</a>
+      </div>  
+      </div>
+<div class="dropdown">
+  <button class="dropbtn">Mesyuarat</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturanJemputanMesyuarat">Atur Jemputan</a>
+          <a href="/senaraiJemputanProgram">Senarai Jemputan Mesyuarat</a>
+      </div>  
+      </div>
+</div>
+
+<!------------------------------------------- Form Container ---------------------------------------------------->
+<div class="container">
+
+<h1><b>Kemas Kini Mesyuarat</b></h1>
+
+<!---------------------------------------- Tugasan Fleksibel Masa-------------------------------------------- -->
+<form id="taskReg" action="/update_admin_meetingInvitation/<%= meetingInvitation[0].uniqueID%>" method="POST">
+      <div>
+            <div class="row">       
+             <div class="col-25">
+             <label for="category">Category</label></div>
+             <div class="col-75">
+                <select id="category" name="category" required>
+                    <option style="background-color: #E2DDDD;" value="<%= meetingInvitation[0].category%>"><%= meetingInvitation[0].category%></option>
+                    <option value="Mesyuarat Rasmi">Mesyuarat Rasmi</option>
+                    <option value="Mesyuarat Tidak Rasmi">Mesyuarat Tidak Rasmi</option>
+                  </select>
+              </div></div>
+
+            <div class="row">       
+             <div class="col-25">
+             <label for="title">Tajuk</label></div>
+             <div class="col-75">
+                <input type="text" id="title" placeholder="Tajuk" name="title" value="<%= meetingInvitation[0].title %>" autocomplete="off" /></div></div>
+
+             <div class="row"> 
+            <div class="col-25">
+            <label for="agenda">Agenda</label></div>
+            <div class="col-75">
+               <textarea style="font-family: 'Avenir', sans-serif;" rows="4" cols="50" id="agenda" name="agenda" placeholder="Agenda" form="taskReg" value="<%= meetingInvitation[0].agenda %>"><%= meetingInvitation[0].agenda %></textarea></div></div>
+
+
+           <!-- Tugasan Tetapan Masa -->
+           <div class="row">
+             <div class="col-25">
+             <label for="location">Lokasi</label></div>
+             <div class="col-75">
+                <input type="text" id="location" placeholder="Lokasi" name="location" value="<%= meetingInvitation[0].location %>" autocomplete="off"/></div>
+             </div>
+
+          <!-- Tugasan Tetapan Masa -->
+          <div class="row">
+             <div class="col-25">
+            <label for="date">Tarikh</label></div>
+                 <div class="col-75">
+                <input type="date" id="date" name="date" value="<%= meetingInvitation[0].date %>" disabled></div></div>
+
+            <div class="row">
+             <div class="col-25">
+             <label for="timeFrom">Masa Dari</label></div>
+             <div class="col-75">
+                <input type="text" id="timeFrom" placeholder="Masa Dari" name="timeFrom" value="<%= meetingInvitation[0].timeFrom %>" autocomplete="off" disabled/></div>
+             </div>
+
+           <div class="row">
+             <div class="col-25">
+             <label for="timeUntil">Masa Sehingga</label></div>
+             <div class="col-75">
+                <input type="text" id="timeTo" placeholder="Masa Sehingga" name="timeTo" value="<%= meetingInvitation[0].timeTo %>" autocomplete="off" disabled/></div>
+             </div>
+
+          <div class="row">
+             <div class="col-25">
+             <label for="timeUntil">Hadirin</label></div>
+             <div class="col-75">
+              <br>
+              <%for(var i = 0; i< meetingInvitation.length; i++){%>
+                <%var names = meetingInvitation[i].name.split(" ")%>
+                    <div class="tooltip">
+                    <span class="dot1"><span class="tooltiptext"><%= meetingInvitation[i].name%></span>
+                    <%for(var p = 0; p< names.length; p++){%>
+                      <%= names[p].charAt(0)%>
+                    <%}%>
+                    </span>
+                    </div>
+                    <%}%>
+                </div>
+             </div>
+
+
+       <div id="tasksdiv" class="row" style="margin-right: 15%; margin-top: 5%;">
+        <input id="tasksbtn" type="button" value="Batal" onclick="window.location.href = '/senaraiJemputanProgram';" style="float: left;">
+        <input id="tasksbtn" type="submit" value="Kemas Kini">
+          </div>
+</div>
+
+  </form>
+
+
+</div>
+</body>
+
+</html>
+  
+ 

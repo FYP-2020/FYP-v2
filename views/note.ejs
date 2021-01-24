@@ -1,0 +1,1124 @@
+mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","HL") WHERE type = "Comp" AND name = ? AND day = ?',
+[start, start, tarikhstr, (month+1),(month+1), req.body.name, day], function(error, results, fields){
+  if(error) throw error;
+  console.log("slots updated");
+
+ });
+
+ //1
+ mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","HL") WHERE type = "Comp" AND name = ? AND day = ?',
+ [start, start,finish,finish, tarikhstr, (month+1),(month+1), req.body.name, day], function(error, results, fields){
+   if(error) throw error;
+   console.log("slots updated");
+
+  });
+
+  //2
+  <% var month = new Array(12)%>
+<%month[0]= "Januari"%>
+<%month[1]= "Februari"%>
+<%month[2]= "Mac"%>
+<%month[3]= "April"%>
+<%month[4]= "Mei"%>
+<%month[5]= "Jun"%>
+<%month[6]= "Julai"%>
+<%month[7]= "Ogos"%>
+<%month[8]= "September"%>
+<%month[9]= "Oktober"%>
+<%month[10]= "November"%>
+<%month[11]= "Disember"%>
+<%var bulan = month[today.getMonth()]%>
+<%=today.getDate()%> <%=bulan%> <%=today.getFullYear()%>
+
+<% //attendance.forEach(function(a) { %>
+<tr>
+<td class="long">
+    <%= //a.name %> 
+</td>
+<td class="long">
+     <%=// a.reason %>
+</td>
+<td class="short">
+    <%= //a.category%>
+</td>
+</tr>
+<%}//)%>
+
+//div workload
+<div id="<%= task.name %>" class="cont">
+      <div class="meet">Mesyuarat
+      <% for (var i=1; i<meeting.length;i++) { %>
+       <ol style="list-style: none; text-align:left;  padding: 0px; ">
+        <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= meeting[i]%></li>
+       </ol>
+      <%}%>
+      </div>
+     <!-- <div class="out"> Aktiviti Luar Sekolah
+      <% //for (var i=1; i<out.length;i++) { %>
+       <ol style="list-style: none; text-align: left;  padding: 0px; ">
+        <li style="background: lightblue; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%//= out[i]%></li>
+       </ol>
+      <%//}%>
+      </div>-->
+      <div class="tas">Tugasan
+        <% for (var i=1; i<hard.length;i++) { %>
+         <ol style="list-style: none; text-align: left;  padding: 0px; ">
+          <li style="background: #FF5E5E; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= hard[i]%></li><br>
+         </ol>
+        <%}%>
+        <% for (var i=1; i<medium.length;i++) { %>
+          <ol style="list-style: none; text-align: left;  padding: 0px; ">
+           <li style="background: #FCAC65; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= medium[i]%></li><br>
+          </ol>
+         <%}%>
+         <% for (var i=1; i<easy.length;i++) { %>
+          <ol style="list-style: none; text-align: left;  padding: 0px; ">
+           <li style="background: #FFFF46; padding: 5px; border-radius: 10px; margin: 5px; font-size: 15px;"><%= easy[i]%></li><br>
+          </ol>
+         <%}%>
+      </div>
+    </div>
+
+
+
+app.post('/insert_jemputanMesyuarat',urlencodedParser,function(req,res) {
+    
+  var name1 = JSON.stringify(req.body.name);
+  var name2 = name1.replace("[",""); 
+  var name3 = name2.replace("]","");
+  var search = '"';
+  var replaceWith ='';
+  var name4 = name3.split(search).join(replaceWith);
+  var arr= name4.split(",");
+
+  var role1 = JSON.stringify(req.body.attendeerole);
+  var role2 = role1.replace("[",""); 
+  var role3 = role2.replace("]","");
+  var find = '"';
+  var replaceit ='';
+  var role4 = role3.split(find).join(replaceit);
+  var arrRole= role4.split(",");
+
+  var name = JSON.stringify(req.body.name);
+  var attendeeRole = JSON.stringify(req.body.attendeerole);
+
+  var obj = JSON.stringify(req.body);
+  var jsonObj = JSON.parse(obj);
+   
+   var filter1 = JSON.stringify(req.body.selectedtime_from);
+   var filter2 = JSON.stringify(req.body.selectedtime_until);
+
+         var start = 0;
+         var finish = 0;
+
+         var getDate = jsonObj.selectedDate_from;
+         var monthToday = new Date(getDate);
+         var month = monthToday.getMonth();
+         var months = [0,1,2,3,4,5,6,7,8,9,10,11];
+         var unselectedMonth = [];
+
+         for(var j = 0; j<months.length; j++){
+           if(months[j] != month){
+             unselectedMonth.push(months[j]);
+           }
+         }
+         '<%= task.name %>'
+        // convert date to day
+         var weekday = new Array(7);
+         weekday[0] = "Sunday";
+         weekday[1] = "Monday";
+         weekday[2] = "Tuesday";
+         weekday[3] = "Wednesday";
+         weekday[4] = "Thursday";
+         weekday[5] = "Friday";
+         weekday[6] = "Saturday";
+
+         var day = weekday[monthToday.getDay()];
+
+         var level = jsonObj.tahap;
+         var levelpoint = 0;
+
+         if(level === "Tinggi"){
+           levelpoint = 3;
+         }
+
+         else if(level === "Sederhana"){
+           levelpoint = 2;
+         }
+
+         else if(level === "Rendah"){
+           levelpoint = 1;
+         }
+
+         var start_ar = ["7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", 
+         "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"];
+
+         var finish_ar = ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", 
+         "16:00", "16:30", "17:00", "17:30", "18:00", "18:30"];
+
+
+         for (var i = 0; i < start_ar.length; i++)  { 
+             if((jsonObj.selectedtime_from===start_ar[i]))
+               { start = i+1;} //1
+             }
+
+
+         for (var i = 0; i < finish_ar.length; i++) {       
+             if((jsonObj.selectedtime_until===finish_ar[i]))
+               { finish = i+1;} //22
+             }
+
+   var range = finish - start;
+                       
+   // let data = {
+   // owner_role: req.body.ownerrole, 
+   // category: req.body.task, //category 
+   // date:req.body.selectedDate_from,
+   // timeFrom: req.body.selectedtime_from,
+   // timeTo: req.body.selectedtime_until,
+   // location: req.body.location,
+   // title:req.body.title, //tajuk
+   // agenda: req.body.agenda,
+   // difficulty_level: req.body.tahap, //tahap kesukaran
+   // name: name,        
+   // attendee_role: attendeeRole,
+   // owner_name:"Adam Hariz"}; 
+
+            //save to task details and points (analyse workload)=================================
+    for(var i=0; i < arr.length ; i++ ){
+          
+      
+       if(jsonObj.tahap==="Tinggi"){
+       
+         mysqlConnection.query('UPDATE taskpoint SET tinggi = tinggi+1,tinggidetail = CONCAT(tinggidetail, "," ,?), peratus = peratus+3  WHERE name = ? ', [req.body.title,arr[i]], function(error, results, fields){
+            if(error) throw error;
+            console.log("1 hard point inserted");
+            console.log("1 hard detail inserted");
+            console.log("total points updated");
+           });
+         
+            mysqlConnection.query('UPDATE availabilityStaff SET percentage? = percentage?+3 WHERE name = ? ', [(month+1), (month+1),arr[i]], function(error, results, fields){
+             if(error) throw error;
+             console.log("total points updated");
+   
+            });
+
+
+        }
+
+       else if(jsonObj.tahap==="Sederhana"){
+         
+         mysqlConnection.query('UPDATE taskpoint SET sederhana = sederhana+2, sederhanadetail = CONCAT(sederhanadetail, "," ,?), peratus = peratus+2 WHERE name = ? ', [req.body.title,arr[i]], function(error, results, fields){
+            if(error) throw error;
+            console.log("1 medium point inserted");
+            console.log("1 medium detail inserted");
+            console.log("total points updated");
+           });
+          
+            mysqlConnection.query('UPDATE availabilityStaff SET percentage? = percentage?+2 WHERE name = ? ', [(month+1), (month+1),arr[i]], function(error, results, fields){
+             if(error) throw error;
+             console.log("total points updated");
+   
+            });
+        }
+
+        else{
+         
+         mysqlConnection.query('UPDATE taskpoint SET rendah = rendah+1, rendahdetail = CONCAT(rendahdetail, "," ,?), peratus = peratus+1 WHERE name = ? ', [req.body.title,arr[i]], function(error, results, fields){
+            if(error) throw error;
+            console.log("1 easy point inserted");
+            console.log("1 easy detail inserted");
+            console.log("total points updated");
+           });
+           
+            mysqlConnection.query('UPDATE availabilityStaff SET percentage? = percentage?+1 WHERE name = ? ', [(month+1), (month+1),arr[i]], function(error, results, fields){
+             if(error) throw error;
+             console.log("total points updated");
+   
+            });
+        }
+
+    mysqlConnection.query('INSERT INTO meetingInvitation(owner_role, category, date, timeFrom, timeTo, location, title, agenda, difficulty_level, name, attendee_role, owner_name, confirmation_status) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+     [req.body.ownerrole, req.body.task, req.body.selectedDate_from, req.body.selectedtime_from, req.body.selectedtime_until, req.body.location, req.body.title,  req.body.agenda, req.body.tahap, arr[i], arrRole[i], "Adam Hariz", "Unconfirmed"], function(error, results, fields){
+             if(error) throw error;
+             console.log("meeting invitation is updated");
+             });
+
+
+    } //end for loop
+
+       
+          if(range == 0){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"TTM",?,"TTM", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+              mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?',
+      [start, start, getDate, start, start, (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 1){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+              mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+      [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 2){ //not yet
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+             mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+          if(range == 3){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY", "MSY","MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+             mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+               [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2), (start+3), (start+3), getDate, (start+3), (start+3), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 4){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY","MSY","MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+             mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+               [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2), (start+3), (start+3), getDate, (start+3), (start+3), (start+4), (start+4), getDate, (start+4), (start+4), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+
+           }               
+         }
+   
+     if(range == 5){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY","MSY","MSY","MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+             mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+               [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2), (start+3), (start+3), getDate, (start+3), (start+3), (start+4), (start+4), getDate, (start+4), (start+4), (start+5), (start+5), getDate, (start+5), (start+5), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+
+           }               
+         } //done
+
+          if(range == 6){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY","MSY","MSY","MSY", "MSY",?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 7){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY", "MSY","MSY","MSY","MSY","MSY","MSY",?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?',
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2), (start+3), (start+3), getDate, (start+3), (start+3), (start+4), (start+4), getDate, (start+4), (start+4), (start+5), (start+5), getDate, (start+5), (start+5), (start+6), (start+6), getDate, (start+6), (start+6), (start+7), (start+7), getDate, (start+7), (start+7), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 8){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5),(start+6), (start+7), (start+8), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?',
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2), (start+3), (start+3), getDate, (start+3), (start+3), (start+4), (start+4), getDate, (start+4), (start+4), (start+5), (start+5), getDate, (start+5), (start+5), (start+6), (start+6), getDate, (start+6), (start+6), (start+7), (start+7), getDate, (start+7), (start+7), (start+8), (start+8), getDate, (start+8), (start+8), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+            });
+
+           }               
+         }
+
+         if(range == 9){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY", "MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY",?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?',
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 10){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY", "MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY",?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 11){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (start+11), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (start+11), (start+11), getDate, (start+11), (start+11), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 12){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (start+11), (start+12), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (start+11), (start+11), getDate, (start+11), (start+11), (start+12), (start+12), getDate, (start+12), (start+12), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 13){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (start+11), (start+12), (start+13), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (start+11), (start+11), getDate, (start+11), (start+11), (start+12), (start+12), getDate, (start+12), (start+12), (start+13), (start+13), getDate, (start+13), (start+13), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 14){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", "MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (start+11), (start+12), (start+13), (start+14), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (start+11), (start+11), getDate, (start+11), (start+11), (start+12), (start+12), getDate, (start+12), (start+12), (start+13), (start+13), getDate, (start+13), (start+13), (start+14), (start+14), getDate, (start+14), (start+14), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 15){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY", "MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (start+11), (start+12), (start+13), (start+14), (start+15), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1),(start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (start+11), (start+11), getDate, (start+11), (start+11), (start+12), (start+12), getDate, (start+12), (start+12), (start+13), (start+13), getDate, (start+13), (start+13), (start+14), (start+14), getDate, (start+14), (start+14), (start+15), (start+15), getDate, (start+15), (start+15), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 16){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY", "MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (start+11), (start+12), (start+13), (start+14), (start+15), (start+16), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (start+11), (start+11), getDate, (start+11), (start+11), (start+12), (start+12), getDate, (start+12), (start+12), (start+13), (start+13), getDate, (start+13), (start+13), (start+14), (start+14), getDate, (start+14), (start+14),(start+15), (start+15), getDate, (start+15), (start+15), (start+16), (start+16), getDate, (start+16), (start+16), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 17){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", "MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (start+11), (start+12), (start+13), (start+14), (start+15), (start+16), (start+17), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (start+11), (start+11), getDate, (start+11), (start+11), (start+12), (start+12), getDate, (start+12), (start+12), (start+13), (start+13), getDate, (start+13), (start+13), (start+14), (start+14), getDate, (start+14), (start+14),(start+15), (start+15), getDate, (start+15), (start+15),(start+16), (start+16), getDate, (start+16), (start+16),(start+17), (start+17), getDate, (start+17), (start+17), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 18){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY", "MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", "MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (start+11), (start+12), (start+13), (start+14), (start+15), (start+16), (start+17), (start+18), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (start+11), (start+11), getDate, (start+11), (start+11), (start+12), (start+12), getDate, (start+12), (start+12), (start+13), (start+13), getDate, (start+13), (start+13), (start+14), (start+14), getDate, (start+14), (start+14),(start+15), (start+15), getDate, (start+15), (start+15), (start+16), (start+16), getDate, (start+16), (start+16), (start+17), (start+17), getDate, (start+17), (start+17), (start+18), (start+18), getDate, (start+18), (start+18),(month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 19){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", "MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (start+11), (start+12), (start+13), (start+14), (start+15), (start+16), (start+17), (start+18), (start+19), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (start+11), (start+11), getDate, (start+11), (start+11), (start+12), (start+12), getDate, (start+12), (start+12), (start+13), (start+13), getDate, (start+13), (start+13), (start+14), (start+14), getDate, (start+14), (start+14),(start+15), (start+15), getDate, (start+15), (start+15), (start+16), (start+16), getDate, (start+16), (start+16), (start+17), (start+17), getDate, (start+17), (start+17), (start+18), (start+18), getDate, (start+18), (start+18), (start+19), (start+19), getDate, (start+19), (start+19), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 20){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", "MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (start+11), (start+12), (start+13), (start+14), (start+15), (start+16), (start+17), (start+18), (start+19), (start+20), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (start+11), (start+11), getDate, (start+11), (start+11), (start+12), (start+12), getDate, (start+12), (start+12), (start+13), (start+13), getDate, (start+13), (start+13), (start+14), (start+14), getDate, (start+14), (start+14),(start+15), (start+15), getDate, (start+15), (start+15), (start+16), (start+16), getDate, (start+16), (start+16), (start+17), (start+17), getDate, (start+17), (start+17), (start+18), (start+18), getDate, (start+18), (start+18), (start+19), (start+19), getDate, (start+19), (start+19), (start+20), (start+20), getDate, (start+20), (start+20), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+         if(range == 21){
+           for(var i=0; i < arr.length ; i++ ){
+             mysqlConnection.query('INSERT INTO availabilityStaff(name, type, date, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, slot_?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?, percentage?) VALUES(?,"MSY",?,"MSY","MSY", "MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY","MSY", "MSY", ?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)',
+     [start, (start+1), (start+2), (start+3), (start+4), (start+5), (start+6), (start+7), (start+8), (start+9), (start+10), (start+11), (start+12), (start+13), (start+14), (start+15), (start+16), (start+17), (start+18), (start+19), (start+20), (start+21), (month+1), unselectedMonth[0]+1, unselectedMonth[1]+1, unselectedMonth[2]+1, unselectedMonth[3]+1, unselectedMonth[4]+1, unselectedMonth[5]+1, unselectedMonth[6]+1, unselectedMonth[7]+1, unselectedMonth[8]+1, unselectedMonth[9]+1, unselectedMonth[10]+1, arr[i], req.body.selectedDate_from, levelpoint], function(error, results, fields){
+             if(error) throw error;
+             console.log("an availability of staff is updated");
+             });
+
+               mysqlConnection.query('UPDATE availabilityStaff SET slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"),slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), slot_? = CONCAT(slot_?,",",?), act_? = CONCAT(act_?,",","MSY"), percentage? = percentage? + ? WHERE type = "Comp" AND name = ? AND day = ?', 
+     [start, start, getDate, start, start, (start+1), (start+1), getDate, (start+1), (start+1), (start+2), (start+2), getDate, (start+2), (start+2),(start+3), (start+3), getDate, (start+3), (start+3),(start+4), (start+4), getDate, (start+4), (start+4),(start+5), (start+5), getDate, (start+5), (start+5),(start+6), (start+6), getDate, (start+6), (start+6),(start+7), (start+7), getDate, (start+7), (start+7),(start+8), (start+8), getDate, (start+8), (start+8),(start+9), (start+9), getDate, (start+9), (start+9), (start+10), (start+10), getDate, (start+10), (start+10), (start+11), (start+11), getDate, (start+11), (start+11), (start+12), (start+12), getDate, (start+12), (start+12), (start+13), (start+13), getDate, (start+13), (start+13), (start+14), (start+14), getDate, (start+14), (start+14),(start+15), (start+15), getDate, (start+15), (start+15), (start+16), (start+16), getDate, (start+16), (start+16), (start+17), (start+17), getDate, (start+17), (start+17), (start+18), (start+18), getDate, (start+18), (start+18), (start+19), (start+19), getDate, (start+19), (start+19), (start+20), (start+20), getDate, (start+20), (start+20), (start+21), (start+21), getDate, (start+21), (start+21), (month+1),(month+1), levelpoint, arr[i], day], function(error, results, fields){
+             if(error) throw error;
+             console.log("slots updated");
+             res.redirect('/senaraiJemputanProgram');
+   
+            });
+
+           }               
+         }
+
+ //owner_role  category  date  timeFrom  timeTo  location  title agenda  name  attendee_role
+
+          // let sql = "INSERT INTO meetingInvitation SET ?";
+          // mysqlConnection.query(sql , data, function(error, results) {
+          //  if(error) throw error;
+          //  console.log("1 meeting invitation inserted");
+          //   res.redirect('/admin_pengurusanTugas');
+          // });
+
+});
+
+app.get('/admin_pengurusanTugas', authUser, function(req,res){
+var assigner;
+var owner;
+var name = person[0].fullname;
+console.log(name); 
+
+ 
+
+// "SELECT * FROM card WHERE name LIKE " + connection.escape('%'+req.body.search+'%')
+mysqlConnection.query('SELECT * FROM tasksMgmt WHERE names  LIKE '+mysqlConnection.escape('%'+name+'%')+'OR owner_name LIKE'+mysqlConnection.escape('%'+name+'%'), function(error, results, fields) {
+res.render('admin_pengurusanTugas.ejs', { 
+             tasksMgmt: results,
+             name: name
+});
+});
+});
+
+
+
+
+<div class="tab">
+<div id="specifictime"><h3><a class="one" href="/admin_ketersediaanKakitangan">Ketersediaan Kakitangan:</a></h3>
+<%let now = new Date().toISOString().slice(0, 10)%>
+<% var date = now.split("-");%>
+<% if(date[1]==="11") { %>
+ <table id="myTable" style="margin-top: 40px; background-color: #57585A; color: white;  table-layout: fixed; width: 85%;  ">
+  <tr>
+  <th> <input type="checkbox" onclick="checkPage(this)" id="name" name="name" value="name"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nama</th>
+  <th style="text-align: center; "><a style="color:white; text-decoration: none;" href="/agihanTugasanKeseluruhan">Status Bebanan</a></th> 
+  </tr>
+
+  <% for(var i=0; i < availabilityStaff.length ; i++) {%>
+  <tr>
+  <td style="display:none"><input type="checkbox" id="name" name="name" value="<%= availabilityStaff[i].name %>"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= availabilityStaff[i].name %></td>
+  <td style="display:none"><%= availabilityStaff[i].day %></td>    <!--0-->
+   <td style="display:none" id="1"><%= availabilityStaff[i].slot_1 %></td> <!--1-->
+    <td style="display:none" id="2"><%= availabilityStaff[i].slot_2 %></td> <!--2-->
+    <td style="display:none" id="3"><%= availabilityStaff[i].slot_3 %></td> <!--3-->
+    <td style="display:none" id="4"><%= availabilityStaff[i].slot_4 %></td> <!--4-->
+    <td style="display:none" id="5"><%= availabilityStaff[i].slot_5 %></td> <!--5-->
+    <td style="display:none" id="6"><%= availabilityStaff[i].slot_6 %></td> <!--6-->
+    <td style="display:none" id="7"><%= availabilityStaff[i].slot_7 %></td> <!--7-->
+    <td style="display:none" id="8"><%= availabilityStaff[i].slot_8 %></td> <!--8-->
+    <td style="display:none" id="9"><%= availabilityStaff[i].slot_9 %></td> <!--9-->
+    <td style="display:none" id="10"><%= availabilityStaff[i].slot_10 %></td> <!--10-->
+    <td style="display:none" id="11"><%= availabilityStaff[i].slot_11 %></td> <!--11-->
+    <td style="display:none" id="12"><%= availabilityStaff[i].slot_12 %></td> <!--12-->
+    <td style="display:none" id="13"><%= availabilityStaff[i].slot_13 %></td> <!--13-->
+    <td style="display:none" id="14"><%= availabilityStaff[i].slot_14 %></td> <!--14-->
+    <td style="display:none" id="15"><%= availabilityStaff[i].slot_15 %></td> <!--15-->
+    <td style="display:none" id="16"><%= availabilityStaff[i].slot_16 %></td> <!--16-->
+    <td style="display:none" id="17"><%= availabilityStaff[i].slot_17 %></td> <!--17-->
+    <td style="display:none" id="18"><%= availabilityStaff[i].slot_18 %></td> <!--18-->
+    <td style="display:none" id="19"><%= availabilityStaff[i].slot_19 %></td> <!--19-->
+    <td style="display:none" id="20"><%= availabilityStaff[i].slot_20 %></td> <!--20-->
+    <td style="display:none" id="21"><%= availabilityStaff[i].slot_21 %></td> <!--21-->
+    <td style="display:none" id="22"><%= availabilityStaff[i].slot_22 %></td> <!--22-->
+ <!-- Status Bebanan -->
+  <%var percent1= Math.round(availabilityStaff[i].percentage1/40*100) %> <!--23-->
+  <% if (percent1<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p1">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent1>29 && percent1<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p1">Rendah</td> 
+  <%}%>
+  <% if (percent1>49 && percent1<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p1">Sederhana</td> 
+  <%}%>
+  <% if (percent1>69 && percent1<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p1">Tinggi</td> 
+  <%}%>
+
+   <%var percent2= Math.round(availabilityStaff[i].percentage2/40*100) %> <!--24-->
+  <% if (percent2<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p2">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent2>29 && percent2<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p2">Rendah</td> 
+  <%}%>
+  <% if (percent2>49 && percent2<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p2">Sederhana</td> 
+  <%}%>
+  <% if (percent2>69 && percent2<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p2">Tinggi</td> 
+  <%}%>
+
+  <%var percent3= Math.round(availabilityStaff[i].percentage3/40*100) %> <!--25-->
+  <% if (percent3<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p3">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent3>29 && percent3<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p3">Rendah</td> 
+  <%}%>
+  <% if (percent3>49 && percent3<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p3">Sederhana</td> 
+  <%}%>
+  <% if (percent3>69 && percent3<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p3">Tinggi</td> 
+  <%}%>
+
+   <%var percent4= Math.round(availabilityStaff[i].percentage4/40*100) %> <!--26-->
+  <% if (percent4<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p4">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent4>29 && percent4<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p4">Rendah</td> 
+  <%}%>
+  <% if (percent4>49 && percent4<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p4">Sederhana</td> 
+  <%}%>
+  <% if (percent4>69 && percent4<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p4">Tinggi</td> 
+  <%}%>
+
+  <%var percent5= Math.round(availabilityStaff[i].percentage5/40*100) %> <!--27-->
+  <% if (percent5<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p5">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent5>29 && percent5<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p5">Rendah</td> 
+  <%}%>
+  <% if (percent5>49 && percent5<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p5">Sederhana</td> 
+  <%}%>
+  <% if (percent5>69 && percent5<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p5">Tinggi</td> 
+  <%}%>
+
+  <%var percent6= Math.round(availabilityStaff[i].percentage6/40*100) %> <!--28-->
+  <% if (percent6<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p6">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent6>29 && percent6<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p6">Rendah</td> 
+  <%}%>
+  <% if (percent6>49 && percent6<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p6">Sederhana</td> 
+  <%}%>
+  <% if (percent6>69 && percent6<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p6">Tinggi</td> 
+  <%}%>
+
+   <%var percent7= Math.round(availabilityStaff[i].percentage7/40*100) %> <!--29-->
+  <% if (percent7<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p7">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent7>29 && percent7<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p7">Rendah</td> 
+  <%}%>
+  <% if (percent7>49 && percent7<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p7">Sederhana</td> 
+  <%}%>
+  <% if (percent7>69 && percent7<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p7">Tinggi</td> 
+  <%}%>
+
+  <%var percent8= Math.round(availabilityStaff[i].percentage8/40*100) %> <!--30-->
+  <% if (percent8<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p8">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent8>29 && percent8<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p8">Rendah</td> 
+  <%}%>
+  <% if (percent8>49 && percent8<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p8">Sederhana</td> 
+  <%}%>
+  <% if (percent8>69 && percent8<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p8">Tinggi</td> 
+  <%}%>
+
+   <%var percent9= Math.round(availabilityStaff[i].percentage9/40*100) %> <!--31-->
+  <% if (percent9<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p9">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent9>29 && percent9<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p9">Rendah</td> 
+  <%}%>
+  <% if (percent9>49 && percent9<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p9">Sederhana</td> 
+  <%}%>
+  <% if (percent9>69 && percent9<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p9">Tinggi</td> 
+  <%}%>
+
+  <%var percent10= Math.round(availabilityStaff[i].percentage10/40*100) %> <!--32-->
+  <% if (percent10<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p10">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent10>29 && percent10<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p10">Rendah</td> 
+  <%}%>
+  <% if (percent10>49 && percent10<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p10">Sederhana</td> 
+  <%}%>
+  <% if (percent10>69 && percent10<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p10">Tinggi</td> 
+  <%}%>
+
+  <%var percent11= Math.round(availabilityStaff[i].percentage11/40*100) %> <!--33-->
+  <% if (percent11<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p11">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent11>29 && percent11<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p11">Rendah</td> 
+  <%}%>
+  <% if (percent11>49 && percent11<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p11">Sederhana</td> 
+  <%}%>
+  <% if (percent11>69 && percent11<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p11">Tinggi</td> 
+  <%}%>
+
+   <%var percent12= Math.round(availabilityStaff[i].percentage12/40*100) %> <!--34-->
+  <% if (percent12<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p12">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent12>29 && percent12<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p12">Rendah</td> 
+  <%}%>
+  <% if (percent12>49 && percent12<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p12">Sederhana</td> 
+  <%}%>
+  <% if (percent12>69 && percent12<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p12">Tinggi</td> 
+  <%}%>
+<!--           <td style="display:none"><input type="text" id="userID" name="userID" value="<%= availabilityStaff[i].id %>" readonly><%= availabilityStaff[i].id %></td>  --><!-- 36-->
+  <!-- <td style="display:none"><input type="text" id="type" name="type" value="<%= availabilityStaff[i].type %>" readonly><%= availabilityStaff[i].type %></td> --> <!-- 37-->
+  <td style="display:none"><input type="text" id="date" name="date" value="<%= availabilityStaff[i].date %>" readonly><%= availabilityStaff[i].date %></td> <!-- 38-->
+
+ </tr>
+
+  <% }; %>  
+
+ </table>
+<%}%>
+ </div>
+
+
+   <!--------------------------------------------------------- Tugasan Fleksibel Masa ------------------------------------------------------------------------------>
+<div  id="nonspecifictime"><h3><a class="one" href="/agihanTugasanKeseluruhan">Status Bebanan Kakitangan</a></h3>
+<%let today = new Date().toISOString().slice(0, 10)%>
+<% var date = today.split("-");%>
+<% if(date[1]==="11") { %>
+ <table id="myTable2" style="margin-top: 40px; background-color: #57585A; color: white;  table-layout: fixed; width: 85%;  ">
+   <tr>
+  <th> <input type="checkbox" onclick="checkPage(this)" id="name" name="name" value="name"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nama</th>
+  <th style="text-align: center;">Status Bebanan</th> 
+</tr>
+
+  <% for(var i=0; i < availabilityStaff.length ; i++) {%>
+  <tr>
+  <td style="display:none"><input type="checkbox" id="name" name="name" value="<%= availabilityStaff[i].name %>"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= availabilityStaff[i].name %></td> <!--0-->
+  <td style="display:none"><%= availabilityStaff[i].day %></td><!--1-->        
+  <!-- Status Bebanan -->
+  <%var percent1= Math.round(availabilityStaff[i].percentage1/40*100) %> <!--2-->  
+  <% if (percent1<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p1">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent1>29 && percent1<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p1">Rendah</td> 
+  <%}%>
+  <% if (percent1>49 && percent1<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p1">Sederhana</td> 
+  <%}%>
+  <% if (percent1>69 && percent1<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p1">Tinggi</td> 
+  <%}%>
+
+   <%var percent2= Math.round(availabilityStaff[i].percentage2/40*100) %><!--3-->  
+  <% if (percent2<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p2">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent2>29 && percent2<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p2">Rendah</td> 
+  <%}%>
+  <% if (percent2>49 && percent2<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p2">Sederhana</td> 
+  <%}%>
+  <% if (percent2>69 && percent2<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p2">Tinggi</td> 
+  <%}%>
+
+  <%var percent3= Math.round(availabilityStaff[i].percentage3/40*100) %> <!--4-->  
+  <% if (percent3<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p3">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent3>29 && percent3<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p3">Rendah</td> 
+  <%}%>
+  <% if (percent3>49 && percent3<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p3">Sederhana</td> 
+  <%}%>
+  <% if (percent3>69 && percent3<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p3">Tinggi</td> 
+  <%}%>
+
+   <%var percent4= Math.round(availabilityStaff[i].percentage4/40*100) %> <!--5-->  
+  <% if (percent4<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p4">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent4>29 && percent4<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p4">Rendah</td> 
+  <%}%>
+  <% if (percent4>49 && percent4<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p4">Sederhana</td> 
+  <%}%>
+  <% if (percent4>69 && percent4<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p4">Tinggi</td> 
+  <%}%>
+
+  <%var percent5= Math.round(availabilityStaff[i].percentage5/40*100) %> <!--6-->  
+  <% if (percent5<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p5">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent5>29 && percent5<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p5">Rendah</td> 
+  <%}%>
+  <% if (percent5>49 && percent5<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p5">Sederhana</td> 
+  <%}%>
+  <% if (percent5>69 && percent5<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p5">Tinggi</td> 
+  <%}%>
+
+  <%var percent6= Math.round(availabilityStaff[i].percentage6/40*100) %> <!--7-->  
+  <% if (percent6<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p6">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent6>29 && percent6<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p6">Rendah</td> 
+  <%}%>
+  <% if (percent6>49 && percent6<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p6">Sederhana</td> 
+  <%}%>
+  <% if (percent6>69 && percent6<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p6">Tinggi</td> 
+  <%}%>
+
+   <%var percent7= Math.round(availabilityStaff[i].percentage7/40*100) %> <!--8-->  
+  <% if (percent7<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p7">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent7>29 && percent7<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p7">Rendah</td> 
+  <%}%>
+  <% if (percent7>49 && percent7<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p7">Sederhana</td> 
+  <%}%>
+  <% if (percent7>69 && percent7<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p7">Tinggi</td> 
+  <%}%>
+
+  <%var percent8= Math.round(availabilityStaff[i].percentage8/40*100) %> <!--9-->  
+  <% if (percent8<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p8">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent8>29 && percent8<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p8">Rendah</td> 
+  <%}%>
+  <% if (percent8>49 && percent8<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p8">Sederhana</td> 
+  <%}%>
+  <% if (percent8>69 && percent8<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p8">Tinggi</td> 
+  <%}%>
+
+   <%var percent9= Math.round(availabilityStaff[i].percentage9/40*100) %> <!--10-->  
+  <% if (percent9<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p9">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent9>29 && percent9<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p9">Rendah</td> 
+  <%}%>
+  <% if (percent9>49 && percent9<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p9">Sederhana</td> 
+  <%}%>
+  <% if (percent9>69 && percent9<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p9">Tinggi</td> 
+  <%}%>
+
+  <%var percent10= Math.round(availabilityStaff[i].percentage10/40*100) %> <!--11-->  
+  <% if (percent10<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p10">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent10>29 && percent10<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p10">Rendah</td> 
+  <%}%>
+  <% if (percent10>49 && percent10<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p10">Sederhana</td> 
+  <%}%>
+  <% if (percent10>69 && percent10<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p10">Tinggi</td> 
+  <%}%>
+
+  <%var percent11= Math.round(availabilityStaff[i].percentage11/40*100) %> <!--12-->  
+  <% if (percent11<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p11">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent11>29 && percent11<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p11">Rendah</td> 
+  <%}%>
+  <% if (percent11>49 && percent11<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p11">Sederhana</td> 
+  <%}%>
+  <% if (percent11>69 && percent11<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p11">Tinggi</td> 
+  <%}%>
+
+   <%var percent12= Math.round(availabilityStaff[i].percentage12/40*100) %> <!--13-->  
+  <% if (percent12<30){ %>
+    <td style="background-color: #0da74a; text-align: center; color: white; display:none" id="p12">Sangat Rendah</td> 
+  <%}%>
+  <% if (percent12>29 && percent12<50){ %>
+    <td style="background-color: #096bc5; text-align: center; color: white; display:none" id="p12">Rendah</td> 
+  <%}%>
+  <% if (percent12>49 && percent12<70){ %>
+    <td style="background-color: #fdc105; text-align: center; color: white; display:none" id="p12">Sederhana</td> 
+  <%}%>
+  <% if (percent12>69 && percent12<101){ %>
+    <td style="background-color: #e90800; text-align: center; color: white; display:none" id="p12">Tinggi</td> 
+  <%}%>
+  <!-- <td style="display:none"><input type="text" id="userID" name="userID" value="<%= availabilityStaff[i].id %>"><%= availabilityStaff[i].id %></td> --><!--14-->  
+  <td style="display:none"><input type="text" id="type" name="type" value="<%= availabilityStaff[i].type %>"><%= availabilityStaff[i].type %></td><!--15-->  
+
+  </tr>
+
+  <% }; %>  
+ </table>
+ </div>
+
+ <%}%>
+
+</div>

@@ -82,7 +82,7 @@ window.onclick = function(event) {
 <div style="box-shadow: 0 8px 6px -6px black;">
 <ul>
     <li><a href="/keseluruhanProgresTugasan">Utama</a></li>
-    <li><a class="current" href="/completeProfile">Atur Tugasan</a></li>
+    <li><a class="current" href="/admin_aturTugasan">Atur Tugasan</a></li>
     <li ><a href="/pengurusanTugas">Pengurusan Tugas</a></li>  
     <li ><a href="#about">Ketersediaan</a></li>
 </ul>
@@ -101,7 +101,9 @@ window.onclick = function(event) {
     
   <h2><b>Atur Tugasan</b></h2>
 
+
    <form action="/pengurusanTugas" method="POST">
+   
   <!-- <form action="/quotes" method="POST"> -->
      <div class="row">
        <div class="col-25">
@@ -170,13 +172,13 @@ window.onclick = function(event) {
           <option value="Rendah">Rendah</option>
            <option value="Sangat Rendah">Sangat Rendah</option>
         </select></div>
-
+      
       <table style="margin-top: 80px;" action="/getdetails" method = "GET">
         <tr>
    
           <th> <input type="checkbox" onclick="checkPage(this)" id="name1" name="name1" value="name1">Nama</th>
           <th>Ketersediaan</th>
-          <th style="text-align: center;"><a href="/test">Status Bebanan</a></th>
+          <th style="text-align: center;"><a href="/agihanTugasanKeseluruhan">Status Bebanan</a></th>
         </tr>
         
           <% userprofile.forEach(function(user){ %>

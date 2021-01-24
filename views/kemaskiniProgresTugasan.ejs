@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>Kemas Kini Perkembangan Tugasan</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+<!--===============================================================================================-->
+<link rel="icon" type="image/png" href="images/skse.png"/>
+<!--===============================================================================================-->
+  <!-- <link rel="stylesheet" type="text/css" href="vendor-table/bootstrap/css/bootstrap.min.css"> -->
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="fonts-table/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor-table/animate/animate.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor-table/select2/select2.min.css">
+<!--===============================================================================================-->
+  <!-- <link rel="stylesheet" type="text/css" href="vendor-table/perfect-scrollbar/perfect-scrollbar.css"> -->
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="css-table/util.css">
+  <link rel="stylesheet" type="text/css" href="css-table/main.css">
+<!--===============================================================================================-->
+
+<!-- JavaScript -->
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "200px";
+  document.getElementById("main").style.marginLeft = "200px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+
+<style type="text/css">
+  table{
+     overflow: scroll;
+     max-height: 40%;
+  }
+
+#table{ 
+    display: table; 
+}
+.tr{ 
+    display: table-row; 
+}
+.td{ 
+    display: table-cell; }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="topHeader">
+<img src="images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()"   />
+<img src="images/skse.png" class = "imageL" alt="hide menu">
+<img src="images/User.png" alt="Logout" onclick="window.location.href = '/logout';" class = "imageR" title="Logout">
+<span style="float: right; line-height: 3; padding-right: 10px;"><%= name%></span>
+</div>
+
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+ <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+ <a href="/keberadaanHarian">E Kehadiran</a>
+</div>       
+
+<!-- <div id="main" data-position="header"> -->
+
+<!---------------------------------------- Second top navigation bar--------------------------------------------- -->
+<div style="box-shadow: 0 8px 6px -6px black;">
+<ul>
+    <li><a href="/keseluruhanProgresTugasan">Utama</a></li>
+    <li><a href="/admin_ketersediaanKakitangan">Ketersediaan</a></li>
+</ul>
+
+<div class="dropdown">
+  <button class="dropbtn">Tugasan</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturTugasan">Atur Tugasan</a>
+          <a href="/admin_pengurusanTugas">Pengurusan Tugas</a>
+          <a class="current" href="/kemaskiniProgresTugasan">Kemas Kini Perkembangan Tugasan</a>
+      </div>  
+      </div>
+<div class="dropdown">
+  <button class="dropbtn">Mesyuarat</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturanJemputanMesyuarat">Atur Jemputan</a>
+          <a href="/senaraiJemputanProgram">Senarai Jemputan Mesyuarat</a>
+      </div>  
+      </div>
+</div>
+
+
+<body>
+   <div class="container"> <!-- Form -->
+    
+  <h2><b>Kemas Kini Perkembangan Tugasan</b></h2>  
+
+  
+  <div action="/kemaskiniProgresTugasan" method = "GET">
+
+    <div id="table">
+    <div class="tr">
+        <div class="td"></div>
+        <div class="td"></div>
+        <div class="td"></div>
+    </div>
+  </div>
+  
+  <div class="limiter" >
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table100">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">Kategori</th>
+                <th class="column1">Tajuk</th>
+                <th class="column1">Tugas</th>
+                <th class="column1">Penyerah</th>
+                <th class="column1">Tarikh Akhir</th>
+                <th class="column1">Status</th>
+                <!-- <th class="column1">Tindakan</th> -->
+              </tr>
+            </thead>
+            <tbody>
+
+                <% for(var i=0; i< taskProgress.length; i++) {%>  
+                  <tr>                         
+                    <td style="display: none;"><input type="text" name="uniqueID" value="<%= taskProgress[i].uniqueID%>"></td>       
+                    <td class="column1"><%= taskProgress[i].category %></td>
+                    <td class="column1"><%= taskProgress[i].title %></td>
+                    <td class="column1"><%= taskProgress[i].taskname %></td>
+                    <td class="column1"><%= taskProgress[i].taskassigner %></td>
+                     <%var date2 = new Date(new Date().toISOString().slice(0, 10))%>   
+                      <%var date1 = new Date(taskProgress[i].dueDate)%>
+                      <%var diffTime =  date2.getTime() - date1.getTime()%>
+                      <%var diffDays = diffTime / (1000 * 3600 * 24)%>
+                    <%if(diffDays >= 0){%>  
+                    <td class="column1" style="color: red;"><%= taskProgress[i].dueDate %></td>
+                    <%}%>
+                    <%if(diffDays < 0){%>  
+                    <td class="column1"><%= taskProgress[i].dueDate %></td>
+                    <%}%>
+                    <td class="column1">
+                        <select id="status" name="status" onchange="location = this.value;">
+                          <option value="/updateProgress/<%= taskProgress[i].id%>_<%= taskProgress[i].uniqueID%>_<%= taskProgress[i].status%>" style="background-color: grey; color: white;" ><%= taskProgress[i].status%></option>
+                          <option value="/updateProgress/<%= taskProgress[i].id%>_<%= taskProgress[i].uniqueID%>_Belum Mula">Belum Mula</option>
+                           <option value="/updateProgress/<%= taskProgress[i].id%>_<%= taskProgress[i].uniqueID%>_Sedang Dijalankan">Sedang Dijalankan</option>
+                            <option value="/updateProgress/<%= taskProgress[i].id%>_<%= taskProgress[i].uniqueID%>_Selesai">Selesai</option>
+                        </select>
+                    </td>  
+                  <!--  <td class="column1">
+                      <span><button><a onclick="return alert('Are You sure?')" 
+                        href="/updateProgress/<%= taskProgress[i].id%>_<%= taskProgress[i].uniqueID%>_status"></a></button>Kemas Kini</span>
+                    </td>          -->        
+
+                  </tr>   
+                <% } %>                
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<!--===============================================================================================-->  
+  <script src="vendor-table/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<!--   <script src="vendor-table/bootstrap/js/popper.js"></script> -->  
+<!-- <script src="vendor-table/bootstrap/js/bootstrap.min.js"></script> -->
+<!--===============================================================================================-->
+  <script src="vendor-table/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+  <script src="js-table/main.js"></script>
+
+</div>
+</body>
+
+</body>
+</html>

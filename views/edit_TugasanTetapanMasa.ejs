@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/main.css">
+<link rel="icon" type="image/png" href="/images/skse.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Kemas Kini Tugasan</title>
+<!-- JavaScript -->
+<script type="text/javascript">
+
+//----------------------------Hide / Unhide Side Nav Bar---------------------------------
+function openNav() {
+  document.getElementById("mySidebar").style.width = "200px";
+  document.getElementById("main").style.marginLeft = "200px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+
+// ---------------------------Hide/Unhide dropdown content------------------------------
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+</script>
+
+<style type="text/css">
+  /* List */
+.domain {
+  counter-reset: index;  
+  padding: 0;
+  max-width: 100%;
+  /*max-width: 100px;*/
+
+}
+
+/* List element */
+.small {
+  counter-increment: index; 
+  display: -webkit-box; 
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 12px 0;
+  /*box-sizing: border-box;*/
+}
+
+
+/* Element counter */
+.small::before {
+  content: counters(index, ".", decimal-leading-zero);
+  font-size: 1.5rem;
+  text-align: right;
+  font-weight: bold;
+  /*min-width: 50px;*/
+  padding-right: 12px;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  align-self: flex-start;
+  background: #C9D6FF;  
+  background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /*background-image: -webkit-gradient(linear, left top, left bottom, from(aquamarine), to(orangered));
+  background-image: linear-gradient(to bottom, aquamarine, orangered);
+  background-attachment: fixed;*/
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!------------------------------------------- top navigation ------------------------------------------------------->
+<div class="topHeader">
+<img src="/images/expand.png" class = "imageL" alt="hide menu"  onclick="openNav()">
+<img src="/images/skse.png" class = "imageL" alt="hide menu">
+<img src="/images/User.png" alt="Logout" onclick="window.location.href = '/logout';"  class = "imageR" title="Logout">
+<span style="float: right; line-height: 3; padding-right: 10px;"><%= name%></span>
+
+</div>
+<!------------------------------------------ Sidebar navigation bar---------------------------------------------- -->
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="/keseluruhanProgresTugasan">E Tugasan</a>
+  <a href="/keberadaanHarian">E Kehadiran</a>
+</div>       
+
+
+<!-- <div id="main"> -->
+<!---------------------------------------- Second top navigation bar--------------------------------------------- -->
+<div style="box-shadow: 0 8px 6px -6px black;">
+<ul>
+    <li><a href="/keseluruhanProgresTugasan">Utama</a></li>
+    <li><a href="/admin_ketersediaanKakitangan">Ketersediaan</a></li>
+</ul>
+
+<div class="dropdown">
+  <button class="dropbtn">Tugasan</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturTugasan">Atur Tugasan</a>
+          <a class="current" href="/admin_pengurusanTugas">Pengurusan Tugas</a>
+          <a href="/kemaskiniProgresTugasan">Kemas Kini Perkembangan Tugasan</a>
+      </div>  
+      </div>
+<div class="dropdown">
+  <button class="dropbtn">Mesyuarat</button>
+  <div class="dropdown-content">
+          <a href="/admin_aturanJemputanMesyuarat">Atur Jemputan</a>
+          <a href="/senaraiJemputanProgram">Senarai Jemputan Mesyuarat</a>
+      </div>  
+      </div>
+</div>
+
+<!------------------------------------------- Form Container ---------------------------------------------------->
+<div class="container">
+
+<h1><b>Kemas Kini <%= task%>: </b></h1>
+
+<!---------------------------------------- Tugasan Fleksibel Masa-------------------------------------------- -->
+<form id="taskReg" action="/update/<%= id %>" method="POST">
+      <div>
+
+            <div class="row">       
+             <div class="col-25">
+             <label for="title">Tajuk</label></div>
+             <div class="col-75">
+                <input type="text" id="title" placeholder="Tajuk" name="title" value="<%= title %>" autocomplete="off" /></div></div>
+
+             <div class="row"> 
+            <div class="col-25">
+            <label for="notes">Tugas</label></div>
+            <div class="col-75">
+               <textarea style="font-family: 'Avenir', sans-serif;" rows="4" cols="50" name="note" placeholder="Tugas" id="note" value="<%= note %>" ><%= note %></textarea></div></div>
+
+
+           <!-- Tugasan Tetapan Masa -->
+           <div class="row">
+             <div class="col-25">
+             <label for="location">Lokasi</label></div>
+             <div class="col-75">
+                <input type="text" id="location" placeholder="Lokasi" name="location" value="<%= location %>" autocomplete="off"/></div>
+             </div>
+
+          <!-- Tugasan Tetapan Masa -->
+          <div class="row">
+             <div class="col-25">
+            <label for="date">Tarikh</label></div>
+                 <div class="col-75">
+                <input type="date" id="date" name="date" value="<%= date %>" disabled></div></div>
+
+            <div class="row">
+             <div class="col-25">
+             <label for="timeFrom">Masa Dari</label></div>
+             <div class="col-75">
+                <input type="text" id="timeFrom" placeholder="Masa Dari" name="timeFrom" value="<%= timeFrom %>" autocomplete="off" disabled/></div>
+             </div>
+
+           <div class="row">
+             <div class="col-25">
+             <label for="timeUntil">Masa Sehingga</label></div>
+             <div class="col-75">
+                <input type="text" id="timeUntil" placeholder="Masa Sehingga" name="timeUntil" value="<%= timeUntil %>" autocomplete="off" disabled/></div>
+             </div>
+
+           <div class="row"> 
+            <div class="col-25">
+             <label for="tahap">Tahap Kesukaran * </label></div>
+              <div class="col-75">
+                <select id="tahap" name="tahap" required>
+                  <option value="<%= tahap%>" selected><%= tahap%></option>
+                  <option value="Tinggi">Tinggi</option>
+                  <option value="Sederhana">Sederhana</option>
+                  <option value="Rendah">Rendah</option>
+                </select></div></div>
+
+              <table>
+              <td style="display: none;" class="column1"><input type="text" name="previousTahap" value="<%= tahap%>"></td>
+
+             <td style="display: none;" class="column1"><input type="text" name="task_owner" value="<%= names%>"></td>
+              </table>
+              <% var name1 %>
+              <% var name2 %>
+              <% var name3  %>
+              <% var search %>
+              <% var replaceWith %>
+              <% var name4 %>
+              <%var nameArr = []%>           
+
+              <% name1 = names %>
+              <% name2 = name1.replace("[","") %>
+              <% name3 = name2.replace("]","") %>
+              <% search = '"' %>
+              <% replaceWith = '' %>
+              <% name4 = name3.split(search).join(replaceWith)%>
+              <% nameArr.push(name4.split(","))%>
+
+              <div class="row">
+             <div class="col-25">
+             <label>Pemilik Tugas</label></div>
+             <div class="col-75">
+              <table class="domain">
+              <%for(var i = 0; i< nameArr.length; i++) { %>  
+                <%for(var j = 0; j< nameArr[i].length; j++) { %>
+                <tr class="small" style=" border-bottom: 0;">
+                  <td style="font-weight: bolder;"><%= nameArr[i][j] %></td>                  
+                </tr>
+                 <!-- <input style="margin-bottom: 10px;" type="checkbox"  name="names" value="<%= nameArr[i][j] %>" disabled/> <br> -->
+                <%}%>
+              <%}%>
+              </table>
+               </div>
+             </div>
+
+        <div id="tasksdiv" class="row" style="margin-right: 15%; margin-top: 5%;">
+        <input id="tasksbtn" type="button" value="Batal" onclick="window.location.href = '/admin_pengurusanTugas';" style="float: left;">
+        <input id="tasksbtn" type="submit" value="Kemas Kini">
+          </div>
+  </form>
+
+
+</div>
+</body>
+
+</html>
+  
+ 
